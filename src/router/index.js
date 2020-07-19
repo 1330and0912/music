@@ -34,6 +34,17 @@ const routes = [
         name: 'passwordVerify',
         component: () => import('views/login/PasswordVerify')
     }
+    ,
+    {
+        path: '/profile',
+        name: 'profile',
+        component: () => import('views/profile/Profile')
+    },
+    {
+        path: '/play',
+        name: 'play',
+        component: () => import('components/common/play/Play')
+    }
 ]
 
 const router = new VueRouter({

@@ -36,17 +36,17 @@
             }
         },
         methods: {
+            //当输入框内容发生改变时触发的事件
             valueChange() {
                 this.$emit('bind-value', this.value)
             },
-            isBlur(inp){
-                // console.log(inp.value.length);
-                // console.log(this.maxlength);
-                if(inp.value.length == this.maxlength){
-                    // console.log('asd');
-
+            //当输入长度上线时离开输入框
+            isBlur(inp) {
+                if (inp.value.length == this.maxlength) {
                     inp.blur()
                 }
+                this.$emit('input-value', inp.value)
+
             }
         },
         mounted() {

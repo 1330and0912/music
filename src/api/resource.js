@@ -5,3 +5,5 @@ export const CaptchaVerify = '/captcha/verify'//检查验证码是否正确
 export const RegisterCellPhone = '/register/cellphone'//注册账号/修改密码
 export const InitProfile = '/activate/init/profile'//初始化昵称
 export const LoginCellphone = '/login/cellphone'//手机号码登录
+export const LoginStatus = '/login/status'//手机号码登录
+export const GetLyric = '/lyric'//获取歌词

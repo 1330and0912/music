@@ -6,11 +6,13 @@
         </div>
         <form-input ref="inp" :maxlength="11" @bind-value="getPhone" caret="red"
                     placeholder="请输入手机号码"/>
-        <next-step  @next-step="nextStep"/>
+        <next-step @next-step="nextStep"/>
+
     </div>
 </template>
 
 <script>
+
     import {checkPhone} from "common/phone-validation";
 
     import {isRegister, sendVerificationCode} from "api/index";
@@ -18,15 +20,17 @@
     import FormInput from "../../components/common/FormInput";
     import PhoneNavBar from "./childcomponents/PhoneNavBar";
     import NextStep from "./childcomponents/NextStep";
+    import PasswordVerify from "./PasswordVerify";
 
     export default {
         name: "Login",
-        components: {PhoneNavBar, FormInput, NextStep},
+        components: {PasswordVerify, PhoneNavBar, FormInput, NextStep},
         data() {
             return {
                 isRegister: false,
                 phone: '',
-                phoneValid: {}
+                phoneValid: {},
+                active: 3
             }
         },
         methods: {
@@ -63,6 +67,7 @@
                         }
                     })
                 } else if (checkPhone(this.phone)) {
+                    this.$store.dispatch('login/savePhone', this.phone)
                     //如果账号已经注册则跳转至输入密码解密
                     this.$router.push({
                         name: 'passwordVerify',

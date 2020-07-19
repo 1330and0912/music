@@ -5,10 +5,11 @@ import {
     CaptchaVerify,
     RegisterCellPhone,
     InitProfile,
-    LoginCellphone
+    LoginCellphone,
+    LoginStatus, GetLyric
 } from "./resource";
 
-//@phone 传入手机号码 判断手机号码是否已注册
+//@phone 手机号码 判断手机号码是否已注册
 export function isRegister(phone) {
     return request({
         url: IsRegister,
@@ -19,7 +20,7 @@ export function isRegister(phone) {
     })
 }
 
-//@phone 传入手机号码 发送验证码
+//@phone 手机号码 发送验证码
 export function sendVerificationCode(phone) {
     return request({
         method: 'post',
@@ -31,8 +32,8 @@ export function sendVerificationCode(phone) {
     })
 }
 
-// @phone 传入手机号码
-// @captcha 传入用户输入的验证码 检查验证码是否正确
+// @phone 手机号码
+// @captcha 用户输入的验证码 检查验证码是否正确
 export function captchaVerify(phone, captcha) {
     return request({
         url: CaptchaVerify,
@@ -43,6 +44,7 @@ export function captchaVerify(phone, captcha) {
     })
 }
 
+//账号注册
 // @phone 手机号
 // @captcha 验证码
 // @password 密码
@@ -61,6 +63,7 @@ export function registerCellPhone(registerData) {
     })
 }
 
+//@nickname昵称
 //传入昵称初始化昵称
 export function initProfile(nickname) {
     return request({
@@ -71,6 +74,9 @@ export function initProfile(nickname) {
     })
 }
 
+//@phone:电话号码
+//@password:密码
+//验证号码与密码进行登录
 export function loginCellphone(phone, password) {
     return request({
         method: 'post',
@@ -78,6 +84,24 @@ export function loginCellphone(phone, password) {
         data: {
             phone,
             password
+        }
+    })
+}
+
+//获取用户登录状态
+export function loginStatus() {
+    return request({
+        url: LoginStatus,
+    })
+}
+
+//获取歌词
+// @lyricID:歌曲id
+export function getLyric(lyricID) {
+    return request({
+        url:GetLyric,
+        params:{
+            id:lyricID
         }
     })
 }
