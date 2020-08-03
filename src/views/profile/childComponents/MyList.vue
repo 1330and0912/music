@@ -28,11 +28,7 @@
 <script>
     export default {
         name: "MyList",
-        data() {
-            return {
-                optionList: ['本地音乐', '下载管理', '', '', '']
-            }
-        }
+
     }
 </script>
 

@@ -1,3 +1,9 @@
+//函数返回对象方式
+// const state = () => ({
+//     phone: '',
+//     password: ''
+// })
+// 对象方式
 const state = {
     phone: '',
     password: ''

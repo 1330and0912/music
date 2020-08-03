@@ -7,3 +7,7 @@ export const InitProfile = '/activate/init/profile'//初始化昵称
 export const LoginCellphone = '/login/cellphone'//手机号码登录
 export const LoginStatus = '/login/status'//手机号码登录
 export const GetLyric = '/lyric'//获取歌词
+export const GetSongURL = '/song/url'//获取音乐url
+export const RecentPlay = '/user/record'//获取用户最近播放记录
+export const Search = '/search'//搜索
+export const Banner = '/banner'//获取轮播图

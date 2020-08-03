@@ -1,6 +1,6 @@
 <template>
     <div class="my-music">
-        <header-bar/>
+        <header-bar text="我的音乐"/>
         <div class="musci-wrap">
             <div class="my-collect">
 
@@ -47,7 +47,7 @@
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
         background-color: white;
-        padding: 30px 20px;
+        padding: 30px 20px 0;
         margin-top: 20px;
     }
 

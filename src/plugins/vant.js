@@ -4,10 +4,16 @@ import 'vant/lib/index.css';
 import {
     Popup,
     Tabs,
-    Tab
+    Tab,
+    Swipe,
+    SwipeItem,
+    Lazyload
 } from 'vant'
 
 // 按需引入UI组件
 Vue.use(Popup)
 Vue.use(Tabs)
 Vue.use(Tab)
+Vue.use(Swipe)
+Vue.use(SwipeItem)
+Vue.use(Lazyload )

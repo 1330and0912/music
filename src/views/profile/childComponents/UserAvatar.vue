@@ -39,6 +39,7 @@
             loginStatus().then(res => {
                 this.isLogin = res.code == 200 ? true : false
                 if (this.isLogin) {
+                    window.sessionStorage.setItem('profile',JSON.stringify(res.profile))
                     this.userInfo = JSON.parse(window.sessionStorage.getItem('profile'))
                 }
             })

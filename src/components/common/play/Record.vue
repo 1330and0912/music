@@ -1,18 +1,20 @@
 <template>
-    <div class="record " :class="isRotate?'move-start':''">
-        <div class="record-bg"></div>
+    <div class="record-wrap">
+        <div class="record " :class="isRotate?'move-start':''">
+            <div class="record-bg"></div>
+        </div>
     </div>
+
 </template>
 
 <script>
     export default {
         name: "Record",
         props: {
-            isRotate: {
+            isRotate: {//控制圆盘是否旋转
                 type: Boolean,
                 default: true
             },
-
         },
         data() {
             return {
@@ -23,13 +25,22 @@
 </script>
 
 <style lang="less" scoped>
+    .record-wrap {
+        overflow-y: hidden;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+
+        position: relative;
+        z-index: 999;
+    }
+
     .record {
-        margin: 0 auto;
         background-color: #151419;
         border-radius: 50%;
-        height: 280px;
-        width: 280px;
-        border: 10px solid #5B5B5B;
+        height: 260px;
+        width: 260px;
+        border: 8px solid rgba(255, 255, 255, .5);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -37,8 +48,8 @@
         .record-bg {
             background-color: rgba(111, 0, 0, 1);
             border-radius: 50%;
-            height: 200px;
-            width: 200px;
+            height: 180px;
+            width: 180px;
             border: 5px solid rgba(0, 0, 0, 1);
             background-image: url("../../../assets/img/profile/private.jpg");
             background-size: cover;
@@ -46,17 +57,15 @@
     }
 
     .move-start {
-        animation:move 12s infinite linear;
+        animation: move 12s infinite linear;
     }
 
     @keyframes move {
         from {
             transform: rotate(0deg);
-
         }
         to {
             transform: rotate(360deg);
         }
-
     }
 </style>

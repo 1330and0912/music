@@ -3,8 +3,7 @@
         <user-avatar class="user"/>
         <my-list/>
         <my-music/>
-        <!--        <recent-play></recent-play>-->
-
+        <swipe/>
     </div>
 </template>
 
@@ -13,12 +12,12 @@
     import UserAvatar from "./childComponents/UserAvatar";
     import MyList from "./childComponents/MyList";
     import MyMusic from "./childComponents/MyMusic";
-    import RecentPlay from "./childComponents/RecentPlay";
+    import Swipe from "./childComponents/Swipe";
 
 
     export default {
         name: "Profile",
-        components: {RecentPlay, MyMusic, MyList, UserAvatar},
+        components: {Swipe, MyMusic, MyList, UserAvatar},
         props: {
             background: {
                 type: String,

@@ -1,19 +1,45 @@
 <template>
     <div id="app">
-        <nav-bar  :titles="['我的','发现','云村','视频']"/>
-        <router-view/>
+        <nav-bar :path="path" v-if="isShowNavBar" :titles="['我的','最近播放','歌单','视频']"/>
+        <keep-alive>
+            <router-view/>
+        </keep-alive>
+        <play-bar/>
     </div>
 </template>
 <script>
     import NavBar from "./components/common/NavBar";
+    import PlayBar from "./components/common/playbar/PlayBar";
+
+    import {mapGetters} from 'vuex'
 
     export default {
-        components: {NavBar}
+        components: {PlayBar, NavBar},
+        data() {
+            return {
+                isShowNavBar: false,
+                path: ['/profile', '/recent', '', ''],
+
+            }
+        },
+        watch: {
+            $route(to) {
+                let flag = this.path.some(item => item == to.path)
+                if (flag) {
+                    this.isShowNavBar = true
+                }
+                console.log(to.path);
+            }
+        },
+        computed:{
+            ...mapGetters('musicDetail',['getIsPlay'])
+        }
     }
 
 </script>
 <style>
     @import "assets/css/base.css";
+
     #app {
         height: 100%;
         width: 100%;

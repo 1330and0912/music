@@ -44,6 +44,10 @@ const routes = [
         path: '/play',
         name: 'play',
         component: () => import('components/common/play/Play')
+    } ,   {
+        path: '/recent',
+        name: 'recent',
+        component: () => import('views/recentplay/RecentPlay')
     }
 ]
 

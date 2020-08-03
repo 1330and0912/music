@@ -16,7 +16,8 @@
             titles: {
                 type: Array,
                 default: () => []
-            }
+            },
+            path: Array
         },
         data() {
             return {
@@ -25,7 +26,12 @@
         },
         methods: {
             changeTab(index) {
+
                 this.currentIndex = index
+                if (this.$route.path !== this.path[index]) {
+                    this.$router.push(this.path[index])
+
+                }
             }
         }
     }
@@ -35,10 +41,10 @@
     .nav-bar {
         width: 100%;
         display: flex;
-        margin: 0 auto;
         align-items: center;
         position: fixed;
-        top: 10px;
+        z-index: 999999;
+        top: 0px;
         height: 44px;
         left: 0;
         right: 0;
@@ -48,16 +54,17 @@
             font-size: 16px;
             text-align: center;
             flex-grow: 1;
-            color: rgba(255,255,255,.7);
+            color: rgba(255, 255, 255, .7);
         }
 
         .iconfont {
             line-height: 44px;
             padding: 0;
             font-size: 20px;
-            color: white ;
+            color: white;
 
         }
+
         .icon-sousuo {
             font-size: 30px;
         }
