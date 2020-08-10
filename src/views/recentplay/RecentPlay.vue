@@ -5,11 +5,12 @@
 </template>
 
 <script>
-    import {getRecentPlay} from "api";
+    import {getRecentPlay, getSongURL, getLyric} from "api";
 
     import MusicList from "components/common/musicList/MusicList";
 
     import {mapActions} from 'vuex'
+    import {dataLyric} from "common/dataLyric";
 
     export default {
         name: "RecentPlay",
@@ -24,20 +25,25 @@
             //获取用户id
             this.uid = JSON.parse(window.sessionStorage.getItem('profile')).userId
             const {allData: res} = await getRecentPlay(this.uid)
-            //console.log(res);
-            res.forEach(item => {
-                this.recentPlay.push({
-                    id: item.song.id,//音乐id
-                    songName: item.song.name,//歌曲名
-                    author: item.song.ar[0].name,//演唱者
-                    bg: item.song.al.picUrl//歌曲背景
-                })
+
+            res.forEach(async (item) => {
+                if ((await getSongURL(item.song.id)).data[0].url) {//如果获取不到音乐url则不添加
+                    this.recentPlay.push({
+                        id: item.song.id,//音乐id
+                        songName: item.song.name,//歌曲名
+                        author: item.song.ar[0].name,//演唱者
+                        bg: item.song.al.picUrl,//歌曲背景
+                        musicUrl: (await getSongURL(item.song.id)).data[0].url,//歌曲url
+                        lyric: dataLyric((await getLyric(item.song.id)).lrc.lyric)//歌词
+                    })
+                }
             })
+
             this.saveRecentPlay(this.recentPlay)//将播放过的歌曲信息保存到vuex
-            // console.log(this.recentPlay);
+            console.log(this.recentPlay);
         },
         methods: {
-            ...mapActions('musicDetail',['saveRecentPlay']),
+            ...mapActions('musicDetail', ['saveRecentPlay']),
 
         }
     }

@@ -1,11 +1,11 @@
 <template>
-    <div id="play">
+    <div id="play" :style="{backgroundImage:`url(${getCurrentMusic.bg})`}">
         <div class="nav-bar">
-            <i class="iconfont icon-zuojiantou"></i>
-            <span>单车</span>
+            <i @click="back" class="iconfont icon-zuojiantou"></i>
+            <span>{{getCurrentMusic.songName}}-{{getCurrentMusic.author}}</span>
         </div>
-        <record/>
-        <lyric-detail class="lyric"></lyric-detail>
+        <record :is-rotate="getIsPlay" :bg="getCurrentMusic.bg"/>
+        <lyric-detail :lyric="getCurrentMusic.lyric" class="lyric"></lyric-detail>
         <music-control class="control"/>
     </div>
 </template>
@@ -17,17 +17,25 @@
 
     import PhoneNavBar from "views/login/childcomponents/PhoneNavBar";
 
+    import {mapGetters} from 'vuex'
+
     export default {
         name: "Play",
         components: {PhoneNavBar, MusicControl, LyricDetail, Record},
-        props: {
-
+        methods: {
+            back() {
+                this.$router.back()
+            }
+        },
+        computed:{
+            ...mapGetters('musicDetail',['getCurrentMusic','getIsPlay'])
         }
     }
 </script>
 
 <style lang="less" scoped>
     #play {
+        transition: all .3s;
         background-color: #cccccc;
         height: 100%;
         width: 100%;
@@ -35,7 +43,7 @@
         background-image: url("../../../assets/img/profile/private.jpg");
         background-repeat: no-repeat;
         background-size: cover;
-
+        background-position: center center;
         &::before {
             content: '';
             position: absolute;
@@ -50,14 +58,15 @@
             height: 44px;
             line-height: 44px;
             padding-left: 20px;
-
+            display: flex;
+            align-items: center;
             i {
                 font-size: 24px;
             }
 
             span {
-                font-size: 20px;
-                margin-left: 24px;
+                font-size: 16px;
+                margin-left: 10px;
             }
         }
     }

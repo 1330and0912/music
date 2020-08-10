@@ -6,17 +6,14 @@ export function request(config) {
         withCredentials: true,
     })
     instance.interceptors.request.use(data => {
-        // console.log(data.data);
         return data
     }, err => {
         console.log(err);
     })
 
     instance.interceptors.response.use(res => {
-        // console.log(res);
         return res.data
     }, err => {
-        //alert(err);
         console.log(err);
     })
 

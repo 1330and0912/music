@@ -1,50 +1,98 @@
 <template>
-    <div class="lyric-detail">
-        <p class="lyric" v-for="(item,index) in lyricArr">
-            {{item.lyricStr}}
-        </p>
-
+    <div @touchend="touchend" ref="scroll" class="lyric-detail">
+        <div class="scroll-wrap">
+            <p ref="lyricHeight" :class="index==activeIndex?'heightd':''" class="lyric" v-for="(item,index) in lyrics">
+                {{item.lyricStr}}
+            </p>
+        </div>
     </div>
 </template>
 
 <script>
-    import {getLyric} from "api";
-    import {dataLyric} from "common/dataLyric";
+    import {mapGetters} from 'vuex'
 
     export default {
         name: "LyricDetail",
-        data() {
-            return {
-                lyric: [],
-                lyricDuration: [],
-                lyricArr: []
+        props: {
+            lyric: {
+                type: Array,
+                default: () => []
             }
         },
-        async created() {
-            let res = await getLyric('64561')
-            //将歌曲时间和歌词分割为两个数组
-            // this.lyric = res.lrc.lyric.replace(/\[.*?\]/g, '').trim().split('\n')
-            // this.lyricDuration = res.lrc.lyric.replace(/[\u4e00-\u9fa5 | a-z|A-Z |\[|\]|:|,]/g, '').trim().split('\n')            // this.lyricDuration = res.lrc.lyric.replace(/[\u4e00-\u9fa5 | a-z|A-Z |\[|\]|:|,]/g, ',')
-            // //把时间转换为秒
-            // this.lyricDuration = this.lyricDuration.map(item => {
-            //     return item.slice(0, 2) * 60 + Number(item.slice(2))
-            // })
-            // this.lyric.forEach((item, index) => {
-            //     this.lyricArr.push({
-            //         lyricStr: item,
-            //         duration: this.lyricDuration[index]
-            //     })
-            // })
-            this.lyricArr = dataLyric(res.lrc.lyric)
-            console.log(this.lyricArr);
+        data() {
+            return {
+                moveHeight: 0,
+                scrollTop: 0,
+                lyricTotalHeight: 0,//歌词高度
+                lyricCount: 0,//已滚动的歌词
+                timer: null
+            }
         },
-        computed: {},
+        computed: {
+            ...mapGetters('musicDetail', ['getCurrentTime']),
+            activeIndex() {
+                let t = 0
+                let flag = this.lyrics.some((item, index) => {
+                    t = index
+                    return item.duration > this.getCurrentTime
+                })
+                return flag ? t - 1 : this.lyrics.length - 1
+            },
+            lyrics() {
+                return this.lyric.filter(item => {
+                    return item.lyricStr !== ''
+                })
+            }
+        },
+        watch: {
+            activeIndex(newVal) {
+                if (newVal > 2) {
+                    this.$nextTick(() => {
+                        this.moveHeight = this.$refs.lyricHeight[this.activeIndex].clientHeight
+                    })
+                    this.$refs.scroll.scrollTop = this.$refs.scroll.scrollTop + this.moveHeight
+                }
+                this.lyricCount = newVal
+            },
+            lyrics() {
+                //切换歌曲则重置滚动
+                this.$refs.scroll.scrollTop = 0
+            }
+        },
+        activated() {
+            this.lyricTotalHeight = 0
+            for (let i = 3; i < this.lyricCount; i++) {
+                this.lyricTotalHeight += this.$refs.lyricHeight[i].clientHeight//记录以滚动高度
+            }
+            window.sessionStorage.scrollTop = this.lyricTotalHeight
+            this.$refs.scroll.scrollTop = window.sessionStorage.getItem('scrollTop')
+        },
+        methods: {
+            touchend(e) {
+                clearTimeout(this.timer)
+                this.timer = setTimeout(() => {
+                    this.lyricTotalHeight = 0
+                    for (let i = 3; i < this.lyricCount; i++) {
+                        this.lyricTotalHeight += this.$refs.lyricHeight[i].clientHeight
+                    }
+                    window.sessionStorage.scrollTop = this.lyricTotalHeight
+                    this.$refs.scroll.scrollTop = window.sessionStorage.getItem('scrollTop')
+                }, 2000)
+            }
+        }
 
     }
 </script>
 
 <style lang="less" scoped>
+    .heightd {
+        color: white !important;
+        font-size: 18px !important;
+        text-shadow: 1px 1px 11px skyblue;
+    }
+
     .lyric-detail {
+        transition: all 1s;
         position: relative;
         z-index: 999;
         width: 100%;
@@ -52,8 +100,11 @@
         overflow: scroll;
 
         .lyric {
+            font-size: 15px;
+            transition: all .5s;
             padding: 10px 0;
             text-align: center;
+            color: rgba(255, 255, 255, .6);
         }
 
     }

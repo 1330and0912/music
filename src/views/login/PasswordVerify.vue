@@ -30,9 +30,9 @@
             login() {
                 const {phone, password} = this.$store.getters['login/getUserInfo']
                 loginCellphone(phone, password).then(res => {
-                    console.log(res)
                     if (res.code == 502) {
                         this.$toast(res.message)
+                        console.log(res)
                         return
                     }
                     loginStatus().then(res => {

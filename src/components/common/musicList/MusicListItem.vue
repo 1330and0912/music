@@ -24,7 +24,7 @@
             }
         },
         mounted() {
-            console.log(this.musicInfo);
+          //  console.log(this.musicInfo);
         },
         methods: {
             ...mapActions('musicDetail', ['playMusic']),
@@ -36,9 +36,7 @@
                         id: id
                     })
                 })
-
             }
-
         }
     }
 </script>

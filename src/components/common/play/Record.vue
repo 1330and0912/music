@@ -1,7 +1,7 @@
 <template>
     <div class="record-wrap">
-        <div class="record " :class="isRotate?'move-start':''">
-            <div class="record-bg"></div>
+        <div class="record " :class="isRotate?'move-start':'move-pause'">
+            <div class="record-bg" :style="{backgroundImage:`url(${bg})`}"></div>
         </div>
     </div>
 
@@ -15,6 +15,7 @@
                 type: Boolean,
                 default: true
             },
+            bg:String
         },
         data() {
             return {
@@ -58,6 +59,10 @@
 
     .move-start {
         animation: move 12s infinite linear;
+    }
+    .move-pause {
+        animation: move 12s infinite linear;
+        animation-play-state: paused;
     }
 
     @keyframes move {

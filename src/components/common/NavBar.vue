@@ -71,7 +71,7 @@
     }
 
     .current {
-        font-size: 22px !important;
+        font-size: 20px !important;
         color: white !important;
     }
 </style>
