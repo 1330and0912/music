@@ -6,6 +6,7 @@
         </div>
         <record :is-rotate="getIsPlay" :bg="getCurrentMusic.bg"/>
         <lyric-detail :lyric="getCurrentMusic.lyric" class="lyric"></lyric-detail>
+        <progress-bar/>
         <music-control class="control"/>
     </div>
 </template>
@@ -14,6 +15,7 @@
     import Record from "./Record";
     import LyricDetail from "./LyricDetail";
     import MusicControl from "./MusicControl";
+    import ProgressBar from "./ProgressBar";
 
     import PhoneNavBar from "views/login/childcomponents/PhoneNavBar";
 
@@ -21,7 +23,7 @@
 
     export default {
         name: "Play",
-        components: {PhoneNavBar, MusicControl, LyricDetail, Record},
+        components: {ProgressBar, PhoneNavBar, MusicControl, LyricDetail, Record},
         methods: {
             back() {
                 this.$router.back()

@@ -29,12 +29,12 @@
             }
         },
         computed: {
-            ...mapGetters('musicDetail', ['getCurrentTime']),
+            ...mapGetters('musicDetail', ['getCurrentMusicPlayTime', 'getProgressValue']),
             activeIndex() {
                 let t = 0
                 let flag = this.lyrics.some((item, index) => {
                     t = index
-                    return item.duration > this.getCurrentTime
+                    return item.duration > this.getCurrentMusicPlayTime
                 })
                 return flag ? t - 1 : this.lyrics.length - 1
             },
@@ -51,14 +51,26 @@
                         this.moveHeight = this.$refs.lyricHeight[this.activeIndex].clientHeight
                     })
                     this.$refs.scroll.scrollTop = this.$refs.scroll.scrollTop + this.moveHeight
+                } else {
+                    this.$refs.scroll.scrollTop = 0
                 }
                 this.lyricCount = newVal
             },
             lyrics() {
                 //切换歌曲则重置滚动
                 this.$refs.scroll.scrollTop = 0
+                this.lyricTotalHeight = 0
+            },
+            getProgressValue() {
+                this.lyricTotalHeight = 0
+                for (let i = 3; i < this.lyricCount; i++) {
+                    this.lyricTotalHeight += this.$refs.lyricHeight[i].clientHeight//记录以滚动高度
+                }
+                window.sessionStorage.scrollTop = this.lyricTotalHeight
+                this.$refs.scroll.scrollTop = window.sessionStorage.getItem('scrollTop')
             }
-        },
+        }
+        ,
         activated() {
             this.lyricTotalHeight = 0
             for (let i = 3; i < this.lyricCount; i++) {
@@ -66,7 +78,8 @@
             }
             window.sessionStorage.scrollTop = this.lyricTotalHeight
             this.$refs.scroll.scrollTop = window.sessionStorage.getItem('scrollTop')
-        },
+        }
+        ,
         methods: {
             touchend(e) {
                 clearTimeout(this.timer)

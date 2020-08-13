@@ -1,10 +1,15 @@
+import {random} from 'lodash'
+
 const state = {
     recentPlay: [],//最近播放的音乐数据，
     currentMusic: {},//当前播放的歌曲信息
     isPlay: false,//判断是否在播放音乐,
     songUrl: '',//音乐url,暂时未用到该状态
     currentTime: 0,//当前播放时间
-    isPlayEnd: false//是否播放结束
+    isPlayEnd: false,//是否播放结束
+    playMode: 0,//播放模式 0：列表循环 1：单曲循环 2：随机播放
+    duration: 0,//音乐总时长,
+    progressValue: 0//设置进度条滚动值
 }
 const mutations = {
     //保存用户已播放过的音乐
@@ -35,18 +40,31 @@ const mutations = {
     },
     //上一曲
     prevSong(state, index) {
+        state.isPlay = true
         state.currentMusic = state.recentPlay[index]
     },
     //下一曲
     nextSong(state, index) {
+        state.isPlay = true
         state.currentMusic = state.recentPlay[index]
     },
-    //播放完毕时修改
-    isPlayEnd(state, finish) {
-        state.isPlayEnd = finish
+    //修改播放模式
+    alterPlayMode(state, mode) {
+        state.playMode = mode
+    },
+    // 随机播放模式
+    randomPlay(state, index) {
+        state.currentMusic = state.recentPlay[index]
+    },
+    // 保存音乐时长
+    saveMusicDuration(state, duration) {
+        state.duration = duration
+    },
+    //保存进度条滚动值
+    saveProgressValue(state, value) {
+        state.progressValue = value
     }
 }
-
 const actions = {
     //获取保存播放音乐数据
     //@recentPlay 最近播放的音乐数据
@@ -79,9 +97,22 @@ const actions = {
         index = index > state.recentPlay.length - 1 ? 0 : index
         commit('nextSong', index)
     },
-    //判断是否播放完毕
-    isPlayEnd({commit}, finish) {
-        commit('isPlayEnd', finish)
+    //修改播放模式
+    alterPlayMode({commit}, mode) {
+        commit('alterPlayMode', mode)
+    },
+    // 播放模式
+    randomPlay({commit, state}) {
+        let index = random(0, state.recentPlay.length - 1)
+        commit('randomPlay', index)
+    },
+    // 获取音乐时长
+    getMusicDuration({commit}, duration) {
+        commit('saveMusicDuration', duration)
+    },
+    //设置进度条滚动值
+    setProgressValue({commit}, value) {
+        commit('saveProgressValue', value)
     }
 }
 const getters = {
@@ -97,16 +128,22 @@ const getters = {
     getSongUrl(state) {
         return state.songUrl
     },
-    // 获取播放时间
-    getCurrentTime(state) {
+    // 获取当前播放时间
+    getCurrentMusicPlayTime(state) {
         return state.currentTime
     },
-    //获取播放完成的状态
-    getIsPlayEnd(state){
-        return state.currentTime
+    //获取播放模式
+    getPlayMode(state) {
+        return state.playMode
+    },
+    //获取音乐时长
+    getDuration(state) {
+        return state.duration
+    },
+    //设置进度条滚动值
+    getProgressValue() {
+        return state.progressValue
     }
-
-
 }
 export const musicDetail = {
     namespaced: true,

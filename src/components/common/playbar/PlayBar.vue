@@ -9,7 +9,7 @@
         </div>
         <div class="music-control">
             <i @click.stop="isPlayMusic" class="play iconfont" :class="getIsPlay?'icon-bofang':'icon-bofang1'"></i>
-            <i class=" iconfont icon-zhankai"></i>
+            <i @click.stop="test" class=" iconfont icon-zhankai"></i>
         </div>
         <audio @ended="playFinish" @timeupdate="getCurrentPlayTime" @canplay="loadMusicSuccess" ref="audio"
                :src="getCurrentMusic.musicUrl"></audio>
@@ -22,7 +22,7 @@
     export default {
         name: "PlayBar",
         computed: {
-            ...mapGetters('musicDetail', ['getCurrentMusic', 'getIsPlay'])
+            ...mapGetters('musicDetail', ['getCurrentMusic', 'getIsPlay', 'getCurrentMusicPlayTime', 'getPlayMode', 'getProgressValue'])
         },
         watch: {
             //监听播放状态的改变来进行音乐的暂停与播放
@@ -34,28 +34,47 @@
                 } else {
                     this.$refs.audio.pause()
                 }
+            },
+            getProgressValue(newVal) {
+                this.$refs.audio.currentTime = newVal
+                this.getCurrentTime(newVal)
             }
         },
         methods: {
-            ...mapActions('musicDetail', ['toggleMusicState', 'getCurrentTime','nextSong']),
+            ...mapActions('musicDetail', ['toggleMusicState', 'getCurrentTime', 'nextSong', 'randomPlay', 'getMusicDuration']),
+            //打开主播放器
             goMusciDetail() {
                 this.$router.push('play')
             },
+            //切换音乐播放和暂停状态
             isPlayMusic() {
                 // this.$refs.audio.currentTime+=20
                 this.toggleMusicState()
             },
+            //音乐加载成功
             loadMusicSuccess() {
+                this.getMusicDuration(this.$refs.audio.duration)
                 this.$refs.audio.play()
             },
+            //获取当前播放时间
             getCurrentPlayTime(e) {
-                let time = e.target.currentTime.toFixed(2)
+                let time = e.target.currentTime
                 this.getCurrentTime(time)
-            },
-            //播放完成触发
+        },
+            //播放完成切换到下一曲
             playFinish() {
-                this.nextSong()
-                alert(111)
+                //this.$refs.audio.currentTime = 0
+                if (this.getPlayMode === 0) {
+                    this.nextSong()
+                } else if (this.getPlayMode === 1) {
+                    this.$refs.audio.currentTime = 0
+                } else if (this.getPlayMode === 2) {
+                    this.randomPlay()
+                }
+
+            },
+            test() {
+                this.$refs.audio.currentTime = 282
             }
         },
         created() {

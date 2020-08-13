@@ -2,8 +2,8 @@
     <div class="musci-control">
         <div class="control-wrap">
 
-            <div class="circulation">
-                <i class="iconfont icon-suijibofang"></i>
+            <div @click="playMode" class="circulation">
+                <i class="iconfont   " :class="playModeIcon[modeIndex]"></i>
             </div>
             <div @click="prevMusic" class="prev">
                 <i class="iconfont icon-shangyiqu"></i>
@@ -22,27 +22,43 @@
 </template>
 
 <script>
-    import {mapActions,mapGetters} from 'vuex'
+    import {mapActions, mapGetters} from 'vuex'
+
     export default {
         name: "MusicControl",
         data() {
             return {
-                currentTime: 0
+                playModeIcon: ['icon-liebiaoxunhuan', 'icon-danquxunhuan', 'icon-suijibofang'],
+                playModeText: ['列表循环', '单曲循环', '随机播放'],
+                modeIndex: 0//模式索引
             }
         },
-        computed:{
-          ...mapGetters('musicDetail',['getIsPlay'])
+        computed: {
+            ...mapGetters('musicDetail', ['getIsPlay'])
         },
         methods: {
-            ...mapActions('musicDetail',['toggleMusicState','prevSong','nextSong']),
+            ...mapActions('musicDetail', ['toggleMusicState', 'prevSong', 'nextSong', 'alterPlayMode']),
+            //暂停/播放
             playMusic() {
                 this.toggleMusicState()
             },
-            prevMusic(){
+            // 上一曲
+            prevMusic() {
                 this.prevSong()
             },
-            nextMusic(){
+            //下一曲
+            nextMusic() {
                 this.nextSong()
+            },
+            //修改播放模式
+            playMode() {
+                if (this.modeIndex == 2) {
+                    this.modeIndex = 0
+                } else {
+                    this.modeIndex++
+                }
+                this.$toast(this.playModeText[this.modeIndex])
+                this.alterPlayMode(this.modeIndex)
             }
         }
     }

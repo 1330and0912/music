@@ -39,8 +39,8 @@
     .record {
         background-color: #151419;
         border-radius: 50%;
-        height: 260px;
-        width: 260px;
+        height: 240px;
+        width: 240px;
         border: 8px solid rgba(255, 255, 255, .5);
         display: flex;
         justify-content: center;
