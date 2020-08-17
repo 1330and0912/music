@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+import store from '../store/index'
+
 export function request(config) {
     const instance = axios.create({
         baseURL: 'http://192.168.0.102:3000',

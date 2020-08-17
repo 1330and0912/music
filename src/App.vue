@@ -7,6 +7,7 @@
             <router-view/>
         </keep-alive>
         <play-bar v-show="isShowNavBar"/>
+        <loading v-if="$store.state.isShowLoading"/>
     </div>
 </template>
 <script>
@@ -14,18 +15,18 @@
     import PlayBar from "./components/common/playbar/PlayBar";
 
     import {mapGetters} from 'vuex'
+    import Loading from "./components/common/loading/Loading";
 
     export default {
-        components: {PlayBar, NavBar},
+        components: {Loading, PlayBar, NavBar},
         data() {
             return {
                 isShowNavBar: false,
                 path: ['/profile', '/recent', '', ''],
-
             }
         },
         watch: {
-            $route(to) {
+            $route(to, from) {
                 let flag = this.path.some(item => item == to.path)
                 if (flag) {
                     this.isShowNavBar = true
@@ -49,10 +50,5 @@
         width: 100%;
     }
 
-    /*.fade-enter-active, .fade-leave-active {*/
-    /*    transition:  1s;*/
-    /*}*/
-    /*.fade-enter, .fade-leave-to !* .fade-leave-active below version 2.1.8 *! {*/
-    /*    transform: translateY(300px);*/
-    /*}*/
+
 </style>

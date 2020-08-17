@@ -1,11 +1,18 @@
 <template>
     <ul class="nav-bar">
-        <li><i class="iconfont icon-zhankai"></i></li>
-        <li @click="changeTab(index)" class="nav-bar-item" :class=" index===currentIndex?'current':''"
-            v-for="(item,index) in titles">
+        <li>
+            <i class="iconfont icon-zhankai"></i>
+        </li>
+        <li
+                @click="changeTab(index)"
+                class="nav-bar-item" :class="
+                index===currentIndex?'current':''"
+                v-for="(item,index) in titles">
             {{item}}
         </li>
-        <li><i class="iconfont icon-sousuo"></i></li>
+        <li @click="toSearch">
+            <i class="iconfont icon-sousuo"></i>
+        </li>
     </ul>
 </template>
 
@@ -26,12 +33,13 @@
         },
         methods: {
             changeTab(index) {
-
                 this.currentIndex = index
                 if (this.$route.path !== this.path[index]) {
                     this.$router.push(this.path[index])
-
                 }
+            },
+            toSearch() {
+                this.$router.push('search')
             }
         }
     }

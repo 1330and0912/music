@@ -9,12 +9,15 @@
                 :placeholder="placeholder"
                 :style="{caretColor:caret}"
                 @input="isBlur($event.target)"
+                @keypress.enter="search"
+                autofocus
         >
     </div>
 </template>
 
 <script>
 
+    import {mapGetters} from 'vuex'
     export default {
         name: "FormInput",
         props: {
@@ -28,7 +31,6 @@
                 type: String,
                 default: 'text'
             }
-
         },
         data() {
             return {
@@ -40,17 +42,35 @@
             valueChange() {
                 this.$emit('bind-value', this.value)
             },
-            //当输入长度上线时离开输入框
+            //当输入长度上限时离开输入框
             isBlur(inp) {
                 if (inp.value.length == this.maxlength) {
                     inp.blur()
                 }
                 this.$emit('input-value', inp.value)
 
+            },
+            search(e){
+                this.$emit('on-search', this.value)
+                e.target.blur()
             }
+        },
+        computed:{
+              ...mapGetters('search',['getSearchWord'])
         },
         mounted() {
             this.$refs.inp.focus() //1
+        },
+        watch:{
+            getSearchWord(newVal){
+                this.value = newVal
+            }
+        },
+        deactivated() {
+            this.value = ''
+        },
+        activated() {
+            this.$refs.inp.focus()
         }
 
     }

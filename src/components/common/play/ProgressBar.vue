@@ -34,13 +34,15 @@
             }
         },
         mounted() {
-            // console.log(this.$refs.rate.clientWidth);
-            // console.log(this.$refs.bar.clientWidth);
-            // let ratio = this.$refs.bar.clientWidth
-            // this.getDuration
+
+        },
+        deactivated(){
+            console.log(this.$refs.rate.clientWidth);
         },
         activated() {
-            //console.log(123124);
+            let ratio = this.getCurrentMusicPlayTime / this.getDuration
+            this.$refs.rate.style.width = this.$refs.bar.clientWidth * ratio + 'px'
+            this.$refs.point.style.left = this.$refs.rate.clientWidth - this.$refs.point.clientWidth / 2 + 'px'
         },
         methods: {
             ...mapActions('musicDetail', ['setProgressValue']),

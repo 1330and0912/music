@@ -4,7 +4,6 @@ const state = {
     recentPlay: [],//最近播放的音乐数据，
     currentMusic: {},//当前播放的歌曲信息
     isPlay: false,//判断是否在播放音乐,
-    songUrl: '',//音乐url,暂时未用到该状态
     currentTime: 0,//当前播放时间
     isPlayEnd: false,//是否播放结束
     playMode: 0,//播放模式 0：列表循环 1：单曲循环 2：随机播放
@@ -17,18 +16,12 @@ const mutations = {
         state.recentPlay = payload
     },
     //保存当前播放歌曲的信息
-    savaCurrentMusicInfo(state, id) {
-        state.currentMusic = state.recentPlay.find(item => {
-            return item.id === id
-        })
+    savaCurrentMusicInfo(state, musicInfo) {
+        state.currentMusic =  musicInfo
     },
     //播放音乐
     playMusic(state) {
         state.isPlay = true
-    },
-    //保存音乐url
-    saveSongUrl(state, songUrl) {
-        state.songUrl = songUrl
     },
     //切换播放状态
     toggleMusicState(state) {
@@ -73,9 +66,8 @@ const actions = {
     },
     //播放音乐
     playMusic({commit, state}, musicInfo) {
-        commit('savaCurrentMusicInfo', musicInfo.id)
+        commit('savaCurrentMusicInfo', musicInfo)
         commit('playMusic')
-        commit('saveSongUrl', musicInfo.songUrl)
     },
     //切换播放状态
     toggleMusicState({commit}) {
@@ -123,10 +115,6 @@ const getters = {
     //获取当前播放状态
     getIsPlay(state) {
         return state.isPlay
-    },
-    //获取音乐url
-    getSongUrl(state) {
-        return state.songUrl
     },
     // 获取当前播放时间
     getCurrentMusicPlayTime(state) {

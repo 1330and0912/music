@@ -53,14 +53,15 @@
             },
             //音乐加载成功
             loadMusicSuccess() {
+                console.log(1);
                 this.getMusicDuration(this.$refs.audio.duration)
-                this.$refs.audio.play()
+                this.getIsPlay && this.$refs.audio.play()
             },
             //获取当前播放时间
             getCurrentPlayTime(e) {
                 let time = e.target.currentTime
                 this.getCurrentTime(time)
-        },
+            },
             //播放完成切换到下一曲
             playFinish() {
                 //this.$refs.audio.currentTime = 0
@@ -71,7 +72,6 @@
                 } else if (this.getPlayMode === 2) {
                     this.randomPlay()
                 }
-
             },
             test() {
                 this.$refs.audio.currentTime = 282

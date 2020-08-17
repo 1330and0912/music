@@ -34,8 +34,10 @@
                 let t = 0
                 let flag = this.lyrics.some((item, index) => {
                     t = index
-                    return item.duration > this.getCurrentMusicPlayTime
+                    return item.duration >= this.getCurrentMusicPlayTime
                 })
+                if (t == 0) return 0
+                if (t == this.lyrics.length) return this.lyrics.length - 1
                 return flag ? t - 1 : this.lyrics.length - 1
             },
             lyrics() {
@@ -46,15 +48,18 @@
         },
         watch: {
             activeIndex(newVal) {
-                if (newVal > 2) {
-                    this.$nextTick(() => {
-                        this.moveHeight = this.$refs.lyricHeight[this.activeIndex].clientHeight
-                    })
-                    this.$refs.scroll.scrollTop = this.$refs.scroll.scrollTop + this.moveHeight
-                } else {
-                    this.$refs.scroll.scrollTop = 0
+                if(this.$refs.lyricHeight[this.activeIndex]) {
+                    if (this.$refs.lyricHeight[this.activeIndex].clientHeight * newVal >= this.$refs.scroll.clientHeight / 2) {
+                        this.$nextTick(() => {
+                            this.moveHeight = this.$refs.lyricHeight[this.activeIndex].clientHeight
+                            this.$refs.scroll.scrollTop = this.$refs.scroll.scrollTop + this.moveHeight
+                        })
+                    } else {
+                        this.$refs.scroll.scrollTop = 0
+                    }
+                    this.lyricCount = newVal
                 }
-                this.lyricCount = newVal
+
             },
             lyrics() {
                 //切换歌曲则重置滚动
@@ -62,35 +67,29 @@
                 this.lyricTotalHeight = 0
             },
             getProgressValue() {
-                this.lyricTotalHeight = 0
-                for (let i = 3; i < this.lyricCount; i++) {
-                    this.lyricTotalHeight += this.$refs.lyricHeight[i].clientHeight//记录以滚动高度
-                }
-                window.sessionStorage.scrollTop = this.lyricTotalHeight
-                this.$refs.scroll.scrollTop = window.sessionStorage.getItem('scrollTop')
+                this.totalHeight(1)
             }
         }
         ,
         activated() {
-            this.lyricTotalHeight = 0
-            for (let i = 3; i < this.lyricCount; i++) {
-                this.lyricTotalHeight += this.$refs.lyricHeight[i].clientHeight//记录以滚动高度
-            }
-            window.sessionStorage.scrollTop = this.lyricTotalHeight
-            this.$refs.scroll.scrollTop = window.sessionStorage.getItem('scrollTop')
-        }
-        ,
+            this.totalHeight()
+        },
         methods: {
             touchend(e) {
                 clearTimeout(this.timer)
                 this.timer = setTimeout(() => {
-                    this.lyricTotalHeight = 0
-                    for (let i = 3; i < this.lyricCount; i++) {
-                        this.lyricTotalHeight += this.$refs.lyricHeight[i].clientHeight
-                    }
-                    window.sessionStorage.scrollTop = this.lyricTotalHeight
-                    this.$refs.scroll.scrollTop = window.sessionStorage.getItem('scrollTop')
+                    this.totalHeight()
                 }, 2000)
+            },
+            totalHeight(i = 0) {
+                this.lyricTotalHeight = 0
+                for (; i < this.lyricCount; i++) {
+                    this.lyricTotalHeight += this.$refs.lyricHeight[i].clientHeight
+                }
+                window.sessionStorage.scrollTop =
+                    this.lyricTotalHeight -
+                    (this.$refs.scroll.clientHeight - this.$refs.lyricHeight[0].clientHeight) / 2
+                this.$refs.scroll.scrollTop = window.sessionStorage.getItem('scrollTop')
             }
         }
 

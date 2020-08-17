@@ -8,7 +8,7 @@ import {
     LoginCellphone,
     LoginStatus,
     GetLyric,
-    GetSongURL, Search, RecentPlay, Banner
+    GetSongURL, Search, RecentPlay, Banner, SearchHotDetail, DefaultSearchWord
 } from "./resource";
 
 //@phone 手机号码 判断手机号码是否已注册
@@ -86,7 +86,7 @@ export function loginCellphone(phone, password) {
         data: {
             phone,
             password,
-            timestamp:new Date()
+            timestamp: new Date()
         }
     })
 }
@@ -120,21 +120,6 @@ export function getSongURL(songID) {
     })
 }
 
-// 必选参数 : keywords : 关键词
-// 可选参数 : limit : 返回数量 , 默认为 30 offset : 偏移数量，用于分页 , 如 : 如 :( 页数 -1)*30, 其中 30 为 limit 的值 , 默认为 0
-// type: 搜索类型；
-// 默认为 1 即单曲 ,
-// 取值意义 : 1: 单曲, 10: 专辑, 100: 歌手, 1000: 歌单, 1002: 用户,
-// 1004: MV, 1006: 歌词, 1009: 电台, 1014: 视频, 1018:综合
-export function search(keywords, limit = 30, type = 1) {
-    return request({
-        url: Search,
-        params: {
-            keywords, limit, type
-        }
-    })
-}
-
 //获取用户最近播放
 // 必选参数 : uid : 用户 id
 // 可选参数 : type : type=1 时只返回 weekData, type=0 时返回 allData
@@ -144,7 +129,7 @@ export function getRecentPlay(uid, type = 0) {
         params: {
             uid,
             type,
-            timestamp:new Date()
+            timestamp: new Date()
         }
     })
 }
@@ -161,5 +146,35 @@ export function getBanner(type = 2) {
         params: {
             type
         }
+    })
+}
+
+//搜索
+// 必选参数 : keywords : 关键词
+// 可选参数 : limit : 返回数量 , 默认为 30 offset : 偏移数量，用于分页 , 如 : 如 :( 页数 -1)*30, 其中 30 为 limit 的值 , 默认为 0
+// type: 搜索类型；
+// 默认为 1 即单曲 ,
+// 取值意义 : 1: 单曲, 10: 专辑, 100: 歌手, 1000: 歌单, 1002: 用户,
+// 1004: MV, 1006: 歌词, 1009: 电台, 1014: 视频, 1018:综合
+export function search(keywords, limit = 30, type = 1018) {
+    return request({
+        url: Search,
+        params: {
+            keywords, limit, type
+        }
+    })
+}
+
+//获取热搜榜记录
+export function getSearchHotDetail() {
+    return request({
+        url: SearchHotDetail
+    })
+}
+
+//获取默认搜索单词
+export function getDefaultSearchWord() {
+    return request({
+        url: DefaultSearchWord
     })
 }

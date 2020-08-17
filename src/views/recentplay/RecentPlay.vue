@@ -22,10 +22,11 @@
             }
         },
         async created() {
+            this.$store.state.isShowLoading = true
+
             //获取用户id
             this.uid = JSON.parse(window.sessionStorage.getItem('profile')).userId
             const {allData: res} = await getRecentPlay(this.uid)
-
             res.forEach(async (item) => {
                 if ((await getSongURL(item.song.id)).data[0].url) {//如果获取不到音乐url则不添加
                     this.recentPlay.push({
@@ -38,9 +39,9 @@
                     })
                 }
             })
-
+            this.$store.state.isShowLoading = false
             this.saveRecentPlay(this.recentPlay)//将播放过的歌曲信息保存到vuex
-            console.log(this.recentPlay);
+           // console.log(this.recentPlay);
         },
         methods: {
             ...mapActions('musicDetail', ['saveRecentPlay']),

@@ -1,12 +1,14 @@
 <template>
-    <div @click="songPlay(musicInfo.id)" class="music-list-item">
+    <div :class="musicInfo.id==getCurrentMusic.id?'current-play-music':''"
+         @click="songPlay(musicInfo.id)"
+         class="music-list-item">
         <img :src="musicInfo.bg" alt="">
         <span>{{musicInfo.songName}}-{{musicInfo.author}}</span>
     </div>
 </template>
 
 <script>
-    import {mapActions} from 'vuex'
+    import {mapActions, mapGetters} from 'vuex'
     import {getSongURL} from "api";
 
     export default {
@@ -19,29 +21,29 @@
                 }
             }
         },
-        data(){
-            return {
-            }
+        data() {
+            return {}
         },
-        mounted() {
-          //  console.log(this.musicInfo);
+        computed: {
+            ...mapGetters('musicDetail', ['getCurrentMusic'])
+        },
+        created() {
         },
         methods: {
             ...mapActions('musicDetail', ['playMusic']),
             songPlay(id) {
-               // console.dir(this.audio);
-                getSongURL(id).then((res) => {
-                    this.playMusic({
-                        songUrl: res.data[0].url,
-                        id: id
-                    })
-                })
+                this.playMusic(this.musicInfo)
+                console.log(this.musicInfo);
             }
         }
     }
 </script>
 
 <style lang="less" scoped>
+    .current-play-music {
+        background-color: rgba(110, 1, 110, .2);
+    }
+
     .music-list-item {
         width: 100%;
         padding: 10px;

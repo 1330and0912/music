@@ -7,7 +7,11 @@ import {
     Tab,
     Swipe,
     SwipeItem,
-    Lazyload
+    Lazyload,
+    Search,
+    Icon,
+    Dialog,
+    Toast
 } from 'vant'
 
 // 按需引入UI组件
@@ -16,4 +20,8 @@ Vue.use(Tabs)
 Vue.use(Tab)
 Vue.use(Swipe)
 Vue.use(SwipeItem)
-Vue.use(Lazyload )
+Vue.use(Lazyload)
+Vue.use(Search)
+Vue.use(Icon)
+Vue.use(Dialog)
+Vue.use(Toast)
