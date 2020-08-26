@@ -1,8 +1,7 @@
 <template>
-    <div class="search-referral">
+    <div :class="this.$store.state.isShowPlayBar?'bottom-padding':''"  class="search-referral">
         <search-history/>
         <search-hot-detail/>
-
     </div>
 </template>
 
@@ -16,6 +15,8 @@
     }
 </script>
 
-<style scoped>
-
+<style lang="less" scoped>
+    .bottom-padding {
+        padding-bottom: 49px!important;
+    }
 </style>

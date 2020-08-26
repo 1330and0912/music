@@ -3,7 +3,14 @@
          @click="songPlay(musicInfo.id)"
          class="music-list-item">
         <img :src="musicInfo.bg" alt="">
-        <span>{{musicInfo.songName}}-{{musicInfo.author}}</span>
+        <div class="music-info">
+            <span class="music-name">
+                     {{musicInfo.songName}}
+             </span>
+            <span class="music-author">
+                歌手：{{musicInfo.author}}
+            </span>
+        </div>
     </div>
 </template>
 
@@ -30,10 +37,22 @@
         created() {
         },
         methods: {
-            ...mapActions('musicDetail', ['playMusic']),
+            ...mapActions('musicDetail', ['playMusic', 'writePlayQueuedData']),
             songPlay(id) {
                 this.playMusic(this.musicInfo)
                 console.log(this.musicInfo);
+                let data
+                if (window.localStorage.playQueuedData) {
+                    data = JSON.parse(window.localStorage.playQueuedData)
+                } else {
+                    data = []
+                }
+                let index = data.findIndex(item => item.id == this.musicInfo.id)
+                if (index == -1) {
+                    data.push(this.musicInfo)
+
+                }
+                this.writePlayQueuedData(data)
             }
         }
     }
@@ -41,7 +60,7 @@
 
 <style lang="less" scoped>
     .current-play-music {
-        background-color: rgba(110, 1, 110, .2);
+        background-color: rgba(2, 2, 110, .1);
     }
 
     .music-list-item {
@@ -49,15 +68,30 @@
         padding: 10px;
         display: flex;
         align-items: center;
-        border-bottom: 1px solid rgba(0, 0, 0, .2);
+        // border-bottom: 1px solid rgba(0, 0, 0, .2);
 
         &:active {
-            background-color: rgba(0, 0, 0, .2);
+            background-color: rgba(0, 0, 0, .1);
         }
 
         img {
             margin-right: 10px;
             width: 40px;
+        }
+
+        .music-info {
+            display: flex;
+            flex-direction: column;
+
+            .music-name {
+                color: @night-mode-height-color;
+            }
+
+            .music-author {
+                font-size: 14px;
+                padding-top: 3px;
+                color: @night-mode-color;
+            }
         }
 
     }

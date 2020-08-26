@@ -8,7 +8,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        isShowLoading: false
+        isShowLoading: false,//显示加载动画
+        isShowPlayBar: false,//显示微播放器
     },
     mutations: {},
     actions: {},

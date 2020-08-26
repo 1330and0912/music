@@ -5,6 +5,10 @@ Vue.use(VueRouter)
 
 const routes = [
     {
+        path: '/search/play',
+        redirect: '/play'
+    },
+    {
         path: '/',
         redirect: '/login'
     },
@@ -46,7 +50,6 @@ const routes = [
         name: 'play',
         component: () => import('components/common/play/Play'),
         meta: {index: 1},   //页面下标
-
     },
     {
         path: '/recent',
@@ -71,13 +74,15 @@ const routes = [
                 path: 'search-referral',
                 name: 'searchReferral',
                 component: () => import('views/search/SearchReferral'),
-            }
+            },
+
         ]
     }
 ]
 
 const router = new VueRouter({
-    routes
+    mode: 'history',
+    routes,
 })
 
 export default router

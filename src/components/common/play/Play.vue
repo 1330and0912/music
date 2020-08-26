@@ -1,14 +1,15 @@
 <template>
-    <div id="play" :style="{backgroundImage:`url(${getCurrentMusic.bg})`}">
-        <div class="nav-bar">
-            <i @click="back" class="iconfont icon-zuojiantou"></i>
-            <span>{{getCurrentMusic.songName}}-{{getCurrentMusic.author}}</span>
+        <div v-if="Object.keys(getCurrentMusic).length" id="play"
+             :style="{backgroundImage:`url(${getCurrentMusic.bg})`}">
+            <div class="nav-bar">
+                <i @click="back" class="iconfont icon-zuojiantou"></i>
+                <span>{{getCurrentMusic.author}}-{{getCurrentMusic.songName}}</span>
+            </div>
+            <record :is-rotate="getIsPlay" :bg="getCurrentMusic.bg"/>
+            <lyric-detail :lyric="getCurrentMusic.lyric" class="lyric"></lyric-detail>
+            <progress-bar/>
+            <music-control class="control"/>
         </div>
-        <record :is-rotate="getIsPlay" :bg="getCurrentMusic.bg"/>
-        <lyric-detail :lyric="getCurrentMusic.lyric" class="lyric"></lyric-detail>
-        <progress-bar/>
-        <music-control class="control"/>
-    </div>
 </template>
 
 <script>
@@ -29,8 +30,8 @@
                 this.$router.back()
             }
         },
-        computed:{
-            ...mapGetters('musicDetail',['getCurrentMusic','getIsPlay'])
+        computed: {
+            ...mapGetters('musicDetail', ['getCurrentMusic', 'getIsPlay'])
         }
     }
 </script>
@@ -46,6 +47,7 @@
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center center;
+
         &::before {
             content: '';
             position: absolute;
@@ -62,11 +64,16 @@
             padding-left: 20px;
             display: flex;
             align-items: center;
+
             i {
                 font-size: 24px;
             }
 
             span {
+                width: 200px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
                 font-size: 16px;
                 margin-left: 10px;
             }

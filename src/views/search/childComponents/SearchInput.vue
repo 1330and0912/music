@@ -1,7 +1,13 @@
 <template>
     <div class="search-input">
         <div @click="back" class="back iconfont icon-zuojiantou"></div>
-        <form-input :searchWord="getSearchWord"  inputType="search" @on-search="search" :placeholder="defaultSearchWord" class="inp"/>
+        <form-input
+                :searchWord="getSearchWord"
+                inputType="search" @on-search="search"
+                :placeholder="defaultSearchWord"
+                class="inp"
+
+        />
     </div>
 </template>
 
@@ -9,7 +15,7 @@
     import FormInput from "components/common/FormInput";
     import {getDefaultSearchWord} from "api";
 
-    import {mapActions,mapGetters} from 'vuex'
+    import {mapActions, mapGetters} from 'vuex'
 
     export default {
         name: "SearchInput",
@@ -19,8 +25,8 @@
                 defaultSearchWord: '',//默认搜索关键词词
             }
         },
-        computed:{
-            ...mapGetters('search',['getSearchWord'])
+        computed: {
+            ...mapGetters('search', ['getSearchWord'])
         },
         async created() {
             this.defaultSearchWord = (await getDefaultSearchWord()).data.showKeyword
@@ -30,10 +36,15 @@
             back() {
                 this.$router.back()
             },
-            ...mapActions('search', ['setSearchWord','addSearchHistory']),
+            ...mapActions('search', ['setSearchWord', 'addSearchHistory']),
             search(searchWord) {
-                this.setSearchWord(searchWord||this.defaultSearchWord)
-                this.addSearchHistory(searchWord||this.defaultSearchWord)
+                if (searchWord.trim()) {
+                    this.setSearchWord(searchWord)
+                    this.addSearchHistory(searchWord)
+                } else {
+                    this.setSearchWord(this.defaultSearchWord)
+                    this.addSearchHistory(this.defaultSearchWord)
+                }
                 if (this.$route.path !== '/search/search-result') {
                     this.$router.push({
                         path: 'search-result',
@@ -46,8 +57,9 @@
 
 <style lang="less" scoped>
     .search-input {
-        padding: 20px 10px 0;
-        background-color: #fff;
+        padding: 0px 10px 0;
+        height: 49px;
+        background-color: @header-color;
         position: fixed;
         z-index: 9999;
         top: 0px;

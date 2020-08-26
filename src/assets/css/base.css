@@ -6,7 +6,7 @@ body,html {
     height: 100%;
     color: #333;
 }
-
+/** { touch-action: manipulation; }*/
 li {
     list-style-type: none;
 

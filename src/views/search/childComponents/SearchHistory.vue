@@ -5,7 +5,9 @@
             <van-icon @click="deleteSearchAllHistory" name="delete" size="26" color="#cccccc"/>
         </div>
         <div class="h-content">
-            <span @click="search(item)" v-for="item in getSearchHistory">{{item}} </span>
+            <span @click="search(item)" v-for="item in getSearchHistory">
+                {{item}}
+            </span>
         </div>
     </div>
 </template>
@@ -31,11 +33,11 @@
             },
             deleteSearchAllHistory() {
                 this.$dialog.confirm({
-                    title:'删除所有搜索记录',
-                    showCancelButton:true
-                }).then(()=>{
+                    title: '删除所有搜索记录',
+                    showCancelButton: true
+                }).then(() => {
                     this.deleteSearchHistory(-1)
-                }).catch(()=>{
+                }).catch(() => {
                     this.$toast.success('取消成功')
                 })
             }
@@ -49,20 +51,20 @@
 
 <style lang="less" scoped>
     .search-history {
-        padding: 80px 10px 0;
+        padding: 65px 10px 0;
 
         .h-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-
             p {
+                color: @night-mode-height-color;
                 font-weight: bold;
             }
 
             .van-icon {
                 transition: color .3s;
-
+                font-size: 22px !important;
                 &:active {
                     color: rgba(0, 0, 0, 1) !important;
                 }
@@ -82,18 +84,20 @@
             }
 
             span {
-                padding: 10px;
+                color: @night-mode-height-color;
+                padding: 12px;
                 margin-left: 5px;
-                background-color: rgba(0, 0, 0, .1);
-                border-radius: 40%;
+                background-color: rgba(0,0,0,.1);
+                border-radius: 100%;
                 transition: background-color .3s;
                 height: 40px;
                 white-space: nowrap;
+                position: relative;
 
                 &:active {
-                    background-color: rgba(0, 0, 0, .3);
-
+                    background-color: rgba(110, 0, 101, .1);
                 }
+
             }
         }
 

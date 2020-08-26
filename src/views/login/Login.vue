@@ -68,7 +68,7 @@
                     })
                 } else if (checkPhone(this.phone)) {
                     this.$store.dispatch('login/savePhone', this.phone)
-                    //如果账号已经注册则跳转至输入密码解密
+                    //如果账号已经注册则跳转至输入密码界面
                     this.$router.push({
                         name: 'passwordVerify',
                     })

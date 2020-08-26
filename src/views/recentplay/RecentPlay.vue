@@ -1,5 +1,5 @@
 <template>
-    <div id="recentPlay">
+    <div :class="this.$store.state.isShowPlayBar?'bottom-padding':''" id="recentPlay">
         <music-list :music-info="recentPlay"/>
     </div>
 </template>
@@ -41,23 +41,24 @@
             })
             this.$store.state.isShowLoading = false
             this.saveRecentPlay(this.recentPlay)//将播放过的歌曲信息保存到vuex
-           // console.log(this.recentPlay);
+            // console.log(this.recentPlay);
         },
         methods: {
             ...mapActions('musicDetail', ['saveRecentPlay']),
-
         }
     }
 </script>
 
 <style lang="less" scoped>
+    .bottom-padding {
+        padding-bottom: 49px!important;
+    }
     #recentPlay {
         color: white;
         height: 100%;
-        background-image: url("../../assets/img/recent/bg.jpg");
         background-size: cover;
         background-position: center center;
         background-repeat: no-repeat;
-        padding: 55px 0;
+        padding: 49px 0 0;
     }
 </style>

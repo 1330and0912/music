@@ -1,5 +1,5 @@
 <template>
-    <div id="profile">
+    <div :class="this.$store.state.isShowPlayBar?'bottom-padding':''" id="profile">
         <user-avatar class="user"/>
         <my-list/>
         <my-music/>
@@ -44,5 +44,8 @@
 
     .user {
         padding-top: 64px;
+    }
+    .bottom-padding {
+        padding-bottom: 49px!important;
     }
 </style>

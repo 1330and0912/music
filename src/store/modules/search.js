@@ -1,5 +1,5 @@
 const state = {
-    searchWord: '123',//搜索关键词
+    searchWord: '',//搜索关键词
     searchHistory: []//搜索记录
 }
 const mutations = {

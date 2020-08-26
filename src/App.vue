@@ -6,15 +6,17 @@
         <keep-alive>
             <router-view/>
         </keep-alive>
-        <play-bar v-show="isShowNavBar"/>
-        <loading v-if="$store.state.isShowLoading"/>
+        <loading v-show="$store.state.isShowLoading"/>
+        <template v-if="removePlayBar ">
+            <play-bar v-show="this.$store.state.isShowPlayBar"/>
+        </template>
     </div>
 </template>
 <script>
     import NavBar from "./components/common/NavBar";
     import PlayBar from "./components/common/playbar/PlayBar";
 
-    import {mapGetters} from 'vuex'
+    import {mapGetters, mapActions} from 'vuex'
     import Loading from "./components/common/loading/Loading";
 
     export default {
@@ -23,6 +25,7 @@
             return {
                 isShowNavBar: false,
                 path: ['/profile', '/recent', '', ''],
+                removePlayBar: true
             }
         },
         watch: {
@@ -33,14 +36,53 @@
                 } else {
                     this.isShowNavBar = flag
                 }
-                console.log(to.path);
+                let flag1 = ['/play', '/login', '/phoneVerify', '/phoneRegister', '/nickName', '/passwordVerify']
+                let f = flag1.some(item => to.path.includes(item))
+                if (f || (!(Object.keys(this.getCurrentMusic).length))) {
+                    this.$store.state.isShowPlayBar = false
+                } else {
+                    this.$store.state.isShowPlayBar = true
+                }
+            },
+            getCurrentMusic() {
+                this.$store.state.isShowPlayBar = !!(Object.keys(this.getCurrentMusic).length);
+                if (this.$route.path.includes('/play')) {
+                    this.$store.state.isShowPlayBar = false
+                }
+            },
+            getPlayQueuedData(newVal) {
+                if (newVal.length == 0) {
+                    this.removePlayBar = false
+                    this.setCurrentMusic({})
+                } else {
+                    this.removePlayBar = true
+                }
             }
-        },
+        }
+        ,
         computed: {
-            ...mapGetters('musicDetail', ['getIsPlay'])
+            ...mapGetters('musicDetail', ['getIsPlay', 'getCurrentMusic', 'getPlayQueuedData'])
+        }
+        ,
+        created() {
+            if (window.localStorage.currentMusic) {
+                this.setCurrentMusic(JSON.parse(window.localStorage.currentMusic))
+            } else {
+                this.$store.state.isShowPlayBar = false
+            }
+            this.getInitData()
+        }
+        ,
+        methods: {
+            ...
+                mapActions('musicDetail', ['setCurrentMusic', 'writePlayQueuedData']),
+            //获取一些localStorage数据
+            getInitData() {
+                // 获取播放队列数据
+                window.localStorage.playQueuedData && this.writePlayQueuedData(JSON.parse(window.localStorage.playQueuedData))
+            }
         }
     }
-
 </script>
 <style>
     @import "assets/css/base.css";

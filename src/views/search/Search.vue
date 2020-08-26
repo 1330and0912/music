@@ -22,6 +22,8 @@
 
 <style lang="less" scoped>
     #search {
-
+        height: 100%;
+        background-color:@content-color;
     }
+
 </style>

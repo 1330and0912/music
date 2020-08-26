@@ -8,7 +8,8 @@ const state = {
     isPlayEnd: false,//是否播放结束
     playMode: 0,//播放模式 0：列表循环 1：单曲循环 2：随机播放
     duration: 0,//音乐总时长,
-    progressValue: 0//设置进度条滚动值
+    progressValue: 0,//设置进度条滚动值,
+    playQueuedData: []//播放队列音乐数据
 }
 const mutations = {
     //保存用户已播放过的音乐
@@ -17,7 +18,8 @@ const mutations = {
     },
     //保存当前播放歌曲的信息
     savaCurrentMusicInfo(state, musicInfo) {
-        state.currentMusic =  musicInfo
+        state.currentMusic = musicInfo
+        window.localStorage.currentMusic = JSON.stringify(musicInfo)
     },
     //播放音乐
     playMusic(state) {
@@ -34,12 +36,12 @@ const mutations = {
     //上一曲
     prevSong(state, index) {
         state.isPlay = true
-        state.currentMusic = state.recentPlay[index]
+        state.currentMusic = state.playQueuedData[index]
     },
     //下一曲
     nextSong(state, index) {
         state.isPlay = true
-        state.currentMusic = state.recentPlay[index]
+        state.currentMusic = state.playQueuedData[index]
     },
     //修改播放模式
     alterPlayMode(state, mode) {
@@ -47,7 +49,7 @@ const mutations = {
     },
     // 随机播放模式
     randomPlay(state, index) {
-        state.currentMusic = state.recentPlay[index]
+        state.currentMusic = state.playQueuedData[index]
     },
     // 保存音乐时长
     saveMusicDuration(state, duration) {
@@ -56,6 +58,10 @@ const mutations = {
     //保存进度条滚动值
     saveProgressValue(state, value) {
         state.progressValue = value
+    },
+    // 保存播放队列音乐数据
+    savePlayQueuedData(state, value) {
+        state.playQueuedData = value
     }
 }
 const actions = {
@@ -79,23 +85,33 @@ const actions = {
     },
     // 上一曲
     prevSong({commit, state}) {
-        let index = state.recentPlay.findIndex(item => item.id == state.currentMusic.id) - 1
-        index = index < 0 ? state.recentPlay.length - 1 : index
+        let index
+        if (state.playMode == 2) {
+            index = random(0, state.playQueuedData.length - 1)
+        } else {
+            index = state.playQueuedData.findIndex(item => item.id == state.currentMusic.id) - 1
+            index = index < 0 ? state.playQueuedData.length - 1 : index
+        }
         commit('prevSong', index)
     },
     // 下一曲
     nextSong({commit, state}) {
-        let index = state.recentPlay.findIndex(item => item.id == state.currentMusic.id) + 1
-        index = index > state.recentPlay.length - 1 ? 0 : index
+        let index
+        if (state.playMode == 2) {
+            index = random(0, state.playQueuedData.length - 1)
+        } else {
+            index = state.playQueuedData.findIndex(item => item.id == state.currentMusic.id) + 1
+            index = index > state.playQueuedData.length - 1 ? 0 : index
+        }
         commit('nextSong', index)
     },
     //修改播放模式
     alterPlayMode({commit}, mode) {
         commit('alterPlayMode', mode)
     },
-    // 播放模式
+    // 随机播放模式
     randomPlay({commit, state}) {
-        let index = random(0, state.recentPlay.length - 1)
+        let index = random(0, state.playQueuedData.length - 1)
         commit('randomPlay', index)
     },
     // 获取音乐时长
@@ -105,6 +121,14 @@ const actions = {
     //设置进度条滚动值
     setProgressValue({commit}, value) {
         commit('saveProgressValue', value)
+    },
+    //写入播放队列数据
+    writePlayQueuedData({commit}, value) {
+        commit('savePlayQueuedData', value)
+        window.localStorage.playQueuedData = JSON.stringify(value)
+    },
+    setCurrentMusic({commit}, musicInfo) {
+        commit('savaCurrentMusicInfo', musicInfo)
     }
 }
 const getters = {
@@ -128,9 +152,13 @@ const getters = {
     getDuration(state) {
         return state.duration
     },
-    //设置进度条滚动值
-    getProgressValue() {
+    //获取进度条滚动值
+    getProgressValue(state) {
         return state.progressValue
+    },
+    //获取播放队列数据
+    getPlayQueuedData(state) {
+        return state.playQueuedData
     }
 }
 export const musicDetail = {

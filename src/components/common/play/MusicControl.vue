@@ -1,9 +1,8 @@
 <template>
     <div class="musci-control">
         <div class="control-wrap">
-
             <div @click="playMode" class="circulation">
-                <i class="iconfont   " :class="playModeIcon[modeIndex]"></i>
+                <i class="iconfont   " :class="playModeIcon[getPlayMode]"></i>
             </div>
             <div @click="prevMusic" class="prev">
                 <i class="iconfont icon-shangyiqu"></i>
@@ -34,7 +33,7 @@
             }
         },
         computed: {
-            ...mapGetters('musicDetail', ['getIsPlay'])
+            ...mapGetters('musicDetail', ['getIsPlay','getPlayMode'])
         },
         methods: {
             ...mapActions('musicDetail', ['toggleMusicState', 'prevSong', 'nextSong', 'alterPlayMode']),
@@ -57,8 +56,8 @@
                 } else {
                     this.modeIndex++
                 }
-                this.$toast(this.playModeText[this.modeIndex])
                 this.alterPlayMode(this.modeIndex)
+                this.$toast(this.playModeText[this.getPlayMode])
             }
         }
     }

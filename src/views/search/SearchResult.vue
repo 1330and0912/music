@@ -1,5 +1,5 @@
 <template>
-    <div class="search-result">
+    <div :class="this.$store.state.isShowPlayBar?'bottom-padding':''" class="search-result">
         <music-list v-if="searchSuccess" class="music-list" :music-info="musicInfo"/>
         <div v-else>未找到</div>
     </div>
@@ -28,7 +28,9 @@
         },
         watch: {
             async getSearchWord() {
-                this.getMusicInfo()
+                if(this.getSearchWord) {
+                    this.getMusicInfo()
+                }
             }
         },
         created() {
@@ -61,14 +63,19 @@
                 }
             },
             ...mapActions('search', ['setSearchWord'])
+        },
+        deactivated() {
+            this.setSearchWord('');
         }
-
     }
 </script>
 
 <style lang="less" scoped>
     .search-result {
-        padding-top: 60px;
+        padding-top: 49px;
         /*background-color: rgba(255,0,0,.3);*/
+    }
+    .bottom-padding {
+        padding-bottom: 49px!important;
     }
 </style>

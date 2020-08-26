@@ -7,7 +7,7 @@
                 @change="valueChange"
                 :type="inputType"
                 :placeholder="placeholder"
-                :style="{caretColor:caret}"
+                :style="{caretColor:caret,backgroundColor:bg}"
                 @input="isBlur($event.target)"
                 @keypress.enter="search"
                 autofocus
@@ -18,6 +18,7 @@
 <script>
 
     import {mapGetters} from 'vuex'
+
     export default {
         name: "FormInput",
         props: {
@@ -30,7 +31,8 @@
             inputType: {
                 type: String,
                 default: 'text'
-            }
+            },
+            bg:String
         },
         data() {
             return {
@@ -50,19 +52,19 @@
                 this.$emit('input-value', inp.value)
 
             },
-            search(e){
+            search(e) {
                 this.$emit('on-search', this.value)
                 e.target.blur()
             }
         },
-        computed:{
-              ...mapGetters('search',['getSearchWord'])
+        computed: {
+            ...mapGetters('search', ['getSearchWord'])
         },
         mounted() {
             this.$refs.inp.focus() //1
         },
-        watch:{
-            getSearchWord(newVal){
+        watch: {
+            getSearchWord(newVal) {
                 this.value = newVal
             }
         },
@@ -84,7 +86,7 @@
         line-height: 20px;
         border-bottom: 1px solid rgba(0, 0, 0, .3);
         outline: none;
-
+        background-color: transparent;
     }
 
     ::placeholder {

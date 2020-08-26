@@ -70,7 +70,7 @@
     }
 
     .search-hot-detail {
-
+        background-color: @content-color;
         padding:30px 0px 0px;
     }
 
@@ -79,6 +79,7 @@
             font-weight: bold;
             margin-bottom: 10px;
             padding: 0px 10px;
+            color: @night-mode-height-color;
         }
 
         .hot-detail-item {
@@ -99,9 +100,7 @@
                 .content {
                     .search-word {
                         font-weight: bold;
-
                         .lyric {
-                            color: gray;
                             font-weight: normal;
                             margin-top: 5px;
                             font-size: 14px;
@@ -113,13 +112,13 @@
             .index {
                 text-align: center;
                 flex: 1;
-
+                color: @night-mode-height-color;
             }
 
             .content {
                 flex: 10;
                 padding: 0 10px;
-
+                color: @night-mode-height-color;
                 .search-word {
                     .music-name {
                         font-size: 16px;
@@ -132,7 +131,7 @@
                     }
 
                     .lyric {
-                        color: darkgray;
+                        color: @night-mode-color;
                         margin-top: 5px;
                         font-size: 13px;
                     }

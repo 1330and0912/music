@@ -16,7 +16,8 @@ export function isRegister(phone) {
     return request({
         url: IsRegister,
         params: {
-            phone
+            phone,
+            timestamp: new Date()
         }
 
     })
@@ -29,7 +30,7 @@ export function sendVerificationCode(phone) {
         url: SendVerificationCode,
         data: {
             phone,
-            // timestamp:new Date()
+            //timestamp:new Date()
         }
     })
 }
@@ -95,6 +96,9 @@ export function loginCellphone(phone, password) {
 export function loginStatus() {
     return request({
         url: LoginStatus,
+        params:{
+            timestamp: new Date()
+        }
     })
 }
 
@@ -129,7 +133,6 @@ export function getRecentPlay(uid, type = 0) {
         params: {
             uid,
             type,
-            timestamp: new Date()
         }
     })
 }
