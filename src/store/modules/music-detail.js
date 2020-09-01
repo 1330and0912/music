@@ -7,7 +7,7 @@ const state = {
     currentTime: 0,//当前播放时间
     isPlayEnd: false,//是否播放结束
     playMode: 0,//播放模式 0：列表循环 1：单曲循环 2：随机播放
-    duration: 0,//音乐总时长,
+    duration: 1,//音乐总时长,
     progressValue: 0,//设置进度条滚动值,
     playQueuedData: []//播放队列音乐数据
 }
@@ -37,11 +37,14 @@ const mutations = {
     prevSong(state, index) {
         state.isPlay = true
         state.currentMusic = state.playQueuedData[index]
+        window.localStorage.currentMusic = JSON.stringify(state.currentMusic)
     },
     //下一曲
     nextSong(state, index) {
         state.isPlay = true
         state.currentMusic = state.playQueuedData[index]
+        window.localStorage.currentMusic = JSON.stringify(state.currentMusic)
+
     },
     //修改播放模式
     alterPlayMode(state, mode) {
@@ -50,6 +53,7 @@ const mutations = {
     // 随机播放模式
     randomPlay(state, index) {
         state.currentMusic = state.playQueuedData[index]
+        window.localStorage.currentMusic = JSON.stringify(state.currentMusic)
     },
     // 保存音乐时长
     saveMusicDuration(state, duration) {

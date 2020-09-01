@@ -43,9 +43,6 @@
                 value.splice(index, 1)
                 this.writePlayQueuedData(value)
             },
-        },
-        created() {
-            console.log('list');
         }
 
     }

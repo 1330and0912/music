@@ -32,6 +32,9 @@
         },
         computed: {
             ...mapGetters('musicDetail', ['getCurrentMusic', 'getIsPlay'])
+        },
+        beforeRouteUpdate(to){
+            console.log(to);
         }
     }
 </script>

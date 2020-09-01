@@ -36,6 +36,9 @@
             if (this.$route.path == '/recent') {
                 this.bgColor = '#1A1E21'
                 this.currentIndex = 1
+            } else if (this.$route.path == '/category') {
+                this.bgColor = '#1A1E21'
+                this.currentIndex = 2
             }
         },
         methods: {
@@ -44,9 +47,9 @@
                 if (this.$route.path !== this.path[index]) {
                     this.$router.push(this.path[index])
                 }
-                if (index == 1) {
+                if (index != 0) {
                     this.bgColor = '#1A1E21'
-                } else if (index == 0) {
+                } else {
                     this.bgColor = 'transparent'
                 }
             },

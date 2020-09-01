@@ -11,7 +11,11 @@ import {
     Search,
     Icon,
     Dialog,
-    Toast
+    Toast,
+    PullRefresh,
+    List,
+    DropdownMenu,
+    DropdownItem
 } from 'vant'
 
 // 按需引入UI组件
@@ -20,8 +24,14 @@ Vue.use(Tabs)
 Vue.use(Tab)
 Vue.use(Swipe)
 Vue.use(SwipeItem)
-Vue.use(Lazyload)
+Vue.use(Lazyload, {
+    loading: require('assets/img/loading.jpg'),
+})
 Vue.use(Search)
 Vue.use(Icon)
 Vue.use(Dialog)
 Vue.use(Toast)
+Vue.use(PullRefresh)
+Vue.use(List)
+Vue.use(DropdownMenu)
+Vue.use(DropdownItem)

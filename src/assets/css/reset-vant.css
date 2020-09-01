@@ -1,0 +1,13 @@
+.van-dropdown-menu__bar {
+}
+
+.van-dropdown-menu__item {
+    /*justify-content: center !important;*/
+    /*padding-right: 120px;*/
+}
+
+.van-tab__pane {
+    height: calc(100vh - 44px);
+
+}
+

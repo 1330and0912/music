@@ -2,7 +2,7 @@
     <div :class="musicInfo.id==getCurrentMusic.id?'current-play-music':''"
          @click="songPlay(musicInfo.id)"
          class="music-list-item">
-        <img :src="musicInfo.bg" alt="">
+        <img v-lazy="musicInfo.bg" alt="">
         <div class="music-info">
             <span class="music-name">
                      {{musicInfo.songName}}

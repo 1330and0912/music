@@ -9,6 +9,10 @@ const routes = [
         redirect: '/play'
     },
     {
+        path: '/singer-detail/play',
+        redirect: '/play'
+    },
+    {
         path: '/',
         redirect: '/login'
     },
@@ -43,13 +47,17 @@ const routes = [
         path: '/profile',
         name: 'profile',
         component: () => import('views/profile/Profile'),
-        meta: {index: 0},   //页面下标
     },
+    {
+        path: '/category',
+        name: 'category',
+        component: () => import('views/category/Category'),
+    },
+
     {
         path: '/play',
         name: 'play',
         component: () => import('components/common/play/Play'),
-        meta: {index: 1},   //页面下标
     },
     {
         path: '/recent',
@@ -77,6 +85,12 @@ const routes = [
             },
 
         ]
+    },
+    {
+        path:'/singer-detail/:id',
+        name:'singerDetail',
+        props:true,
+        component: ()=> import ('views/singerDetail/SingerDetail')
     }
 ]
 

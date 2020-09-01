@@ -71,7 +71,7 @@
 
     .search-hot-detail {
         background-color: @content-color;
-        padding:30px 0px 0px;
+        margin-top:30px;
     }
 
     .hot-detail-wrap {

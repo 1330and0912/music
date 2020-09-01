@@ -33,12 +33,6 @@
                 this.$refs.point.style.left = this.$refs.rate.clientWidth - this.$refs.point.clientWidth / 2 + 'px'
             }
         },
-        mounted() {
-
-        },
-        deactivated(){
-            console.log(this.$refs.rate.clientWidth);
-        },
         activated() {
             let ratio = this.getCurrentMusicPlayTime / this.getDuration
             this.$refs.rate.style.width = this.$refs.bar.clientWidth * ratio + 'px'

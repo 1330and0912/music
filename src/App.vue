@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <keep-alive>
-            <nav-bar :path="path" v-if="isShowNavBar" :titles="['我的','最近播放','歌单','视频']"/>
+            <nav-bar :path="path" v-if="isShowNavBar" :titles="['我的','最近播放','分类','视频']"/>
         </keep-alive>
         <keep-alive>
             <router-view/>
@@ -24,7 +24,7 @@
         data() {
             return {
                 isShowNavBar: false,
-                path: ['/profile', '/recent', '', ''],
+                path: ['/profile', '/recent', '/category', ''],
                 removePlayBar: true
             }
         },

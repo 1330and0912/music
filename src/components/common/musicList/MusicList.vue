@@ -1,6 +1,6 @@
 <template>
-    <div  class="music-list">
-        <music-list-item  :music-info="item" id="item.id" v-for="item in musicInfo"/>
+    <div class="music-list">
+        <music-list-item :key="item.id" :music-info="item" id="item.id" v-for="item in musicInfo"/>
     </div>
 </template>
 
@@ -16,9 +16,7 @@
                 default: () => []
             }
         },
-        methods:{
-
-        }
+        methods: {}
     }
 </script>
 

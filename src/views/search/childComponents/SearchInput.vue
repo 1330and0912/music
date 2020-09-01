@@ -2,11 +2,9 @@
     <div class="search-input">
         <div @click="back" class="back iconfont icon-zuojiantou"></div>
         <form-input
-                :searchWord="getSearchWord"
                 inputType="search" @on-search="search"
                 :placeholder="defaultSearchWord"
                 class="inp"
-
         />
     </div>
 </template>
@@ -27,6 +25,9 @@
         },
         computed: {
             ...mapGetters('search', ['getSearchWord'])
+        },
+        activated() {
+            console.log(123);
         },
         async created() {
             this.defaultSearchWord = (await getDefaultSearchWord()).data.showKeyword

@@ -1,14 +1,18 @@
 <template>
-    <div class="search-history">
+    <div  class="search-history">
         <div class="h-header">
             <p>历史记录</p>
-            <van-icon @click="deleteSearchAllHistory" name="delete" size="26" color="#cccccc"/>
+            <van-icon  v-if="getSearchHistory.length" @click="deleteSearchAllHistory" name="delete" size="26" color="#cccccc"/>
         </div>
-        <div class="h-content">
+        <div v-if="getSearchHistory.length" class="h-content">
             <span @click="search(item)" v-for="item in getSearchHistory">
                 {{item}}
             </span>
         </div>
+        <div v-else class="no-history">
+            当前无记录
+        </div>
+
     </div>
 </template>
 
@@ -50,6 +54,14 @@
 </script>
 
 <style lang="less" scoped>
+    .no-history {
+        width: 100%;
+        text-align: center;
+        background-color: rgba(0,12,132,.1);
+        height: 44px;
+        border-radius: 40%;
+        line-height: 44px;
+    }
     .search-history {
         padding: 65px 10px 0;
 

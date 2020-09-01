@@ -1,5 +1,6 @@
 @import "~normalize.css";
 @import "../iconfont/iconfont.css";
+@import "./reset-vant.css";
 body,html {
     max-width: 750px !important;
     min-width: 320px !important;

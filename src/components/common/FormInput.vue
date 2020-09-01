@@ -72,7 +72,7 @@
             this.value = ''
         },
         activated() {
-            this.$refs.inp.focus()
+            // this.$refs.inp.focus()
         }
 
     }
