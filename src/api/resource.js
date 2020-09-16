@@ -15,6 +15,8 @@ export const SearchHotDetail = '/search/hot/detail'//热搜数据
 export const DefaultSearchWord = '/search/default'//默认关键词
 export const Artists = '/artists?id=6452'//歌手单曲信息
 export const Album = '/artist/album'//歌手专辑信息
+export const AlbumContent = '/artist'//歌手专辑内容
 export const ArtistCategoryList = '/artist/list'//歌手分类列表
 export const HotSong = '/artist/top/song'//歌手热门五十首单曲
+export const SingerIntroduction = '/artist/desc'//歌手简介信息
 

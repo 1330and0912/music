@@ -4,15 +4,18 @@
                 lazy-render
                 duration=".3"
                 title-inactive-color="black" title-active-color="#fff"
-                background="#339966" @click="tabClick"
+                background="#666666
+" @click="tabClick"
                 swipeable animated sticky v-model="active">
             <van-tab title="简介">
                 <introduction :id="id"/>
             </van-tab>
-            <van-tab title="单曲">
+            <van-tab title="热门单曲">
                 <hot-single :id="id"/>
             </van-tab>
-            <van-tab title="专辑">内容 3</van-tab>
+            <van-tab title="专辑">
+                <album :id="id"/>
+            </van-tab>
             <van-tab title="视屏">内容 4</van-tab>
         </van-tabs>
     </div>
@@ -21,10 +24,11 @@
 <script>
     import Introduction from "./Introduction";
     import HotSingle from "./HotSingle";
+    import Album from "./Album";
 
     export default {
         name: "TabBar",
-        components: {HotSingle, Introduction},
+        components: {Album, HotSingle, Introduction},
         data() {
             return {
                 active: 0,

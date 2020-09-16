@@ -77,6 +77,7 @@
         img {
             margin-right: 10px;
             width: 40px;
+            border-radius: 50%;
         }
 
         .music-info {

@@ -8,7 +8,16 @@ import {
     LoginCellphone,
     LoginStatus,
     GetLyric,
-    GetSongURL, Search, RecentPlay, Banner, SearchHotDetail, DefaultSearchWord, Album, ArtistCategoryList, HotSong
+    GetSongURL,
+    Search,
+    RecentPlay,
+    Banner,
+    SearchHotDetail,
+    DefaultSearchWord,
+    Album,
+    ArtistCategoryList,
+    HotSong,
+    SingerIntroduction, AlbumContent
 } from "./resource";
 
 //@phone 手机号码 判断手机号码是否已注册
@@ -192,6 +201,16 @@ export function getAlbum(id, limit = 30) {
         }
     })
 }
+//获取歌手专辑内容
+//@id 专辑id
+export function getAlbumContent(id) {
+    return request({
+        url: AlbumContent,
+        params: {
+            id
+        }
+    })
+}
 
 //获取歌手分类列表
 // @limit : 返回数量 , 默认为 30
@@ -224,8 +243,17 @@ export function getCategoryList(area = 7, type = 1, limit = 30, offset = 0) {
 export function getHotSongTop50(id) {
     return request({
         url: HotSong,
-        params:{
+        params: {
             id
         }
+    })
+}
+
+//获取歌手简介信息
+// @id:歌手id
+export function getSingerIntroduction(id) {
+    return request({
+        url: SingerIntroduction,
+        params: {id}
     })
 }

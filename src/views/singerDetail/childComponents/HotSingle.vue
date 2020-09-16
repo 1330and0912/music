@@ -26,7 +26,6 @@
                 console.log(to, from, next);
             },
             async getMusicInfo() {
-                this.$store.state.isShowLoading = true
                 this.musicInfo = []
                 let res = await getHotSongTop50(this.id)
                 let tempInfo = []
@@ -42,7 +41,6 @@
                         tempInfo.push({id, songName, author, bg, musicUrl, lyric})
                     }
                     if (index == res.songs.length - 1) {
-                        this.$store.state.isShowLoading = false
                         this.musicInfo.push(...tempInfo)
                     }
 
