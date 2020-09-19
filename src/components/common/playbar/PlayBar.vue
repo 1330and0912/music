@@ -9,7 +9,7 @@
         </div>
         <div class="music-control">
             <i @click.stop="isPlayMusic" class="play iconfont" :class="getIsPlay?'icon-bofang':'icon-bofang1'"></i>
-            <i @click.stop="showPopup" class=" iconfont icon-zhankai"></i>
+            <i @click.stop="showPopup" class=" iconfont icon-zhankai "></i>
         </div>
         <audio @ended="playFinish" @timeupdate="getCurrentPlayTime" @canplay="loadMusicSuccess" ref="audio"
                :src="url">
@@ -60,6 +60,7 @@
                     this.url = res.data[0].url
                 })
             }
+
         },
         methods: {
             ...mapActions('musicDetail', ['toggleMusicState',
@@ -128,7 +129,7 @@
         color: @night-mode-height-color;
         width: 100%;
         position: fixed;
-        bottom: 0px;
+        bottom: -1px;
         height: 49px;
         /*background-image: linear-gradient(120deg,*/
         /*rgba(0, 2, 0, 1),*/

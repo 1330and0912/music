@@ -30,13 +30,14 @@
         },
         watch: {
             $route(to, from) {
+                to.path.includes('music-video') && this.getIsPlay && this.toggleMusicState()
                 let flag = this.path.some(item => item == to.path)
                 if (flag) {
                     this.isShowNavBar = true
                 } else {
                     this.isShowNavBar = flag
                 }
-                let flag1 = ['/play', '/login', '/phoneVerify', '/phoneRegister', '/nickName', '/passwordVerify']
+                let flag1 = ['/play', '/login', '/phoneVerify', '/phoneRegister', '/nickName', '/passwordVerify', '/music-video']
                 let f = flag1.some(item => to.path.includes(item))
                 if (f || (!(Object.keys(this.getCurrentMusic).length))) {
                     this.$store.state.isShowPlayBar = false
@@ -61,7 +62,7 @@
         }
         ,
         computed: {
-            ...mapGetters('musicDetail', ['getIsPlay', 'getCurrentMusic', 'getPlayQueuedData'])
+            ...mapGetters('musicDetail', ['getIsPlay', 'getCurrentMusic', 'getPlayQueuedData', 'isPlay'])
         }
         ,
         created() {
@@ -75,7 +76,7 @@
         ,
         methods: {
             ...
-                mapActions('musicDetail', ['setCurrentMusic', 'writePlayQueuedData']),
+                mapActions('musicDetail', ['setCurrentMusic', 'writePlayQueuedData', 'toggleMusicState']),
             //获取一些localStorage数据
             getInitData() {
                 // 获取播放队列数据

@@ -15,7 +15,9 @@ import {
     PullRefresh,
     List,
     DropdownMenu,
-    DropdownItem
+    DropdownItem,
+    Collapse,
+    CollapseItem
 } from 'vant'
 
 // 按需引入UI组件
@@ -35,3 +37,5 @@ Vue.use(PullRefresh)
 Vue.use(List)
 Vue.use(DropdownMenu)
 Vue.use(DropdownItem)
+Vue.use(Collapse)
+Vue.use(CollapseItem)

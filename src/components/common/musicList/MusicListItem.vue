@@ -77,6 +77,7 @@
         img {
             margin-right: 10px;
             width: 40px;
+            height: 40px;
             border-radius: 50%;
         }
 
@@ -86,10 +87,11 @@
 
             .music-name {
                 color: @night-mode-height-color;
+                font-size: 14px;
             }
 
             .music-author {
-                font-size: 14px;
+                font-size: 12px;
                 padding-top: 3px;
                 color: @night-mode-color;
             }

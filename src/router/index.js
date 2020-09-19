@@ -91,6 +91,12 @@ const routes = [
         name:'singerDetail',
         props:true,
         component: ()=> import ('views/singerDetail/SingerDetail')
+    },
+    {
+        path:'/music-video/:id',
+        name:'musicVideo',
+        props:true,
+        component:()=> import('components/common/musicVideo/MusicVideo')
     }
 ]
 

@@ -4,7 +4,8 @@ import store from '../store/index'
 
 export function request(config) {
     const instance = axios.create({
-        baseURL: ' http://192.168.0.21:3000',
+        // baseURL: 'http://192.168.0.22:3000',
+        baseURL: ' http://192.168.43.121:3000',
         withCredentials: true,
     })
     instance.interceptors.request.use(data => {

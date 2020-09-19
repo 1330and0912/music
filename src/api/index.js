@@ -17,8 +17,9 @@ import {
     Album,
     ArtistCategoryList,
     HotSong,
-    SingerIntroduction, AlbumContent
+    SingerIntroduction, AlbumContent, SingleMV, MVUrl, MVComment, MVData, RelatedMVData
 } from "./resource";
+import {fuchsia} from "color-name";
 
 //@phone 手机号码 判断手机号码是否已注册
 export function isRegister(phone) {
@@ -201,6 +202,7 @@ export function getAlbum(id, limit = 30) {
         }
     })
 }
+
 //获取歌手专辑内容
 //@id 专辑id
 export function getAlbumContent(id) {
@@ -255,5 +257,48 @@ export function getSingerIntroduction(id) {
     return request({
         url: SingerIntroduction,
         params: {id}
+    })
+}
+
+//获取歌手mv
+//@id 歌手id
+export function getSingleMV(id) {
+    return request({
+        url: SingleMV,
+        params: {id}
+    })
+}
+
+//获取mv url
+//@id mvid
+export function getMVUrl(id) {
+    return request({
+        url: MVUrl,
+        params: {id}
+    })
+}
+
+//获取mv评论
+//@id mvid
+export function getMVComment(id) {
+    return request({
+        url: MVComment,
+        params: {id}
+    })
+}
+//获取mv数据
+//@mvid
+export function getMVData(mvid) {
+    return request({
+        url:MVData,
+        params:{mvid}
+    })
+}
+//获取相关mv数据
+//@mvid
+export function getRelatedMVData(mvid) {
+    return request({
+        url:RelatedMVData,
+        params:{mvid}
     })
 }

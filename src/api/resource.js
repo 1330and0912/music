@@ -15,8 +15,13 @@ export const SearchHotDetail = '/search/hot/detail'//热搜数据
 export const DefaultSearchWord = '/search/default'//默认关键词
 export const Artists = '/artists?id=6452'//歌手单曲信息
 export const Album = '/artist/album'//歌手专辑信息
-export const AlbumContent = '/artist'//歌手专辑内容
+export const AlbumContent = '/album'//歌手专辑内容
 export const ArtistCategoryList = '/artist/list'//歌手分类列表
 export const HotSong = '/artist/top/song'//歌手热门五十首单曲
 export const SingerIntroduction = '/artist/desc'//歌手简介信息
+export const MVUrl = '/mv/url'//mv地址
+export const SingleMV = '/artist/mv'//获取歌手 mv
+export const MVComment = '/comment/mv'//获取 mv评论
+export const MVData = '/mv/detail'//获取 mv数据
+export const RelatedMVData = '/simi/mv'//获取相关mv数据
 
