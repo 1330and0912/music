@@ -38,21 +38,25 @@
         },
         methods: {
             ...mapActions('musicDetail', ['playMusic', 'writePlayQueuedData']),
-            songPlay(id) {
-                this.playMusic(this.musicInfo)
-                console.log(this.musicInfo);
-                let data
-                if (window.localStorage.playQueuedData) {
-                    data = JSON.parse(window.localStorage.playQueuedData)
+            async songPlay(id) {
+                let url = (await getSongURL(id)).data[0].url || ''
+                if (url) {
+                    this.playMusic(this.musicInfo)
+                    console.log(this.musicInfo);
+                    let data
+                    if (window.localStorage.playQueuedData) {
+                        data = JSON.parse(window.localStorage.playQueuedData)
+                    } else {
+                        data = []
+                    }
+                    let index = data.findIndex(item => item.id == this.musicInfo.id)
+                    if (index == -1) {
+                        data.push(this.musicInfo)
+                    }
+                    this.writePlayQueuedData(data)
                 } else {
-                    data = []
+                    this.$toast.success(`${this.musicInfo.songName} 资源不存在`)
                 }
-                let index = data.findIndex(item => item.id == this.musicInfo.id)
-                if (index == -1) {
-                    data.push(this.musicInfo)
-
-                }
-                this.writePlayQueuedData(data)
             }
         }
     }

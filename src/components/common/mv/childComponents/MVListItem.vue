@@ -54,32 +54,35 @@
         justify-content: space-between;
         width: 100%;
         transition: background-color .3s;
-
+        margin-bottom: 8px;
+        border-bottom: 1px solid rgba(0,0,0,.05);
         &:active {
-            background-color: rgba(0, 0, 0, .2);
+            background-color: rgba(1, 1, 1, .1);
+        }
+        &:last-child {
+            border-bottom: none;
         }
 
         .img-wrap {
             flex-shrink: 0;
-            border-radius: 10px;
-            width: 40%;
-            height: 90px;
+            border-radius: 5px;
+            width: 30%;
             position: relative;
 
             .cover {
-                border-radius: 10px;
+                border-radius: 5px;
                 width: 100%;
-                height: 90px;
+                vertical-align: middle;
             }
 
             .play-icon-wrap {
                 width: 30px;
                 position: absolute;
-                z-index: 911;
+                z-index: 1;
                 display: flex;
                 align-items: center;
-                right: 18%;
-                bottom: 8%;
+                right: 22%;
+                bottom: 6%;
 
                 .play-icon {
                     width: 20px;
@@ -95,7 +98,7 @@
         }
 
         .mv-info {
-            width: 58%;
+            width:68%;
 
             .mv-name-wrap {
                 display: flex;

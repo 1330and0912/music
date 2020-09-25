@@ -8,7 +8,7 @@
                             {{mvData.playCount}}次观看
                         </div>
                         <div class="create-time">
-                            {{mvData.publishTime}}发布
+                            {{mvData.publishTime}} 发布
                         </div>
                     </div>
                 </van-collapse-item>
@@ -32,6 +32,16 @@
                 <div>{{mvData.shareCount}}</div>
             </div>
         </div>
+        <van-sticky :offset-top="offsetTop">
+            <div @click="goSingerDetail(artists[0].id)" class="single">
+                <div v-if="artists.length"  class="single-info">
+                    <img  :src="artists[0].img1v1Url" alt="">
+                    <span>{{artists[0].name}}</span>
+                </div>
+                <div class="iconfont icon-jiantou"></div>
+            </div>
+        </van-sticky>
+
     </div>
 
 </template>
@@ -41,20 +51,31 @@
 
     export default {
         name: "MVBaseInfo",
-        props: ['id'],
+        props: ['id','offsetTop'],
         data() {
             return {
                 mvData: {},
                 activeNames: ['1'],
+                artists: {}
+            }
+        },
+        watch:{
+            id(newID){
+                 this.getMVInfo()
             }
         },
         methods: {
             async getMVInfo() {
                 const {data} = await getMVData(this.id)
-                const {commentCount, subCount, shareCount, playCount, publishTime, name} = data
+                const {commentCount, subCount, shareCount, playCount, publishTime, name, artists} = data
+                this.artists = artists
+                console.log(this.artists);
                 this.mvData = {commentCount, subCount, shareCount, playCount, publishTime, name}
                 this.mvData.like = this.mvData.shareCount * 3//点赞数量为假数据 分享次数*3
             },
+            goSingerDetail(id){
+                this.$router.replace(`singer-detail/${id}`)
+            }
         },
         activated() {
             this.getMVInfo()
@@ -66,8 +87,9 @@
     .base-info {
         display: flex;
         justify-content: space-between;
-        padding: 10px 20px;
+        padding: 10px 20px 10px;
         text-align: center;
+        border-bottom: 1px solid rgba(0, 0, 0, .05);
 
         img {
             width: 22px;
@@ -83,12 +105,39 @@
         }
 
         .create-time {
-            font-size: 16px;
+            font-size: 14px;
             color: #000;
         }
     }
 
     .base-info-wrap {
-        border-bottom:10px solid rgba(0,0,0,.05) ;
+        border-bottom: 10px solid rgba(0, 0, 0, .05);
+    }
+
+    .single {background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+        transition: background-color .3s;
+
+        &:active {
+            background-color: rgba(0, 0, 0, .1);
+        }
+
+        .single-info {
+            display: flex;
+            align-items: center;
+        }
+        img {
+            border-radius: 50%;
+            width: 40px;
+            height: 35px;
+            margin-right: 10px;
+        }
+
+        span {
+            color: #000;
+        }
     }
 </style>

@@ -30,7 +30,7 @@
 </template>
 
 <script>
-    import {getAlbum, getAlbumContent, getLyric} from "../../../api";
+    import {getAlbum, getAlbumContent, getLyric, getSongURL} from "../../../api";
     import {dataLyric} from "../../../common/dataLyric";
     import MusicList from "../../../components/common/musicList/MusicList";
 
@@ -83,7 +83,7 @@
                 if (this.showPopup) {
                     this.showPopup = false
                     this.closed = false
-                } else if(this.closed ){
+                } else if (this.closed) {
                     this.showPopup = true
                     const {album, songs} = await getAlbumContent(id)
                     const {blurPicUrl, name, description, info, artist} = album

@@ -5,6 +5,10 @@ Vue.use(VueRouter)
 
 const routes = [
     {
+      path:'/music-video/singer-detail/:id',
+      redirect:'/singer-detail/:id'
+    },
+    {
         path: '/search/play',
         redirect: '/play'
     },

@@ -17,7 +17,8 @@ import {
     DropdownMenu,
     DropdownItem,
     Collapse,
-    CollapseItem
+    CollapseItem,
+    Sticky
 } from 'vant'
 
 // 按需引入UI组件
@@ -39,3 +40,4 @@ Vue.use(DropdownMenu)
 Vue.use(DropdownItem)
 Vue.use(Collapse)
 Vue.use(CollapseItem)
+Vue.use(Sticky)
