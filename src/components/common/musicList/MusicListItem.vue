@@ -55,7 +55,7 @@
                     }
                     this.writePlayQueuedData(data)
                 } else {
-                    this.$toast.success(`${this.musicInfo.songName} 资源不存在`)
+                    this.$toast.success(`该歌曲无版权`)
                 }
             }
         }

@@ -1,18 +1,24 @@
 <template>
-    <div @click="back" class="back">
+    <div class="back">
         <span>
-            <i class="iconfont icon-zuojiantou"></i>
-            返回
+            <i @click="back" class="iconfont icon-zuojiantou"></i>
         </span>
+        <collect @collect="collectMV"/>
     </div>
 </template>
 
 <script>
+    import Collect from "../../Collect";
+
     export default {
         name: "Back",
+        components: {Collect},
         methods: {
             back() {
                 this.$router.back()
+            },
+            collectMV() {
+                this.$toast("收藏成功")
             }
         }
     }
@@ -21,23 +27,20 @@
 <style lang="less" scoped>
 
     .back {
-        height: 30px;
+        height: 34px;
+        background-color: #006699;
+        /*background-image: linear-gradient(rgba(220,0,220,.1),rgba(0,222,111,.4));*/
+        border-bottom: 1px solid black;
         display: flex;
-        justify-content: flex-start;
+        justify-content: space-between;
         align-items: center;
-        transition: top .6s;
-        position: fixed;
-        top: 30px;
-        span {
-            color: #000000;
-            display: flex;
-            align-items: center;
-            font-size: 14px;
+        padding: 0 10px;
 
-            i {
-                font-size: 20px;
-                margin-right: 6px;
-            }
+        .icon-zuojiantou {
+            font-size: 30px;
+            color: white;
         }
+
+
     }
 </style>

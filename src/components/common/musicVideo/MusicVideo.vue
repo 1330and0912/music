@@ -1,7 +1,7 @@
 <template>
     <div :style="{paddingTop:`${h}`}" id="musicVideo">
-        <!--        <back :class="isShowBack?'show':'hide'"/>-->
         <div ref="videoWrap" class="video-wrap">
+            <back/>
             <video x5-video-player-type="h5-page" x5-playsinline="" playsinline="" webkit-playsinline="" ref="video"
                    @canplay="playVideo" controls
                    :src="url">
@@ -50,7 +50,7 @@
                 this.$nextTick(() => {
                     this.$refs.video.play()
                     let ratio = this.$refs.video.videoWidth / document.querySelector('.video-wrap').clientWidth
-                    this.h = this.$refs.video.videoHeight / ratio + 'px'
+                    this.h = this.$refs.video.videoHeight / ratio + 32 + 'px'
                 })
             },
             showBack(e) {
@@ -60,19 +60,21 @@
                 this.commentData = []
                 const {hotComments} = await getMVComment(this.id)
                 hotComments.forEach(item => {
-                    const {commentId,content,likedCount,time} = item
-                    const {nickname,avatarUrl} = item.user
-                    this.commentData.push({commentId,content,likedCount,nickname,avatarUrl,time})
+                    const {commentId, content, likedCount, time} = item
+                    const {nickname, avatarUrl} = item.user
+                    this.commentData.push({commentId, content, likedCount, nickname, avatarUrl, time})
                 })
             }
         },
-        deactivated(){
+        deactivated() {
             this.commentData = []
         },
         activated() {
             this.getMVUrlData()
-            // this.getCommentData()
         },
+        created() {
+            this.getCommentData()
+        }
 
     }
 </script>

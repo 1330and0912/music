@@ -96,7 +96,7 @@
             padding: 0 0px 0 36px;
             li {
                /*padding: 10px 0;*/
-                line-height: 200%;
+                line-height: 160%;
             }
         }
     }

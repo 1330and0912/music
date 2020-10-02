@@ -101,6 +101,11 @@ const routes = [
         name:'musicVideo',
         props:true,
         component:()=> import('components/common/musicVideo/MusicVideo')
+    },
+    {
+        path:'/favorite-music',
+        name:'favoriteMusic',
+        component:()=>import('views/favoriteMusic/FavoriteMusic.vue')
     }
 ]
 

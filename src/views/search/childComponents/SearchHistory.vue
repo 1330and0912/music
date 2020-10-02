@@ -12,7 +12,6 @@
         <div v-else class="no-history">
             当前无记录
         </div>
-
     </div>
 </template>
 
@@ -59,8 +58,9 @@
         text-align: center;
         background-color: rgba(0,12,132,.1);
         height: 44px;
-        border-radius: 40%;
+        border-radius: 44px;
         line-height: 44px;
+        margin-top: 10px;
     }
     .search-history {
         padding: 65px 10px 0;
@@ -100,7 +100,7 @@
                 padding: 12px;
                 margin-left: 5px;
                 background-color: rgba(0,0,0,.1);
-                border-radius: 100%;
+                border-radius: 40px;
                 transition: background-color .3s;
                 height: 40px;
                 white-space: nowrap;

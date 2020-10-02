@@ -3,8 +3,7 @@
         <header-bar text="我的音乐"/>
         <div class="musci-wrap">
             <div class="my-collect">
-
-                <div class="wrap">
+                <div @click="goFavoriteMusic" class="wrap">
                     <i class="iconfont icon-aixin"></i>
                     <span>我喜欢的音乐</span>
                     <div class="iconfont icon-bofang1">
@@ -23,7 +22,6 @@
                 </div>
             </div>
             <div class="my-collect more">
-
                 <div class="wrap">
                     <i class="iconfont icon-dibudaohanglan-
 "></i>
@@ -36,9 +34,16 @@
 
 <script>
     import HeaderBar from "./HeaderBar";
+
     export default {
         name: "MyMusic",
-        components: {HeaderBar}
+        components: {HeaderBar},
+        methods: {
+            goFavoriteMusic() {
+                console.log(123);
+                this.$router.push('favorite-music')
+            }
+        }
     }
 </script>
 

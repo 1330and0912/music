@@ -1,12 +1,17 @@
 <template>
-    <div :class="this.$store.state.isShowPlayBar?'bottom-padding':''" id="mvPlay">
-        <div class="mv-count">
-            <div>
-                <span class="m">MV</span>
-                <span>(共{{mvData.length}}个)</span>
+    <div>
+        <div v-if="mvData.length" :class="this.$store.state.isShowPlayBar?'bottom-padding':''" id="mvPlay">
+            <div class="mv-count">
+                <div>
+                    <span class="m">MV</span>
+                    <span>(共{{mvData.length}}个)</span>
+                </div>
             </div>
+            <m-v-list :mv-data="mvData"/>
         </div>
-        <m-v-list :mv-data="mvData"/>
+        <div class="empty" v-else>暂无
+            内容
+        </div>
     </div>
 </template>
 
@@ -46,12 +51,18 @@
 </script>
 
 <style lang="less" scoped>
+    .empty {
+        font-size: 14px;
+        display: flex;
+        justify-content: center;
+        margin-top: 100px;
+    }
     .bottom-padding {
-        padding-bottom: 49px !important;
+        padding-bottom: 85px !important;
     }
 
     #mvPlay {
-        height: 100%;
+        height: 100vh;
     }
 
     video {
@@ -60,15 +71,17 @@
 
     .mv-count {
         height: 30px;
-        padding: 0px 18px ;
+        padding: 0px 18px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        div{
+
+        div {
             padding-top: 5px;
             display: flex;
             align-items: center;
         }
+
         .m {
             font-size: 18px;
             font-weight: bold;

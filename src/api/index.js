@@ -17,7 +17,7 @@ import {
     Album,
     ArtistCategoryList,
     HotSong,
-    SingerIntroduction, AlbumContent, SingleMV, MVUrl, MVComment, MVData, RelatedMVData
+    SingerIntroduction, AlbumContent, SingleMV, MVUrl, MVComment, MVData, RelatedMVData, LikeList, SongDetail
 } from "./resource";
 import {fuchsia} from "color-name";
 
@@ -286,19 +286,38 @@ export function getMVComment(id) {
         params: {id}
     })
 }
+
 //获取mv数据
 //@mvid
 export function getMVData(mvid) {
     return request({
-        url:MVData,
-        params:{mvid}
+        url: MVData,
+        params: {mvid}
     })
 }
+
 //获取相关mv数据
 //@mvid
 export function getRelatedMVData(mvid) {
     return request({
-        url:RelatedMVData,
-        params:{mvid}
+        url: RelatedMVData,
+        params: {mvid}
+    })
+}
+
+//获取喜欢的音乐列表数据
+//@uid 用户id
+export function getLikeList(uid) {
+    return request({
+        url: LikeList,
+        params: {uid}
+    })
+}
+//获取歌曲详细信息
+//@ids 歌曲id
+export function getSongDetail(ids) {
+    return request({
+        url:SongDetail,
+        params:{ids}
     })
 }

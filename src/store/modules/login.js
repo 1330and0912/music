@@ -4,9 +4,12 @@
 //     password: ''
 // })
 // 对象方式
+
 const state = {
     phone: '',
-    password: ''
+    password: '',
+    isLogin: false,
+    uid: ''
 }
 const mutations = {
     savePhone(state, phone) {
@@ -14,6 +17,9 @@ const mutations = {
     },
     savePassword(state, password) {
         state.password = password
+    },
+    saveUserID(state, uid) {
+        state.uid = uid
     }
 }
 const getters = {
@@ -33,6 +39,10 @@ const actions = {
     savePassword(context, password) {
         context.commit('savePassword', password)
     },
+    setUid({commit}) {
+        let profile = JSON.parse(window.sessionStorage.getItem('profile'))
+        commit('saveUserID',profile.userId)
+    }
 
 }
 

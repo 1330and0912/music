@@ -5,7 +5,7 @@ export const CaptchaVerify = '/captcha/verify'//检查验证码是否正确
 export const RegisterCellPhone = '/register/cellphone'//注册账号/修改密码
 export const InitProfile = '/activate/init/profile'//初始化昵称
 export const LoginCellphone = '/login/cellphone'//手机号码登录
-export const LoginStatus = '/login/status'//手机号码登录
+export const LoginStatus = '/login/status'//登录状态
 export const GetLyric = '/lyric'//获取歌词
 export const GetSongURL = '/song/url'//获取音乐url
 export const RecentPlay = '/user/record'//获取用户最近播放记录
@@ -24,4 +24,6 @@ export const SingleMV = '/artist/mv'//获取歌手 mv
 export const MVComment = '/comment/mv'//获取 mv评论
 export const MVData = '/mv/detail'//获取 mv数据
 export const RelatedMVData = '/simi/mv'//获取相关mv数据
+export const LikeList='/likelist'//获取喜欢的音乐列表
+export const SongDetail='/song/detail'//歌曲详情
 

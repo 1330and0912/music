@@ -62,7 +62,7 @@
         }
         ,
         computed: {
-            ...mapGetters('musicDetail', ['getIsPlay', 'getCurrentMusic', 'getPlayQueuedData', 'isPlay'])
+            ...mapGetters('musicDetail', ['getIsPlay', 'getCurrentMusic', 'getPlayQueuedData', 'isPlay']),
         }
         ,
         created() {
@@ -72,11 +72,13 @@
                 this.$store.state.isShowPlayBar = false
             }
             this.getInitData()
+            this.setUid()
         }
         ,
         methods: {
             ...
                 mapActions('musicDetail', ['setCurrentMusic', 'writePlayQueuedData', 'toggleMusicState']),
+            ...mapActions('login', ['setUid']),
             //获取一些localStorage数据
             getInitData() {
                 // 获取播放队列数据

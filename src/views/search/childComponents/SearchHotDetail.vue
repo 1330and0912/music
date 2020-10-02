@@ -4,7 +4,8 @@
             <div class="h-header">
                 热搜榜
             </div>
-            <div @click="search(item.searchWord)" :key="item.score" v-for="(item,index) in hotDetail" class="hot-detail-item">
+            <div @click="search(item.searchWord)" :key="item.score" v-for="(item,index) in hotDetail"
+                 class="hot-detail-item">
                 <div class="index"> {{index+1}}</div>
                 <div class="content">
                     <div class="search-word">
@@ -28,6 +29,7 @@
     import {getSearchHotDetail} from "api";
 
     import {mapActions} from 'vuex'
+
     export default {
         name: "SearchHotDetail",
         data() {
@@ -38,9 +40,9 @@
         async created() {
             this.hotDetail = (await getSearchHotDetail()).data
         },
-        methods:{
-            ...mapActions('search',['setSearchWord','addSearchHistory']),
-            search(searchWord){
+        methods: {
+            ...mapActions('search', ['setSearchWord', 'addSearchHistory']),
+            search(searchWord) {
                 if (this.$route.path !== '/search/search-result') {
                     this.$router.push({
                         path: 'search-result',
@@ -59,6 +61,11 @@
         height: 16px;
     }
 
+    .icontype-0 {
+        width: 30px;
+        height: 16px;
+    }
+
     .icontype-5 {
         width: 16px;
         height: 20px;
@@ -71,7 +78,7 @@
 
     .search-hot-detail {
         background-color: @content-color;
-        margin-top:30px;
+        margin-top: 30px;
     }
 
     .hot-detail-wrap {
@@ -86,10 +93,10 @@
             display: flex;
             align-items: center;
             padding: 10px 10px;
-            transition:  background-color .3s;
+            transition: background-color .3s;
 
             &:active {
-                background-color: rgba(0,0,0,.1);
+                background-color: rgba(0, 0, 0, .1);
             }
 
             &:nth-child(-n+4) {
@@ -100,6 +107,7 @@
                 .content {
                     .search-word {
                         font-weight: bold;
+
                         .lyric {
                             font-weight: normal;
                             margin-top: 5px;
@@ -119,6 +127,7 @@
                 flex: 10;
                 padding: 0 10px;
                 color: @night-mode-height-color;
+
                 .search-word {
                     .music-name {
                         font-size: 16px;
