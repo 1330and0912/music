@@ -24,12 +24,16 @@
 
 <style lang="less" scoped>
     .nav-header {
+        position: fixed;
+        top: 0;
+        z-index: 99;
         margin-top: 10px;
         padding: 0 0 0 10px;
         height: 44px;
         line-height: 44px;
 
         .back-wrap {
+            color: whitesmoke;
             display: flex;
             align-items: center;
 

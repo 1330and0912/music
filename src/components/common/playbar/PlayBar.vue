@@ -143,7 +143,7 @@
         padding: 0 10px;
         align-items: center;
         transition: bottom .3s;
-
+        z-index: 11;
         .music-info {
             display: flex;
             align-items: center;

@@ -14,7 +14,7 @@
                 <i class="iconfont icon-xiayiqu"></i>
             </div>
             <div class="more-music">
-                <i class="iconfont icon-gengduo"></i>
+                <collect/>
             </div>
         </div>
     </div>
@@ -22,9 +22,11 @@
 
 <script>
     import {mapActions, mapGetters} from 'vuex'
+    import Collect from "../Collect";
 
     export default {
         name: "MusicControl",
+        components: {Collect},
         data() {
             return {
                 playModeIcon: ['icon-liebiaoxunhuan', 'icon-danquxunhuan', 'icon-suijibofang'],

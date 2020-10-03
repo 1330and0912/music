@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import {login} from "./modules/login";
 import {musicDetail} from "./modules/music-detail";
 import {search} from './modules/search'
+import {collect} from './modules/collect'
 
 Vue.use(Vuex)
 
@@ -16,6 +17,7 @@ export default new Vuex.Store({
     modules: {
         login,
         musicDetail,
-        search
+        search,
+        collect
     }
 })

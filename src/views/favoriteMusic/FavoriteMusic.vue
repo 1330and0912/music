@@ -1,7 +1,10 @@
 <template>
     <div id="favoriteMusic">
         <nav-header title="喜欢的音乐"/>
-        <music-list :music-info="likeList"/>
+        <top-info/>
+        <div class="list-wrap">
+            <music-list :music-info="likeList"/>
+        </div>
     </div>
 </template>
 
@@ -11,10 +14,11 @@
     import {mapState, mapActions} from 'vuex'
     import {dataLyric} from "../../common/dataLyric";
     import MusicList from "../../components/common/musicList/MusicList";
+    import TopInfo from "./childComponents/TopInfo";
 
     export default {
         name: "FavoriteMusic",
-        components: {MusicList, NavHeader},
+        components: {TopInfo, MusicList, NavHeader},
         data() {
             return {
                 likeList: [],
@@ -27,6 +31,7 @@
         methods: {
             async getLikeListData() {
                 let res = await getLikeList(this.uid)
+                console.log(res);
                 this.ids = res.ids.join(',')
                 this.getMusicInfo()
             },
@@ -49,5 +54,18 @@
 </script>
 
 <style lang="less" scoped>
+    #favoriteMusic {
+        padding-top: 1px;
+        height: 100%;
+        position: relative;
 
+    }
+    .list-wrap {
+        position: relative;
+        z-index: 1;
+        margin-top: 60%;
+        height: 65%;
+        border-radius: 22px;
+        background-color: white;
+    }
 </style>
