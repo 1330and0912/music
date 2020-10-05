@@ -11,6 +11,7 @@
                 歌手：{{musicInfo.author}}
             </span>
         </div>
+        <i v-if="musicInfo.mvid" class="go-mv iconfont icon-bofang1"></i>
     </div>
 </template>
 
@@ -99,6 +100,12 @@
                 padding-top: 3px;
                 color: @night-mode-color;
             }
+        }
+        .go-mv {
+            color:cornflowerblue;
+            font-size: 20px;
+            position: absolute;
+            right: 15px;
         }
 
     }

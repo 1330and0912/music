@@ -3,7 +3,7 @@
         <nav-header title="喜欢的音乐"/>
         <top-info/>
         <div class="list-wrap">
-            <music-list :music-info="likeList"/>
+            <music-list :music-info="likeMusic"/>
         </div>
     </div>
 </template>
@@ -22,33 +22,30 @@
         data() {
             return {
                 likeList: [],
-                ids: ''
             }
         },
         computed: {
-            ...mapState('login', ['uid'])
+            ...mapState('login', ['uid']),
+            ...mapState('collect', ['likeMusic', 'ids'])
         },
         methods: {
-            async getLikeListData() {
-                let res = await getLikeList(this.uid)
-                console.log(res);
-                this.ids = res.ids.join(',')
-                this.getMusicInfo()
-            },
+            ...mapActions('collect', ['saveLikeMusic']),
             async getMusicInfo() {
-                const {songs} = await getSongDetail(this.ids)
+                const {songs} = await getSongDetail(this.ids.join(','))
                 songs.forEach(async item => {
+                    console.log(item);
+                    const mvid = item.mv
                     const {id, name: songName} = item
                     const author = item.ar[0].name
                     const bg = item.al.picUrl
                     const lyric = dataLyric((await getLyric(item.id)).lrc.lyric)
-                    this.likeList.push({id, songName, author, bg, lyric})
+                    this.likeList.push({mvid, id, songName, author, bg, lyric})
+                    this.saveLikeMusic({mvid, id, songName, author, bg, lyric})
                 })
-                console.log(songs);
             }
         },
         created() {
-            this.getLikeListData()
+            this.getMusicInfo()
         }
     }
 </script>
@@ -60,6 +57,7 @@
         position: relative;
 
     }
+
     .list-wrap {
         position: relative;
         z-index: 1;

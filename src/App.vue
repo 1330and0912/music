@@ -18,6 +18,7 @@
 
     import {mapGetters, mapActions} from 'vuex'
     import Loading from "./components/common/loading/Loading";
+    import {getLikeList} from "./api";
 
     export default {
         components: {Loading, PlayBar, NavBar},
@@ -73,16 +74,22 @@
             }
             this.getInitData()
             this.setUid()
+            this.saveLikeMusicIds()
         }
         ,
         methods: {
             ...
                 mapActions('musicDetail', ['setCurrentMusic', 'writePlayQueuedData', 'toggleMusicState']),
             ...mapActions('login', ['setUid']),
+            ...mapActions('collect', ['saveIds']),
             //获取一些localStorage数据
             getInitData() {
                 // 获取播放队列数据
                 window.localStorage.playQueuedData && this.writePlayQueuedData(JSON.parse(window.localStorage.playQueuedData))
+            },
+            async saveLikeMusicIds() {
+                let res = await getLikeList(this.uid)
+                this.saveIds(res.ids)
             }
         }
     }

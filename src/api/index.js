@@ -17,7 +17,7 @@ import {
     Album,
     ArtistCategoryList,
     HotSong,
-    SingerIntroduction, AlbumContent, SingleMV, MVUrl, MVComment, MVData, RelatedMVData, LikeList, SongDetail
+    SingerIntroduction, AlbumContent, SingleMV, MVUrl, MVComment, MVData, RelatedMVData, LikeList, SongDetail, LikeMusic
 } from "./resource";
 import {fuchsia} from "color-name";
 
@@ -313,11 +313,21 @@ export function getLikeList(uid) {
         params: {uid}
     })
 }
+
 //获取歌曲详细信息
 //@ids 歌曲id
 export function getSongDetail(ids) {
     return request({
-        url:SongDetail,
-        params:{ids}
+        url: SongDetail,
+        params: {ids}
+    })
+}
+
+//喜欢音乐
+//@id 音乐id @like true喜欢 false取消喜欢 默认为true
+export function likeMusic(id,like=true) {
+    return request({
+        url:LikeMusic,
+        params:{id,like}
     })
 }

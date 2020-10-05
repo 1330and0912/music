@@ -7,8 +7,8 @@
             </div>
             <record :is-rotate="getIsPlay" :bg="getCurrentMusic.bg"/>
             <lyric-detail :lyric="getCurrentMusic.lyric" class="lyric"></lyric-detail>
-            <progress-bar/>
-            <music-control class="control"/>
+            <progress-bar />
+            <music-control :id="getCurrentMusic.id" class="control"/>
         </div>
 </template>
 

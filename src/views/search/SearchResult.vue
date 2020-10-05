@@ -74,6 +74,7 @@
                     if (res) {
                         res = res.result.songs || []
                         res.forEach(async (item, index) => {
+                            let mvid = item.mvid
                             let pic = await getAlbum(item.artists[0].id)
                             let lrc = (await getLyric(item.id)).lrc || false
                             let url = (await getSongURL(item.id)).data[0].url || false
@@ -84,7 +85,7 @@
                             let musicUrl = url
                             if (lrc && url) {
                                 this.newMusicInfo.has(item.id) ||
-                                this.musicInfo.push({id, songName, author, bg, musicUrl, lyric: dataLyric(lrc.lyric)})
+                                this.musicInfo.push({mvid,id, songName, author, bg, musicUrl, lyric: dataLyric(lrc.lyric)})
                             }
                             if (index == res.length - 1) this.loading = false
                             this.newMusicInfo.add(item.id)

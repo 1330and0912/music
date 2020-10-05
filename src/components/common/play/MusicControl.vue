@@ -14,31 +14,37 @@
                 <i class="iconfont icon-xiayiqu"></i>
             </div>
             <div class="more-music">
-                <collect/>
+                <collect :id="id" @collect="collectMusic"/>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import {mapActions, mapGetters} from 'vuex'
+    import {mapActions, mapGetters, mapState} from 'vuex'
     import Collect from "../Collect";
+    import {getLikeList, likeMusic} from "../../../api";
 
     export default {
         name: "MusicControl",
         components: {Collect},
+        props: ['id'],
         data() {
             return {
                 playModeIcon: ['icon-liebiaoxunhuan', 'icon-danquxunhuan', 'icon-suijibofang'],
                 playModeText: ['列表循环', '单曲循环', '随机播放'],
-                modeIndex: 0//模式索引
+                modeIndex: 0,//模式索引
+                isCollect: false
             }
         },
         computed: {
-            ...mapGetters('musicDetail', ['getIsPlay','getPlayMode'])
+            ...mapGetters('musicDetail', ['getIsPlay', 'getPlayMode', 'getCurrentMusic']),
+            ...mapState('login', ['uid']),
+            ...mapState('collect', ['ids']),
         },
         methods: {
             ...mapActions('musicDetail', ['toggleMusicState', 'prevSong', 'nextSong', 'alterPlayMode']),
+            ...mapActions('collect', ['saveIds', 'saveLikeMusic','cancelLikeMusic']),
             //暂停/播放
             playMusic() {
                 this.toggleMusicState()
@@ -60,6 +66,26 @@
                 }
                 this.alterPlayMode(this.modeIndex)
                 this.$toast(this.playModeText[this.getPlayMode])
+            },
+            //喜欢音乐
+            async collectMusic() {
+                this.isCollect = this.ids.some(item => item == this.id)
+                if (!this.isCollect) {
+                    likeMusic(this.id).then(res => {
+                        if (res.code == 200) {
+                            console.log(res);
+                            this.saveIds(this.id)
+                            this.saveLikeMusic(this.getCurrentMusic)
+                            this.$toast('收藏成功')
+                        }
+                    })
+                } else {
+                    likeMusic(this.id,false).then(res => {
+                        this.cancelLikeMusic(this.id)
+                        this.$toast('取消成功')
+                    })
+                }
+
             }
         }
     }
@@ -80,9 +106,6 @@
         div {
             padding: 10px 10px;
 
-            &:active {
-                background-color: rgba(0, 0, 0, .2);
-            }
 
             i {
                 font-size: 28px;
