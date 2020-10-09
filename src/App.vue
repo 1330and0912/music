@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <keep-alive>
-            <nav-bar :path="path" v-if="isShowNavBar" :titles="['我的','最近播放','分类','视频']"/>
+            <nav-bar :path="path" v-if="isShowNavBar" :titles="['我的','最近播放','分类']"/>
         </keep-alive>
         <keep-alive>
             <router-view/>
@@ -78,8 +78,7 @@
         }
         ,
         methods: {
-            ...
-                mapActions('musicDetail', ['setCurrentMusic', 'writePlayQueuedData', 'toggleMusicState']),
+            ...mapActions('musicDetail', ['setCurrentMusic', 'writePlayQueuedData', 'toggleMusicState']),
             ...mapActions('login', ['setUid']),
             ...mapActions('collect', ['saveIds']),
             //获取一些localStorage数据

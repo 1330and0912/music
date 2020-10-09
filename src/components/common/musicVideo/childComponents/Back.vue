@@ -28,7 +28,7 @@
 
     .back {
         height: 34px;
-        background-color: #006699;
+        background-color: #3366CC;
         /*background-image: linear-gradient(rgba(220,0,220,.1),rgba(0,222,111,.4));*/
         border-bottom: 1px solid black;
         display: flex;

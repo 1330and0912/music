@@ -24,5 +24,8 @@
             height: 100%;
             background-color: rgba(1,1, 1, .4);
         }
+        img {
+            width: 100%;
+        }
     }
 </style>

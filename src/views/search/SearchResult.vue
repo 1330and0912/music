@@ -12,6 +12,7 @@
             <music-list v-if="searchSuccess" class="music-list" :music-info="musicInfo"/>
             <div v-else>未找到</div>
         </div>
+        <loading v-if="showLoading"/>
     </van-list>
 </template>
 
@@ -22,10 +23,11 @@
     import {dataLyric} from "../../common/dataLyric";
 
     import {mapGetters, mapActions} from 'vuex'
+    import Loading from "../../components/common/loading/Loading";
 
     export default {
         name: "SearchResult",
-        components: {MusicList},
+        components: {Loading, MusicList},
         data() {
             return {
                 musicInfo: [],
@@ -34,7 +36,8 @@
                 loading: false,
                 finished: false,
                 offset: 0,
-                count: 0//歌曲数量
+                count: 0,//歌曲数量,
+                showLoading:true
 
             }
         },
@@ -62,6 +65,7 @@
         methods: {
             async getMusicInfo(isClear = true, restOffset = true) {
                 this.searchSuccess = true
+                this.showLoading = true
                 isClear && (this.musicInfo = [])
                 if (restOffset) {
                     this.offset = 0
@@ -87,7 +91,10 @@
                                 this.newMusicInfo.has(item.id) ||
                                 this.musicInfo.push({mvid,id, songName, author, bg, musicUrl, lyric: dataLyric(lrc.lyric)})
                             }
-                            if (index == res.length - 1) this.loading = false
+                            if (index == res.length - 1) {
+                                this.loading = false
+                                this.showLoading = false
+                            }
                             this.newMusicInfo.add(item.id)
                         })
                     } else {

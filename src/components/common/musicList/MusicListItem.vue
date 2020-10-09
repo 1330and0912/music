@@ -11,7 +11,7 @@
                 歌手：{{musicInfo.author}}
             </span>
         </div>
-        <i v-if="musicInfo.mvid" class="go-mv iconfont icon-bofang1"></i>
+        <i @click.stop="goMV(musicInfo.mvid)" v-if="musicInfo.mvid" class="go-mv iconfont icon-bofang1"></i>
     </div>
 </template>
 
@@ -58,6 +58,9 @@
                 } else {
                     this.$toast.success(`该歌曲无版权`)
                 }
+            },
+            goMV(mvid) {
+                this.$router.push( `music-video/${mvid}`)
             }
         }
     }
@@ -101,8 +104,9 @@
                 color: @night-mode-color;
             }
         }
+
         .go-mv {
-            color:cornflowerblue;
+            color: cornflowerblue;
             font-size: 20px;
             position: absolute;
             right: 15px;

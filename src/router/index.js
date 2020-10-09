@@ -2,12 +2,17 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
-
-const routes = [
+const musicVideoRedirect = [
     {
-      path:'/music-video/singer-detail/:id',
-      redirect:'/singer-detail/:id'
+        path: '/search/music-video/:id',
+        redirect: '/music-video/:id'
     },
+    {
+        path: '/singer-detail/music-video/:id',
+        redirect: '/music-video/:id'
+    }
+]//mv页面相关路由重定向
+const playRedirect = [
     {
         path: '/search/play',
         redirect: '/play'
@@ -15,6 +20,14 @@ const routes = [
     {
         path: '/singer-detail/play',
         redirect: '/play'
+    },
+]//主播放器页面路由相关重定向
+const routes = [
+    ...musicVideoRedirect,
+    ...playRedirect,
+    {
+        path: '/music-video/singer-detail/:id',
+        redirect: '/singer-detail/:id'
     },
     {
         path: '/',
@@ -91,21 +104,21 @@ const routes = [
         ]
     },
     {
-        path:'/singer-detail/:id',
-        name:'singerDetail',
-        props:true,
-        component: ()=> import ('views/singerDetail/SingerDetail')
+        path: '/singer-detail/:id',
+        name: 'singerDetail',
+        props: true,
+        component: () => import ('views/singerDetail/SingerDetail')
     },
     {
-        path:'/music-video/:id',
-        name:'musicVideo',
-        props:true,
-        component:()=> import('components/common/musicVideo/MusicVideo')
+        path: '/music-video/:id',
+        name: 'musicVideo',
+        props: true,
+        component: () => import('components/common/musicVideo/MusicVideo')
     },
     {
-        path:'/favorite-music',
-        name:'favoriteMusic',
-        component:()=>import('views/favoriteMusic/FavoriteMusic.vue')
+        path: '/favorite-music',
+        name: 'favoriteMusic',
+        component: () => import('views/favoriteMusic/FavoriteMusic.vue')
     }
 ]
 

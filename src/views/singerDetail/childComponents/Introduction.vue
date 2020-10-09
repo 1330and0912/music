@@ -1,25 +1,22 @@
 <template>
-    <div v-if="!this.$store.state.isShowLoading" :class="this.$store.state.isShowPlayBar?'bottom-padding':''"
+    <div v-if="!this.$store.state.isShowLoading"
          class="introduction">
         <img class="singer-img" :src="bg" alt="">
-<!--        <div class="tags">-->
-<!--&lt;!&ndash;            {{introduction.topicData[0].tags[0]}}&ndash;&gt;-->
-<!--        </div>-->
-<!--        <div class="content-wrap">-->
-<!--            <div v-for="(item,index) in introduction.introduction" class="wrap">-->
-<!--                <div class="title">-->
-<!--                    <strong>{{item.ti}}</strong>-->
-<!--                </div>-->
-<!--                <div class="content">-->
-<!--                    {{item.txt}}-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
+        <div class="tags">
+            <!--            {{introduction.topicData[0].tags[0]}}-->
+        </div>
+        <div :class="this.$store.state.isShowPlayBar?'bottom-padding':''" class="content-wrap">
+            <ul>
+                <li v-for="item in introduction">
+                    {{item}}
+                </li>
+            </ul>
+        </div>
     </div>
 </template>
 
 <script>
-    import {getAlbum,getSingerIntroduction} from "api";
+    import {getAlbum, getSingerIntroduction} from "api";
 
     export default {
         name: "Introduction",
@@ -43,8 +40,9 @@
                 this.bg = (await getAlbum(this.id, 1)).artist.picUrl
             },
             async getIntroduction() {
-                this.introduction = await getSingerIntroduction(this.id)
-                console.log(this.introduction);
+                let res = await getSingerIntroduction(this.id)
+                this.introduction = res.briefDesc.split('\n')
+                this.introduction = this.introduction.filter(item => item.trim())
             }
         },
         async created() {
@@ -55,25 +53,30 @@
 </script>
 
 <style lang="less" scoped>
-    /*.bottom-padding {*/
-    /*    padding-bottom: 49px !important;*/
-    /*}*/
+    .bottom-padding {
+        padding-bottom: 49px !important;
+    }
 
     .introduction {
-        /*height: 100%;*/
+        height: 100%;
         overflow-y: scroll;
 
         .singer-img {
             width: 100%;
         }
     }
+
     .content-wrap {
         padding: 10px;
-        .title {
-            padding:10px 0;
-        }
-        .content {
-            font-size: 14px;
+        overflow: scroll;
+        li {
+            position: relative;
+            margin-top:  20px;
+            border: 10px solid #FF3A3A;
+            border-color: transparent transparent transparent  #FF3A3A;
+            padding-left: 10px;
+            line-height: 28px;
+
         }
     }
 </style>

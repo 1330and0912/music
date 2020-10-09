@@ -30,7 +30,6 @@
                 let res = await getHotSongTop50(this.id)
                 let tempInfo = []
                 res.songs.forEach(async (item, index) => {
-                    console.log(item);
                     let lrc = (await getLyric(item.id)).lrc || ''
                     let musicUrl = (await getSongURL(item.id)).data[0].url || false
                     let lyric = dataLyric(lrc && lrc.lyric)

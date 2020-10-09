@@ -1,8 +1,12 @@
 <template>
-    <div id="favoriteMusic">
+    <div id="favoriteMusic" :class="this.$store.state.isShowPlayBar?'bottom-padding':''">
         <nav-header title="喜欢的音乐"/>
         <top-info/>
         <div class="list-wrap">
+            <div class="h">
+                <i class="iconfont icon-bofang1"></i>
+                <span class="play-all">播放全部(共{{likeMusic.length}}首)</span>
+            </div>
             <music-list :music-info="likeMusic"/>
         </div>
     </div>
@@ -31,9 +35,9 @@
         methods: {
             ...mapActions('collect', ['saveLikeMusic']),
             async getMusicInfo() {
-                const {songs} = await getSongDetail(this.ids.join(','))
+                let ids = this.ids.join(',')
+                const {songs} = await getSongDetail(ids)
                 songs.forEach(async item => {
-                    console.log(item);
                     const mvid = item.mv
                     const {id, name: songName} = item
                     const author = item.ar[0].name
@@ -51,6 +55,10 @@
 </script>
 
 <style lang="less" scoped>
+    .bottom-padding {
+        padding-bottom: 99px !important;
+    }
+
     #favoriteMusic {
         padding-top: 1px;
         height: 100%;
@@ -63,7 +71,17 @@
         z-index: 1;
         margin-top: 60%;
         height: 65%;
+        width: 100%;
         border-radius: 22px;
         background-color: white;
+
+        .h {
+            padding: 20px 15px 10px;
+
+            .icon-bofang1 {
+                font-size: 18px;
+                margin-right: 7px;
+            }
+        }
     }
 </style>
