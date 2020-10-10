@@ -89,11 +89,12 @@
                     const {blurPicUrl, name, description, info, artist} = album
                     this.albumInfo = {blurPicUrl, name, description, info, author: artist.name}
                     songs.forEach(async item => {
+                        const mvid = item.mv
                         const {id, name: songName} = item
                         const {picUrl: bg} = item.al
                         const author = item.ar[0].name
                         const lyric = (await getLyric(id)).lrc && dataLyric((await getLyric(id)).lrc.lyric) || ''//歌词
-                        lyric && this.albumContent.push({id, songName, bg, author, lyric})
+                        lyric && this.albumContent.push({mvid,id, songName, bg, author, lyric})
                     })
                 }
             }
@@ -123,6 +124,11 @@
             box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, .2);
             margin-bottom: 20px;
             padding: 0 0px 10px;
+            transition: all .3s;
+
+            &:active {
+                transform: translate(-10px, 0);
+            }
 
             img {
                 border-radius: 10px;

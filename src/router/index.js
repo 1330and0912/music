@@ -119,6 +119,11 @@ const routes = [
         path: '/favorite-music',
         name: 'favoriteMusic',
         component: () => import('views/favoriteMusic/FavoriteMusic.vue')
+    },
+    {
+        path:'/my-collect',
+        name:'myCollect',
+        component: () =>import('views/myCollect/MyCollect')
     }
 ]
 

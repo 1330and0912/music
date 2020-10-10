@@ -40,7 +40,6 @@
             async getMVData() {
                 this.mvData = []
                 const res = await getSingleMV(this.id)
-                console.log(res);
                 res.mvs.forEach(item => {
                     const {id, name, imgurl, artistName: author, playCount, publishTime} = item
                     this.mvData.push({id, name, imgurl, author, playCount, publishTime})

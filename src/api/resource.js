@@ -27,4 +27,6 @@ export const RelatedMVData = '/simi/mv'//获取相关mv数据
 export const LikeList='/likelist'//获取喜欢的音乐列表
 export const SongDetail='/song/detail'//歌曲详情
 export const LikeMusic='/like'//喜欢音乐
+export const CollectSinger='/artist/sub'//关注歌手
+export const SingerList='/artist/sublist'//关注歌手列表
 

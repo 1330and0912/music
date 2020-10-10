@@ -5,6 +5,7 @@
         <div class="tags">
             <!--            {{introduction.topicData[0].tags[0]}}-->
         </div>
+        <div class="title">个人简介</div>
         <div :class="this.$store.state.isShowPlayBar?'bottom-padding':''" class="content-wrap">
             <ul>
                 <li v-for="item in introduction">
@@ -65,18 +66,22 @@
             width: 100%;
         }
     }
-
+    .title {
+        font-weight: bold;
+        font-size: 20px;
+        padding-left: 10px;
+        margin-top: 20px;
+    }
     .content-wrap {
         padding: 10px;
         overflow: scroll;
         li {
             position: relative;
-            margin-top:  20px;
             border: 10px solid #FF3A3A;
             border-color: transparent transparent transparent  #FF3A3A;
             padding-left: 10px;
             line-height: 28px;
-
+            margin-bottom: 10px;
         }
     }
 </style>

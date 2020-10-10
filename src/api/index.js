@@ -17,7 +17,17 @@ import {
     Album,
     ArtistCategoryList,
     HotSong,
-    SingerIntroduction, AlbumContent, SingleMV, MVUrl, MVComment, MVData, RelatedMVData, LikeList, SongDetail, LikeMusic
+    SingerIntroduction,
+    AlbumContent,
+    SingleMV,
+    MVUrl,
+    MVComment,
+    MVData,
+    RelatedMVData,
+    LikeList,
+    SongDetail,
+    LikeMusic,
+    CollectSinger, SingerList
 } from "./resource";
 import {fuchsia} from "color-name";
 
@@ -325,9 +335,24 @@ export function getSongDetail(ids) {
 
 //喜欢音乐
 //@id 音乐id @like true喜欢 false取消喜欢 默认为true
-export function likeMusic(id,like=true) {
+export function likeMusic(id, like = true) {
     return request({
-        url:LikeMusic,
-        params:{id,like}
+        url: LikeMusic,
+        params: {id, like}
+    })
+}
+
+//收藏歌手
+//@id 歌手id @t 1为收藏 其余为取消
+export function collectSinger(id, t = 1) {
+    return request({
+        url:CollectSinger,
+        params:{id,t}
+    })
+}
+//收藏歌手列表
+export function getCollectSingerList() {
+    return request({
+        url:SingerList,
     })
 }

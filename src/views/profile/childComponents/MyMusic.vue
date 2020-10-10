@@ -13,9 +13,9 @@
             </div>
             <div class="my-collect private">
 
-                <div class="wrap ">
+                <div @click="goMyCollect" class="wrap ">
                     <i class="iconfont icon-jiahao"></i>
-                    <span>私人FM</span>
+                    <span>我的收藏</span>
                     <div class=" ">
                         来这里找好歌
                     </div>
@@ -40,8 +40,10 @@
         components: {HeaderBar},
         methods: {
             goFavoriteMusic() {
-                console.log(123);
                 this.$router.push('favorite-music')
+            },
+            goMyCollect() {
+                this.$router.push('my-collect')
             }
         }
     }
