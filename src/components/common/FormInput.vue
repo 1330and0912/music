@@ -7,7 +7,7 @@
                 @change="valueChange"
                 :type="inputType"
                 :placeholder="placeholder"
-                :style="{caretColor:caret,backgroundColor:bg}"
+                :style="{caretColor:caret,backgroundColor:bg,borderBottomColor:borderColor,placeholder: placeholderColor}"
                 @input="isBlur($event.target)"
                 @keypress.enter="search"
                 autofocus
@@ -32,7 +32,9 @@
                 type: String,
                 default: 'text'
             },
-            bg:String
+            borderColor: String,
+            bg: String,
+            placeholderColor:String
         },
         data() {
             return {

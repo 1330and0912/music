@@ -29,4 +29,6 @@ export const SongDetail='/song/detail'//歌曲详情
 export const LikeMusic='/like'//喜欢音乐
 export const CollectSinger='/artist/sub'//关注歌手
 export const SingerList='/artist/sublist'//关注歌手列表
+export const MVList='/mv/sublist'//收藏mv列表
+export const AllMV='/mv/all'//所有mv
 

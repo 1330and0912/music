@@ -34,7 +34,6 @@
     }
 
     .singer-list-item {
-
         line-height: 20px;
         display: flex;
         align-items: center;

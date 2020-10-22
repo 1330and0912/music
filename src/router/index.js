@@ -124,6 +124,12 @@ const routes = [
         path:'/my-collect',
         name:'myCollect',
         component: () =>import('views/myCollect/MyCollect')
+    },
+    {
+        path:'/recommend',
+        name:'recommend',
+        component: () =>import('views/recommend/Recommend')
+
     }
 ]
 

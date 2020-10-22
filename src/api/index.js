@@ -27,7 +27,7 @@ import {
     LikeList,
     SongDetail,
     LikeMusic,
-    CollectSinger, SingerList
+    CollectSinger, SingerList, MVList, AllMV
 } from "./resource";
 import {fuchsia} from "color-name";
 
@@ -346,13 +346,39 @@ export function likeMusic(id, like = true) {
 //@id 歌手id @t 1为收藏 其余为取消
 export function collectSinger(id, t = 1) {
     return request({
-        url:CollectSinger,
-        params:{id,t}
+        url: CollectSinger,
+        params: {id, t}
     })
 }
+
 //收藏歌手列表
 export function getCollectSingerList() {
     return request({
-        url:SingerList,
+        url: SingerList,
+    })
+}
+
+//收藏MV列表
+export function getCollectMVList() {
+    return request({
+        url: MVList
+    })
+}
+
+// 全部 mv
+// 说明 : 调用此接口 , 可获取全部 mv
+//
+// 可选参数 :
+//     area: 地区,可选值为全部,内地,港台,欧美,日本,韩国,不填则为全部 type: 类型,可选值为全部,官方版,原生,现场版,网易出品,不填则为全部
+//
+// order: 排序,可选值为上升最快,最热,最新,不填则为上升最快
+//
+// limit: 取出数量 , 默认为 30
+//
+// offset: 偏移数量 , 用于分页 , 如 :( 页数 -1)*50, 其中 50 为 limit 的值 , 默认 为 0
+export function getAllMV(limit = 30, offset = 0, area = '内地') {
+    return request({
+        url: AllMV,
+        params: {limit, offset,area}
     })
 }

@@ -2,9 +2,9 @@
     <div @click="goPlayMV(mv.id)" class="mv-list-item">
         <div class="img-wrap">
             <img class="cover" v-lazy="mv.imgurl" alt="">
-            <div class="play-icon-wrap">
+            <div v-if="mv.playCount" class="play-icon-wrap">
                 <img class="play-icon" src="~assets/img/play.svg" alt="">
-                <span>{{mv.playCount |formatCount}}</span>
+                <span >{{mv.playCount |formatCount}}</span>
             </div>
         </div>
         <div class="mv-info">
@@ -12,7 +12,7 @@
                 <img class="mv-icon" src="~assets/img/mv.png" alt="">
                 <span class="mv-name">{{mv.name}}</span>
             </div>
-            <div class="create-time">
+            <div v-if="mv.publishTime" class="create-time">
                 {{mv.publishTime}}
             </div>
         </div>

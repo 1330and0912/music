@@ -57,7 +57,7 @@
         margin-top: 100px;
     }
     .bottom-padding {
-        padding-bottom: 85px !important;
+        padding-bottom: 49px !important;
     }
 
     #mvPlay {

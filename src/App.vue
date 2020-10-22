@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <keep-alive>
-            <nav-bar :path="path" v-if="isShowNavBar" :titles="['我的','最近播放','分类']"/>
+            <nav-bar :path="path" v-if="isShowNavBar" :titles="['我的','最近播放','分类','推荐']"/>
         </keep-alive>
         <keep-alive>
             <router-view/>
@@ -25,7 +25,7 @@
         data() {
             return {
                 isShowNavBar: false,
-                path: ['/profile', '/recent', '/category', ''],
+                path: ['/profile', '/recent', '/category', '/recommend'],
                 removePlayBar: true
             }
         },
@@ -67,6 +67,7 @@
         }
         ,
         created() {
+
             if (window.localStorage.currentMusic) {
                 this.setCurrentMusic(JSON.parse(window.localStorage.currentMusic))
             } else {

@@ -10,8 +10,13 @@
     height: calc(100vh - 44px);
 
 }
+
 .h .van-cell__title {
     color: #000;
     font-weight: bold;
+}
+
+.recommend .van-list {
+    height: 100vh;
 }
 

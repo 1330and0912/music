@@ -24,7 +24,10 @@
                 type: Array,
                 default: () => []
             },
-            path: Array
+            path: {
+                type: Array,
+                default: () => []
+            }
         },
         data() {
             return {
@@ -39,6 +42,9 @@
             } else if (this.$route.path == '/category') {
                 this.bgColor = '#1A1E21'
                 this.currentIndex = 2
+            } else if (this.$route.path == '/recommend') {
+                this.bgColor = '#1A1E21'
+                this.currentIndex = 3
             }
         },
         methods: {

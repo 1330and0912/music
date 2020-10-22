@@ -21,7 +21,7 @@
 
 <style scoped>
     .mv-list {
-        height: calc(100% - 30px);
+        height: calc(100% - 70px);
         overflow: scroll;
     }
 </style>

@@ -2,6 +2,8 @@
     <div class="search-input">
         <div @click="back" class="back iconfont icon-zuojiantou"></div>
         <form-input
+                caret="black"
+                 border-color="white"
                 inputType="search" @on-search="search"
                 :placeholder="defaultSearchWord"
                 class="inp"
@@ -60,7 +62,7 @@
     .search-input {
         padding: 0px 10px 0;
         height: 49px;
-        background-color: @header-color;
+        background-color: #009966;
         position: fixed;
         z-index: 9999;
         top: 0px;
@@ -76,6 +78,7 @@
 
         .iconfont {
             font-size: 32px;
+            color: white;
         }
     }
 </style>

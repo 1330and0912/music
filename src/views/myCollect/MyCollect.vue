@@ -6,13 +6,15 @@
         <div class="side-wrap">
             <van-sidebar v-model="activeKey">
                 <van-sidebar-item @click="getSingerList" title="歌手" :badge="singerList.length"/>
-                <van-sidebar-item title="MV" badge="5"/>
+                <van-sidebar-item @click="getMVList" title="MV" :badge="MVList.length"/>
             </van-sidebar>
             <div class="content">
                 <template v-if="activeKey==0">
                     <singer-list :singer-list="singerList"/>
                 </template>
-                <template v-else>asd</template>
+                <template v-else>
+                    <m-v-list :mv-data="MVList"/>
+                </template>
             </div>
         </div>
     </div>
@@ -20,16 +22,18 @@
 
 <script>
     import NavHeader from "../../components/common/NavHeader";
-    import {collectSinger, getCollectSingerList} from "../../api";
+    import {collectSinger, getCollectMVList, getCollectSingerList} from "../../api";
     import SingerList from "./childComponents/SingerList";
+    import MVList from "../../components/common/mv/childComponents/MVList";
 
     export default {
         name: "MyCollect",
-        components: {SingerList, NavHeader},
+        components: {MVList, SingerList, NavHeader},
         data() {
             return {
                 activeKey: 0,
-                singerList: []
+                singerList: [],
+                MVList: []
             }
         },
         methods: {
@@ -39,29 +43,44 @@
                 getCollectSingerList().then(res => {
                     this.singerList.push(...res.data)
                 })
-
+            },
+            getMVList() {
+                this.MVList = []
+                getCollectMVList().then(res => {
+                    res.data.forEach(item => {
+                        const {vid: id, coverUrl: imgurl, title: name} = item
+                        this.MVList.push({id, name, imgurl})
+                    })
+                })
             }
+        },
+        created() {
+            this.getSingerList()
+            this.getMVList()
         }
     }
 </script>
 
 <style lang="less" scoped>
     .bottom-padding {
-        padding-bottom: 49px!important;
+        padding-bottom: 49px !important;
     }
+
     #myCollect {
         height: 100%;
         width: 100%;
+
         .content {
             height: 100%;
+            width: 80%;
             overflow: scroll;
-            border-left: 4px solid #FF3A3A;
+            border-left: 4px solid rgba(0, 0, 0, .1);
         }
     }
 
     .h {
         width: 100%;
-        height: 30%;
+        height: 10%;
         position: relative;
         background-image: url("../../../src/assets/img/myCollecy.jpg");
         background-size: cover;
@@ -76,7 +95,8 @@
     }
 
     .side-wrap {
+        border-top: 10px solid rgba(0, 0, 0, .1);
         display: flex;
-        height: 70%;
+        height: calc(90% - 10px);
     }
 </style>
