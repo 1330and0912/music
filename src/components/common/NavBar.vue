@@ -4,6 +4,7 @@
             <i class="iconfont icon-zhankai"></i>
         </li>
         <li
+                :style="{color:color}"
                 @click="changeTab(index)"
                 class="nav-bar-item" :class="
                 index===currentIndex?`current`:''"
@@ -32,18 +33,22 @@
         data() {
             return {
                 currentIndex: 0,
-                bgColor: 'transparent'
+                bgColor: 'transparent',
+                color:'darkgrey'
             }
         },
         created() {
             if (this.$route.path == '/recent') {
-                this.bgColor = '#1A1E21'
+                this.bgColor = '#CC0033'
+                this.color='white'
                 this.currentIndex = 1
             } else if (this.$route.path == '/category') {
-                this.bgColor = '#1A1E21'
+                this.bgColor = '#CC0033'
                 this.currentIndex = 2
+                this.color='white'
             } else if (this.$route.path == '/recommend') {
-                this.bgColor = '#1A1E21'
+                this.bgColor = '#CC0033'
+                this.color='white'
                 this.currentIndex = 3
             }
         },
@@ -54,9 +59,12 @@
                     this.$router.push(this.path[index])
                 }
                 if (index != 0) {
-                    this.bgColor = '#1A1E21'
+                    this.bgColor = '#CC0033'
+                    this.color='white'
+
                 } else {
                     this.bgColor = 'transparent'
+                    this.color='darkgrey'
                 }
             },
             toSearch() {
@@ -77,12 +85,13 @@
         height: 49px;
         left: 0;
         right: 0;
+
         //background-color: rgba(1,111,1,.3);
         li {
             font-size: 16px;
             text-align: center;
             flex-grow: 1;
-            color: darkgrey;
+            color: white;
         }
 
         .iconfont {

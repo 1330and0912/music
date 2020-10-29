@@ -37,7 +37,7 @@
                 finished: false,
                 offset: 0,
                 count: 0,//歌曲数量,
-                showLoading:true
+                showLoading:false
 
             }
         },
@@ -65,7 +65,7 @@
         methods: {
             async getMusicInfo(isClear = true, restOffset = true) {
                 this.searchSuccess = true
-                this.showLoading = true
+                //this.showLoading = true
                 isClear && (this.musicInfo = [])
                 if (restOffset) {
                     this.offset = 0

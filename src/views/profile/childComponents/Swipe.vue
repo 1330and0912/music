@@ -30,7 +30,7 @@
 
 <style lang="less" scoped>
     .swpie {
-        padding: 0 20px;
+        padding: 0 10px;
     }
 
     .van-swipe {

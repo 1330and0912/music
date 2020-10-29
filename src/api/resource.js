@@ -12,6 +12,7 @@ export const RecentPlay = '/user/record'//获取用户最近播放记录
 export const Banner = '/banner'//获取轮播图
 export const Search = '/search'//搜索
 export const SearchHotDetail = '/search/hot/detail'//热搜数据
+export const SearchSuggest = '/search/suggest'//搜索建议
 export const DefaultSearchWord = '/search/default'//默认关键词
 export const Artists = '/artists?id=6452'//歌手单曲信息
 export const Album = '/artist/album'//歌手专辑信息

@@ -27,7 +27,7 @@ import {
     LikeList,
     SongDetail,
     LikeMusic,
-    CollectSinger, SingerList, MVList, AllMV
+    CollectSinger, SingerList, MVList, AllMV, SearchSuggest
 } from "./resource";
 import {fuchsia} from "color-name";
 
@@ -195,10 +195,20 @@ export function getSearchHotDetail() {
     })
 }
 
-//获取默认搜索单词
+//获取默认搜索关键词
 export function getDefaultSearchWord() {
     return request({
         url: DefaultSearchWord
+    })
+}
+
+//获取搜索建议列表
+//@type mobile为移动端
+//@keywords 搜索关键字
+export function getSearchSuggest(keywords,type='mobile') {
+    return request({
+        url:SearchSuggest,
+        params:{type,keywords,timestamp: new Date()}
     })
 }
 

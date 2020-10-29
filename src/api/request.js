@@ -1,6 +1,8 @@
 import axios from 'axios'
 
 import store from '../store/index'
+var os=require('os');
+var ifaces=os.networkInterfaces();
 
 export function request(config) {
     const instance = axios.create({

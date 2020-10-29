@@ -6,7 +6,7 @@
         <div class="music-info">
             <span class="music-name">
                      {{musicInfo.songName}}
-             </span>
+            </span>
             <span class="music-author">
                 歌手：{{musicInfo.author}}
             </span>
@@ -60,7 +60,9 @@
                 }
             },
             goMV(mvid) {
-                this.$router.push( `music-video/${mvid}`)
+                setTimeout(() => {
+                    this.$router.push(`music-video/${mvid}`)
+                }, 300)
             }
         }
     }
@@ -106,11 +108,18 @@
         }
 
         .go-mv {
-            color: cornflowerblue;
-            font-size: 20px;
+            font-size: 20px  ;
+
+            color: teal;
             position: absolute;
             right: 15px;
+            transition: .3s;
+
+            &:active {
+                transform: scale(1.5);
+            }
         }
+
 
     }
 </style>

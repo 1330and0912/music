@@ -1,14 +1,28 @@
 <template>
     <div id="recommend">
+        <swipe/>
         <van-list
+                :class="this.$store.state.isShowPlayBar?'bottom-padding':''"
                 v-model="loading"
                 :finished="finished"
                 finished-text="没有更多了"
                 @load="onLoad"
-                immediate-check
+                :immediate-check="false"
+                offset="-49"
         >
-            <recommend-list :data-list="mvList"/>
+            <van-sticky :offset-top="50">
+                <div class="category">
+                <span
+                        @click="changeTab(index)"
+                        :class="index==currentIndex?'current-index':''" :key="index"
+                        class="category-item"
+                        v-for="(item,index) in categoryList">
+                    {{item}}
+                </span>
+                </div>
+            </van-sticky>
 
+            <recommend-list :data-list="mvList[this.currentIndex][this.categoryList[this.currentIndex]]"/>
         </van-list>
     </div>
 </template>
@@ -16,32 +30,61 @@
 <script>
     import {getAllMV} from "../../api";
     import RecommendList from "./childComponents/RecommendList";
+    import Swipe from "../profile/childComponents/Swipe";
 
     export default {
         name: "Recommend",
-        components: {RecommendList},
+        components: {Swipe, RecommendList},
         data() {
             return {
-                loading:false,
-                finished:false,
-                mvList: [],
-                offset: 1,
-                limit: 20,
-                count: 0,
-                hasMore: true
+                categoryList: ['内地', '港台', '欧美', '日本', '韩国'],
+                currentIndex: 0,
+                loading: false,
+                finished: false,
+                limit: 10,
+                hasMore: true,
+                mvList: [
+                    {
+                        '内地': [], offset: 0
+                    },
+                    {
+                        '港台': [], offset: 0
+                    },
+                    {
+                        '欧美': [], offset: 0
+                    },
+                    {
+                        '日本': [], offset: 0
+                    },
+                    {
+                        '韩国': [], offset: 0
+                    },
+                ]
 
             }
         },
         methods: {
             async getAllMVData() {
-                const res = await getAllMV(this.limit, this.offset * this.limit)
-                this.count = res.count
+                let offset = this.mvList[this.currentIndex].offset * this.limit
+                let keyWord=this.categoryList[this.currentIndex]
+                const res = await getAllMV(this.limit, offset, keyWord)
                 this.hasMore = res.hasMore
-                this.mvList = res.data.filter(item => item.cover)
-                console.log(res);
+                this.mvList[this.currentIndex][keyWord].push(...res.data.filter(item => item.cover))
+                this.loading = false
+                this.mvList[this.currentIndex].offset++
+                this.finished = !this.hasMore
             },
-            onLoad(){
-                console.log(123);
+            onLoad() {
+                if (this.mvList[this.currentIndex][this.categoryList[this.currentIndex]].length !== 0){
+                    this.getAllMVData()
+                }
+            },
+            changeTab(index) {
+                this.currentIndex = index
+                if (this.mvList[this.currentIndex][this.categoryList[this.currentIndex]].length == 0) {
+                    console.log(this.mvList[this.currentIndex][this.categoryList[this.currentIndex]].length);
+                    this.getAllMVData()
+                }
             }
         },
         created() {
@@ -51,8 +94,35 @@
 </script>
 
 <style lang="less" scoped>
+    .bottom-padding {
+        padding-bottom: 49px !important;
+    }
+
     #recommend {
         height: 100%;
-        padding-top: 50px;
+        padding-top: 55px;
+    }
+
+    .category {
+        display: flex;
+        justify-content: space-between;
+        height: 43px;
+        width: 100%;
+        padding: 0 20px;
+        line-height: 30px;
+        margin: 0 auto;
+        align-items: center;
+        background-color: white;
+
+        .category-item {
+            padding: 0 6px;
+            transition: border-bottom-color .5s;
+        }
+    }
+
+    .current-index {
+        border-bottom: 4px solid #FF3A3A;
+        font-weight: bold;
+        border-radius: 4px;
     }
 </style>

@@ -3,10 +3,11 @@
         <div @click="back" class="back iconfont icon-zuojiantou"></div>
         <form-input
                 caret="black"
-                 border-color="white"
+                border-color="white"
                 inputType="search" @on-search="search"
                 :placeholder="defaultSearchWord"
                 class="inp"
+                @input-value="getSearchSuggestData"
         />
     </div>
 </template>
@@ -16,6 +17,8 @@
     import {getDefaultSearchWord} from "api";
 
     import {mapActions, mapGetters} from 'vuex'
+    import {getSearchSuggest} from "../../../api";
+    import {debounce} from "../../../common/debounce";
 
     export default {
         name: "SearchInput",
@@ -23,17 +26,17 @@
         data() {
             return {
                 defaultSearchWord: '',//默认搜索关键词词
+                debounceFn: null,
+                searchSuggestList: []
             }
         },
         computed: {
             ...mapGetters('search', ['getSearchWord'])
         },
         activated() {
-            console.log(123);
         },
         async created() {
             this.defaultSearchWord = (await getDefaultSearchWord()).data.showKeyword
-            console.log(this.defaultSearchWord);
         },
         methods: {
             back() {
@@ -53,6 +56,16 @@
                         path: 'search-result',
                     })
                 }
+            },
+            getSuggest(v) {
+                getSearchSuggest(v).then(res => {
+                    console.log(res);
+                    this.searchSuggestList = res.result.allMatch
+                })
+            },
+            getSearchSuggestData(v) {
+                this.debounceFn = debounce(this.getSuggest, 1000, v)
+                this.debounceFn()
             }
         }
     }
