@@ -27,7 +27,7 @@
         components: {PasswordVerify, PhoneNavBar, FormInput, NextStep},
         data() {
             return {
-                isRegister: false,
+                isRegister: true,
                 phone: '',
                 phoneValid: {},
                 active: 3

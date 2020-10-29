@@ -16,9 +16,9 @@
     import NavBar from "./components/common/NavBar";
     import PlayBar from "./components/common/playbar/PlayBar";
 
-    import {mapGetters, mapActions} from 'vuex'
+    import {mapGetters, mapActions,mapState} from 'vuex'
     import Loading from "./components/common/loading/Loading";
-    import {getLikeList} from "./api";
+    import {getLikeList, loginStatus} from "./api/index";
 
     export default {
         components: {Loading, PlayBar, NavBar},
@@ -30,6 +30,20 @@
             }
         },
         watch: {
+            isLogin(newVal){
+                if(newVal) {
+                    if(window.sessionStorage.getItem('profile')){
+                        loginStatus().then(res => {
+                            console.log(123);
+                            if(res.code == 200) {
+                                window.sessionStorage.setItem('profile', JSON.stringify(res.profile))
+                                this.setUid()
+                                this.saveLikeMusicIds()
+                            }
+                        });
+                    }
+                }
+            },
             $route(to, from) {
                 to.path.includes('music-video') && this.getIsPlay && this.toggleMusicState()
                 let flag = this.path.some(item => item == to.path)
@@ -64,9 +78,21 @@
         ,
         computed: {
             ...mapGetters('musicDetail', ['getIsPlay', 'getCurrentMusic', 'getPlayQueuedData', 'isPlay']),
+            ...mapState('login',['uid','isLogin'])
         }
         ,
         created() {
+            if(window.sessionStorage.getItem('profile')){
+                loginStatus().then(res => {
+                    console.log(123);
+                    if(res.code == 200) {
+                        window.sessionStorage.setItem('profile', JSON.stringify(res.profile))
+                        this.setUid()
+                        this.saveLikeMusicIds()
+                    }
+                });
+            }
+
 
             if (window.localStorage.currentMusic) {
                 this.setCurrentMusic(JSON.parse(window.localStorage.currentMusic))
@@ -74,8 +100,7 @@
                 this.$store.state.isShowPlayBar = false
             }
             this.getInitData()
-            this.setUid()
-            this.saveLikeMusicIds()
+
         }
         ,
         methods: {
@@ -88,7 +113,9 @@
                 window.localStorage.playQueuedData && this.writePlayQueuedData(JSON.parse(window.localStorage.playQueuedData))
             },
             async saveLikeMusicIds() {
+                console.log(this.uid);
                 let res = await getLikeList(this.uid)
+                console.log(res);
                 this.saveIds(res.ids)
             }
         }

@@ -31,7 +31,7 @@ const routes = [
     },
     {
         path: '/',
-        redirect: '/login'
+        redirect: '/recommend'
     },
     {
         path: '/login',

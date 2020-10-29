@@ -20,6 +20,9 @@ const mutations = {
     },
     saveUserID(state, uid) {
         state.uid = uid
+    },
+    saveLoginStatus(state, isLogin) {
+        state.isLogin = isLogin
     }
 }
 const getters = {
@@ -41,7 +44,10 @@ const actions = {
     },
     setUid({commit}) {
         let profile = JSON.parse(window.sessionStorage.getItem('profile'))
-        commit('saveUserID',profile.userId)
+        commit('saveUserID', profile.userId)
+    },
+    setLoginStatus({commit}, isLogin) {
+        commit('saveLoginStatus', isLogin)
     }
 
 }

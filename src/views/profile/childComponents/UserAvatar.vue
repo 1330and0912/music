@@ -24,7 +24,7 @@
 </template>
 
 <script>
-    import {loginStatus} from "api";
+    import {loginStatus} from "../../../api";
 
     export default {
         name: "UserAvatar",
@@ -37,11 +37,11 @@
         created() {
             //先判断登录状态 如果登录则获取用户信息并渲染对应用户信息
             loginStatus().then(res => {
-                this.isLogin = res.code == 200 ? true : false
-                if (this.isLogin) {
-                    window.sessionStorage.setItem('profile',JSON.stringify(res.profile))
-                    this.userInfo = JSON.parse(window.sessionStorage.getItem('profile'))
-                }
+                if(res.code == 200) {
+                   window.sessionStorage.setItem('profile', JSON.stringify(res.profile))
+                   this.userInfo = JSON.parse(window.sessionStorage.getItem('profile'))
+                   this.isLogin = true
+               }
             })
         }
     }

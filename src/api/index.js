@@ -115,10 +115,7 @@ export function loginCellphone(phone, password) {
 //获取用户登录状态
 export function loginStatus() {
     return request({
-        url: LoginStatus,
-        params: {
-            timestamp: new Date()
-        }
+        url: LoginStatus,params:{}
     })
 }
 
@@ -191,14 +188,14 @@ export function search(keywords, limit = 30, type = 1018, offset = 0) {
 //获取热搜榜记录
 export function getSearchHotDetail() {
     return request({
-        url: SearchHotDetail
+        url: SearchHotDetail,params:{}
     })
 }
 
 //获取默认搜索关键词
 export function getDefaultSearchWord() {
     return request({
-        url: DefaultSearchWord
+        url: DefaultSearchWord,params:{}
     })
 }
 
@@ -364,14 +361,14 @@ export function collectSinger(id, t = 1) {
 //收藏歌手列表
 export function getCollectSingerList() {
     return request({
-        url: SingerList,
+        url: SingerList,params:{}
     })
 }
 
 //收藏MV列表
 export function getCollectMVList() {
     return request({
-        url: MVList
+        url: MVList,params:{}
     })
 }
 
