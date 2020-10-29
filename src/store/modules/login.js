@@ -6,10 +6,11 @@
 // 对象方式
 
 const state = {
-    phone: '',
-    password: '',
+    phone: '15860383073',
+    password: '34040hu*',
     isLogin: false,
-    uid: ''
+    uid: '',
+    profile:null
 }
 const mutations = {
     savePhone(state, phone) {
@@ -23,6 +24,7 @@ const mutations = {
     },
     saveLoginStatus(state, isLogin) {
         state.isLogin = isLogin
+        state.profile =JSON.parse(window.sessionStorage.getItem('profile'))
     }
 }
 const getters = {

@@ -34,13 +34,21 @@
 
 <script>
     import HeaderBar from "./HeaderBar";
+    import {mapState} from 'vuex'
 
     export default {
         name: "MyMusic",
         components: {HeaderBar},
+        computed: {
+            ...mapState('login', ['isLogin'])
+        },
         methods: {
             goFavoriteMusic() {
-                this.$router.push('favorite-music')
+                if (this.isLogin) {
+                    this.$router.push('favorite-music')
+                } else {
+                    this.$router.push('login')
+                }
             },
             goMyCollect() {
                 this.$router.push('my-collect')

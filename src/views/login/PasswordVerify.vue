@@ -38,8 +38,8 @@
                         this.$toast(res.message)
                         return
                     }else {
-                        this.setLoginStatus(true)
                         window.sessionStorage.setItem('profile', JSON.stringify(res.profile))
+                        this.setLoginStatus(true)
                         document.cookie = res.cookie//登录时设置cookie
                         window.localStorage.cookie=res.cookie
                         this.$router.push('profile')

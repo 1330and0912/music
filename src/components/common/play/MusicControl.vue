@@ -39,12 +39,12 @@
         },
         computed: {
             ...mapGetters('musicDetail', ['getIsPlay', 'getPlayMode', 'getCurrentMusic']),
-            ...mapState('login', ['uid']),
+            ...mapState('login', ['uid', 'isLogin']),
             ...mapState('collect', ['ids']),
         },
         methods: {
             ...mapActions('musicDetail', ['toggleMusicState', 'prevSong', 'nextSong', 'alterPlayMode']),
-            ...mapActions('collect', ['saveIds', 'saveLikeMusic','cancelLikeMusic']),
+            ...mapActions('collect', ['saveIds', 'saveLikeMusic', 'cancelLikeMusic']),
             //暂停/播放
             playMusic() {
                 this.toggleMusicState()
@@ -69,21 +69,25 @@
             },
             //喜欢音乐
             async collectMusic() {
-                this.isCollect = this.ids.some(item => item == this.id)
-                if (!this.isCollect) {
-                    likeMusic(this.id).then(res => {
-                        if (res.code == 200) {
-                            console.log(res);
-                            this.saveIds(this.id)
-                            this.saveLikeMusic(this.getCurrentMusic)
-                            this.$toast('收藏成功')
-                        }
-                    })
+                if (!this.isLogin) {
+                    this.$toast('请登录')
                 } else {
-                    likeMusic(this.id,false).then(res => {
-                        this.cancelLikeMusic(this.id)
-                        this.$toast('取消成功')
-                    })
+                    this.isCollect = this.ids.some(item => item == this.id)
+                    if (!this.isCollect) {
+                        likeMusic(this.id).then(res => {
+                            if (res.code == 200) {
+                                console.log(res);
+                                this.saveIds(this.id)
+                                this.saveLikeMusic(this.getCurrentMusic)
+                                this.$toast('收藏成功')
+                            }
+                        })
+                    } else {
+                        likeMusic(this.id, false).then(res => {
+                            this.cancelLikeMusic(this.id)
+                            this.$toast('取消成功')
+                        })
+                    }
                 }
 
             }

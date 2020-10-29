@@ -18,6 +18,8 @@
 </template>
 
 <script>
+    import {mapState} from 'vuex'
+
     export default {
         name: "NavBar",
         props: {
@@ -34,38 +36,53 @@
             return {
                 currentIndex: 0,
                 bgColor: 'transparent',
-                color:'darkgrey'
+                color: 'darkgrey'
             }
         },
         created() {
             if (this.$route.path == '/recent') {
                 this.bgColor = '#CC0033'
-                this.color='white'
+                this.color = 'white'
                 this.currentIndex = 1
             } else if (this.$route.path == '/category') {
                 this.bgColor = '#CC0033'
                 this.currentIndex = 2
-                this.color='white'
+                this.color = 'white'
             } else if (this.$route.path == '/recommend') {
                 this.bgColor = '#CC0033'
-                this.color='white'
+                this.color = 'white'
                 this.currentIndex = 3
             }
         },
+        computed: {
+            ...mapState('login', ['isLogin'])
+
+        },
         methods: {
             changeTab(index) {
-                this.currentIndex = index
+
                 if (this.$route.path !== this.path[index]) {
+                    if (this.path[index] == '/recent') {
+                        if (!this.isLogin) {
+                            this.$router.push('login')
+                            this.bgColor = 'transparent'
+                            this.color = 'darkgrey'
+                            this.currentIndex = 0
+                            return 0
+                        }
+                    }
                     this.$router.push(this.path[index])
+                    this.currentIndex = index
                 }
                 if (index != 0) {
                     this.bgColor = '#CC0033'
-                    this.color='white'
+                    this.color = 'white'
 
                 } else {
                     this.bgColor = 'transparent'
-                    this.color='darkgrey'
+                    this.color = 'darkgrey'
                 }
+
             },
             toSearch() {
                 this.$router.push('search')

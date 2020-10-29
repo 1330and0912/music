@@ -1,12 +1,12 @@
 <template>
     <div class="user-avatar">
-        <template v-if="isLogin">
+        <template v-if="profile">
             <div class="avatar-wrap">
                 <div class="avatar">
-                    <img :src="userInfo.avatarUrl" alt="">
+                    <img :src="profile.avatarUrl" alt="">
                 </div>
                 <div class="user-name">
-                    {{userInfo.nickname}}
+                    {{profile.nickname}}
                 </div>
             </div>
         </template>
@@ -25,24 +25,16 @@
 
 <script>
     import {loginStatus} from "../../../api";
-
+    import {mapState}from 'vuex'
     export default {
         name: "UserAvatar",
         data() {
             return {
-                isLogin: false,
-                userInfo: {}
             }
         },
-        created() {
-            //先判断登录状态 如果登录则获取用户信息并渲染对应用户信息
-            loginStatus().then(res => {
-                if(res.code == 200) {
-                   window.sessionStorage.setItem('profile', JSON.stringify(res.profile))
-                   this.userInfo = JSON.parse(window.sessionStorage.getItem('profile'))
-                   this.isLogin = true
-               }
-            })
+        computed: {
+            ...mapState('login',['profile']),
+
         }
     }
 </script>

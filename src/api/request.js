@@ -22,13 +22,7 @@ export function request(config) {
     })
 
     instance.interceptors.response.use(res => {
-        if (res.status == 301) {
-            router.replace({
-                path: 'login'
-            })
-        }else {
-            return res.data
-        }
+        return res.data
     }, err => {
         console.log(err);
     })

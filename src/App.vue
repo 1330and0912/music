@@ -16,7 +16,7 @@
     import NavBar from "./components/common/NavBar";
     import PlayBar from "./components/common/playbar/PlayBar";
 
-    import {mapGetters, mapActions,mapState} from 'vuex'
+    import {mapGetters, mapActions, mapState} from 'vuex'
     import Loading from "./components/common/loading/Loading";
     import {getLikeList, loginStatus} from "./api/index";
 
@@ -26,16 +26,16 @@
             return {
                 isShowNavBar: false,
                 path: ['/profile', '/recent', '/category', '/recommend'],
-                removePlayBar: true
+                removePlayBar: true,
+                redirectCop: ['/recent', '/favorite-music', '/my-collect']
             }
         },
         watch: {
-            isLogin(newVal){
-                if(newVal) {
-                    if(window.sessionStorage.getItem('profile')){
+            isLogin(newVal) {
+                if (newVal) {
+                    if (window.sessionStorage.getItem('profile')) {
                         loginStatus().then(res => {
-                            console.log(123);
-                            if(res.code == 200) {
+                            if (res.code == 200) {
                                 window.sessionStorage.setItem('profile', JSON.stringify(res.profile))
                                 this.setUid()
                                 this.saveLikeMusicIds()
@@ -45,6 +45,9 @@
                 }
             },
             $route(to, from) {
+                if (this.redirectCop.some(item => item == to.path)) {
+                    !this.isLogin && this.$router.replace('/login')
+                }
                 to.path.includes('music-video') && this.getIsPlay && this.toggleMusicState()
                 let flag = this.path.some(item => item == to.path)
                 if (flag) {
@@ -78,14 +81,15 @@
         ,
         computed: {
             ...mapGetters('musicDetail', ['getIsPlay', 'getCurrentMusic', 'getPlayQueuedData', 'isPlay']),
-            ...mapState('login',['uid','isLogin'])
+            ...mapState('login', ['uid', 'isLogin'])
         }
         ,
         created() {
-            if(window.sessionStorage.getItem('profile')){
+            if (window.sessionStorage.getItem('profile')) {
+                this.setLoginStatus(true)
                 loginStatus().then(res => {
                     console.log(123);
-                    if(res.code == 200) {
+                    if (res.code == 200) {
                         window.sessionStorage.setItem('profile', JSON.stringify(res.profile))
                         this.setUid()
                         this.saveLikeMusicIds()
@@ -105,7 +109,7 @@
         ,
         methods: {
             ...mapActions('musicDetail', ['setCurrentMusic', 'writePlayQueuedData', 'toggleMusicState']),
-            ...mapActions('login', ['setUid']),
+            ...mapActions('login', ['setUid','setLoginStatus']),
             ...mapActions('collect', ['saveIds']),
             //获取一些localStorage数据
             getInitData() {
