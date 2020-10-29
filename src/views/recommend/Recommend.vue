@@ -8,7 +8,7 @@
                 finished-text="没有更多了"
                 @load="onLoad"
                 :immediate-check="false"
-                offset="-49"
+                offset="0"
         >
             <van-sticky :offset-top="50">
                 <div class="category">
