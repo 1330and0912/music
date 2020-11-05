@@ -9,6 +9,7 @@
                 class="inp"
                 @input-value="getSearchSuggestData"
         />
+        <fuzzy-search :fuzzy-data="searchSuggestList"/>
     </div>
 </template>
 
@@ -19,21 +20,21 @@
     import {mapActions, mapGetters} from 'vuex'
     import {getSearchSuggest} from "../../../api";
     import {debounce} from "../../../common/debounce";
+    import FuzzySearch from "./FuzzySearch";
 
     export default {
         name: "SearchInput",
-        components: {FormInput},
+        components: {FuzzySearch, FormInput},
         data() {
             return {
                 defaultSearchWord: '',//默认搜索关键词词
                 debounceFn: null,
-                searchSuggestList: []
+                searchSuggestList: [],
+                fuzzySearch: '',
             }
         },
         computed: {
             ...mapGetters('search', ['getSearchWord'])
-        },
-        activated() {
         },
         async created() {
             this.defaultSearchWord = (await getDefaultSearchWord()).data.showKeyword
@@ -57,14 +58,18 @@
                     })
                 }
             },
-            getSuggest(v) {
-                getSearchSuggest(v).then(res => {
-                    console.log(res);
-                    this.searchSuggestList = res.result.allMatch
-                })
+            getSuggest() {
+                if (this.fuzzySearch.length !== 0) {
+                    getSearchSuggest(this.fuzzySearch).then(res => {
+                        this.searchSuggestList = res.result.allMatch
+                    })
+                } else {
+                    this.searchSuggestList = []
+                }
             },
             getSearchSuggestData(v) {
-                this.debounceFn = debounce(this.getSuggest, 1000, v)
+                this.fuzzySearch = v
+                !this.debounceFn && (this.debounceFn = debounce(this.getSuggest, 200))
                 this.debounceFn()
             }
         }

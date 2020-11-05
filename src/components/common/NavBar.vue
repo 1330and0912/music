@@ -58,6 +58,15 @@
             ...mapState('login', ['isLogin'])
 
         },
+        watch: {
+            $route(newVal) {
+                if ('/profile' == newVal.path) {
+                    this.bgColor = 'transparent'
+                    this.color = 'darkgrey'
+                    this.currentIndex = 0
+                }
+            }
+        },
         methods: {
             changeTab(index) {
 
@@ -65,9 +74,9 @@
                     if (this.path[index] == '/recent') {
                         if (!this.isLogin) {
                             this.$router.push('login')
-                            this.bgColor = 'transparent'
-                            this.color = 'darkgrey'
-                            this.currentIndex = 0
+                            // this.bgColor = 'transparent'
+                            // this.color = 'darkgrey'
+                            // this.currentIndex = 0
                             return 0
                         }
                     }

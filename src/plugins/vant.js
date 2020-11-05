@@ -20,7 +20,8 @@ import {
     CollapseItem,
     Sticky,
     Sidebar,
-    SidebarItem
+    SidebarItem,
+    Slider
 
 } from 'vant'
 
@@ -46,3 +47,4 @@ Vue.use(CollapseItem)
 Vue.use(Sticky)
 Vue.use(Sidebar)
 Vue.use(SidebarItem)
+Vue.use(Slider)

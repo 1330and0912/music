@@ -88,7 +88,6 @@
             if (window.sessionStorage.getItem('profile')) {
                 this.setLoginStatus(true)
                 loginStatus().then(res => {
-                    console.log(123);
                     if (res.code == 200) {
                         window.sessionStorage.setItem('profile', JSON.stringify(res.profile))
                         this.setUid()
@@ -117,9 +116,7 @@
                 window.localStorage.playQueuedData && this.writePlayQueuedData(JSON.parse(window.localStorage.playQueuedData))
             },
             async saveLikeMusicIds() {
-                console.log(this.uid);
                 let res = await getLikeList(this.uid)
-                console.log(res);
                 this.saveIds(res.ids)
             }
         }

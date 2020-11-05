@@ -6,8 +6,8 @@
 // 对象方式
 
 const state = {
-    phone: '15860383073',
-    password: '34040hu*',
+    phone: '',
+    password: '',
     isLogin: false,
     uid: '',
     profile:null

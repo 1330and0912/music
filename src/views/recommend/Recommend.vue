@@ -10,7 +10,7 @@
                 :immediate-check="false"
                 offset="0"
         >
-            <van-sticky :offset-top="50">
+            <van-sticky  :offset-top="49">
                 <div class="category">
                 <span
                         @click="changeTab(index)"
@@ -85,7 +85,7 @@
                     console.log(this.mvList[this.currentIndex][this.categoryList[this.currentIndex]].length);
                     this.getAllMVData()
                 }
-            }
+            },
         },
         created() {
             this.getAllMVData()

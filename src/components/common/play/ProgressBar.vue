@@ -2,10 +2,15 @@
     <div ref="progressBarWarp" class="progress-bar">
         <div class="progress-bar-wrap">
             <div class="current-time">{{getCurrentMusicPlayTime|filterPlayTime}}</div>
-            <div @click="setCurrentTime" class="bar" ref="bar">
-                <div ref="rate" class="rate"></div>
-                <div ref="point" class="point"></div>
-            </div>
+            <van-slider @drag-start="sliderChange" @change="progressChange" active-color="#FFffff" inactive-color="#666"
+                        :max="getDuration"
+                        v-model="value">
+                <template #button>
+                    <div class="custom-button">
+                        <div v-show="showCurrentTime" class="slide-value">{{value|filterPlayTime}}</div>
+                    </div>
+                </template>
+            </van-slider>
             <div class="end-time">{{getDuration|filterPlayTime}}</div>
         </div>
     </div>
@@ -16,6 +21,14 @@
 
     export default {
         name: "ProgressBar",
+        data() {
+            return {
+                value: 0,
+                showCurrentTime: false,
+                timer: null,
+                autoScroll: true
+            }
+        },
         computed: {
             ...mapGetters('musicDetail', ['getCurrentMusicPlayTime', 'getDuration'])
         },
@@ -28,33 +41,50 @@
         },
         watch: {
             getCurrentMusicPlayTime(newVal) {
-                let ratio = newVal / this.getDuration
-                this.$refs.rate.style.width = this.$refs.bar.clientWidth * ratio + 'px'
-                this.$refs.point.style.left = this.$refs.rate.clientWidth - this.$refs.point.clientWidth / 2 + 'px'
+                this.autoScroll && (this.value = newVal)
             }
         },
-        activated() {
-            let ratio = this.getCurrentMusicPlayTime / this.getDuration
-            this.$refs.rate.style.width = this.$refs.bar.clientWidth * ratio + 'px'
-            this.$refs.point.style.left = this.$refs.rate.clientWidth - this.$refs.point.clientWidth / 2 + 'px'
-        },
+
         methods: {
             ...mapActions('musicDetail', ['setProgressValue']),
-            setCurrentTime(e) {
-                let ratio = (e.clientX - this.$refs.progressBarWarp.offsetLeft - this.$refs.bar.offsetLeft) / this.$refs.bar.clientWidth
-                let currentTime = ratio * this.getDuration
-                if (currentTime < 0) {
-                    currentTime = 0
-                } else if (currentTime > this.getDuration) {
-                    currentTime = this.getDuration
-                }
-                this.setProgressValue(currentTime)
+
+            // 进度条变化且结束拖动后触发
+            progressChange(value) {
+                this.showCurrentTime = true
+                this.setProgressValue(value)
+                clearTimeout(this.timer)
+                this.timer = setTimeout(() => {
+                    this.showCurrentTime = false
+                    this.autoScroll = true
+                }, 2000)
+            },
+            sliderChange(value) {
+                this.autoScroll = false
+                this.showCurrentTime = true
             }
         }
     }
 </script>
 
 <style lang="less" scoped>
+
+    .custom-button {
+        width: 10px;
+        height: 10px;
+        border-radius: 10px;
+        background-color: #FFffff;
+        position: relative;
+
+        .slide-value {
+            position: absolute;
+            content: ' ';
+            width: 40px;
+            height: 20px;
+            top: -25px;
+            left: -15px;
+        }
+    }
+
     .progress-bar {
         position: relative;
         z-index: 1111;
@@ -71,6 +101,14 @@
         div {
             font-size: 14px;
             color: white;
+        }
+
+        .current-time {
+            margin-right: 10px;
+        }
+
+        .end-time {
+            margin-left: 10px;
         }
 
         .bar {
@@ -99,7 +137,7 @@
 
             .rate {
                 height: 2px;
-                background-color: #336699;
+                background-color: white;
             }
 
             .point {
