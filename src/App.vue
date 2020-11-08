@@ -6,7 +6,7 @@
         <keep-alive>
             <router-view/>
         </keep-alive>
-        <loading v-show="$store.state.isShowLoading"/>
+<!--        <loading v-show="$store.state.isShowLoading"/>-->
         <template v-if="removePlayBar ">
             <play-bar v-show="this.$store.state.isShowPlayBar"/>
         </template>

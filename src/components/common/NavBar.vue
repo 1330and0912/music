@@ -1,6 +1,6 @@
 <template>
     <ul class="nav-bar" :style="{backgroundColor:bgColor}">
-        <li>
+        <li @click="openSet">
             <i class="iconfont icon-zhankai"></i>
         </li>
         <li
@@ -14,14 +14,19 @@
         <li @click="toSearch">
             <i class="iconfont icon-sousuo"></i>
         </li>
+        <van-popup v-model="showPopup" position="left" :style="{ height: '100%',width:'90%' }">
+            <main-set />
+        </van-popup>
     </ul>
 </template>
 
 <script>
     import {mapState} from 'vuex'
+    import MainSet from "./set/MainSet";
 
     export default {
         name: "NavBar",
+        components: {MainSet},
         props: {
             titles: {
                 type: Array,
@@ -36,7 +41,8 @@
             return {
                 currentIndex: 0,
                 bgColor: 'transparent',
-                color: 'darkgrey'
+                color: 'darkgrey',
+                showPopup: false
             }
         },
         created() {
@@ -95,6 +101,10 @@
             },
             toSearch() {
                 this.$router.push('search')
+            },
+            // 打开左侧设置栏
+            openSet() {
+                this.showPopup = true
             }
         }
     }

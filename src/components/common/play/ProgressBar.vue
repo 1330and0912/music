@@ -55,10 +55,12 @@
                 clearTimeout(this.timer)
                 this.timer = setTimeout(() => {
                     this.showCurrentTime = false
-                    this.autoScroll = true
                 }, 2000)
+                this.autoScroll = true
             },
+            //进度条开始拖动时
             sliderChange(value) {
+                clearTimeout(this.timer)
                 this.autoScroll = false
                 this.showCurrentTime = true
             }

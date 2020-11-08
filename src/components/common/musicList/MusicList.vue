@@ -1,22 +1,41 @@
 <template>
     <div class="music-list">
+        <loading :show-loading="isShowLoading"/>
         <music-list-item :key="item.id" :music-info="item" id="item.id" v-for="item in musicInfo"/>
     </div>
 </template>
 
 <script>
     import MusicListItem from "./MusicListItem";
+    import {mapState} from 'vuex'
+    import Loading from "../loading/Loading";
 
     export default {
         name: "MusicList",
-        components: {MusicListItem},
+        components: {Loading, MusicListItem},
         props: {
             musicInfo: {
                 type: Array,
                 default: () => []
             }
         },
-        methods: {}
+        data() {
+            return {
+                isShowLoading: true
+            }
+        },
+        watch: {
+            musicInfo(newVal) {
+                if (newVal.length) {
+                    this.isShowLoading = false
+                }
+            }
+        },
+        activated() {
+            if (this.musicInfo.length == 0) {
+                this.isShowLoading = true
+            }
+        }
     }
 </script>
 

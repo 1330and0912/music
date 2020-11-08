@@ -13,11 +13,12 @@
     import MyList from "./childComponents/MyList";
     import MyMusic from "./childComponents/MyMusic";
     import Swipe from "./childComponents/Swipe";
+    import MainSet from "../../components/common/set/MainSet";
 
 
     export default {
         name: "Profile",
-        components: {Swipe, MyMusic, MyList, UserAvatar},
+        components: {MainSet, Swipe, MyMusic, MyList, UserAvatar},
         props: {
             background: {
                 type: String,

@@ -1,29 +1,28 @@
 <template>
-    <van-list
-            :immediate-check="false"
-            :class="this.$store.state.isShowPlayBar?'bottom-padding':''"
-            v-model="loading"
-            :finished="finished"
-            finished-text="没有更多了"
-            @load="onLoad"
-
-    >
-        <div class="search-result">
-            <music-list v-if="searchSuccess" class="music-list" :music-info="musicInfo"/>
-            <div v-else>未找到</div>
-        </div>
-        <loading v-if="showLoading"/>
-    </van-list>
+    <div class="search-result-wrap">
+        <loading :show-loading="!musicInfo.length && !finished "/>
+        <van-list
+                :immediate-check="false"
+                :class="this.$store.state.isShowPlayBar?'bottom-padding':''"
+                v-model="loading"
+                :finished="finished"
+                finished-text="没有更多了"
+                @load="onLoad"
+        >
+            <div class="search-result">
+                <music-list v-if="searchSuccess" class="music-list" :music-info="musicInfo"/>
+                <div v-else>未找到</div>
+            </div>
+        </van-list>
+    </div>
 </template>
 
 <script>
     import MusicList from "../../components/common/musicList/MusicList";
-
+    import Loading from "../../components/common/loading/Loading";
     import {search, getSongURL, getLyric, getAlbum} from "../../api";
     import {dataLyric} from "../../common/dataLyric";
-
     import {mapGetters, mapActions} from 'vuex'
-    import Loading from "../../components/common/loading/Loading";
 
     export default {
         name: "SearchResult",
@@ -32,13 +31,11 @@
             return {
                 musicInfo: [],
                 newMusicInfo: new Set(),
-                searchSuccess: false,
+                searchSuccess: true,
                 loading: false,
                 finished: false,
                 offset: 0,
                 count: 0,//歌曲数量,
-                showLoading:false
-
             }
         },
         computed: {
@@ -47,6 +44,7 @@
         },
         watch: {
             async getSearchWord() {
+                this.musicInfo = []
                 this.count = 0
                 this.finished = false
                 if (this.getSearchWord) {
@@ -65,7 +63,6 @@
         methods: {
             async getMusicInfo(isClear = true, restOffset = true) {
                 this.searchSuccess = true
-                //this.showLoading = true
                 isClear && (this.musicInfo = [])
                 if (restOffset) {
                     this.offset = 0
@@ -75,7 +72,7 @@
                 let musicInfo = []
                 search(this.getSearchWord, 30, 1, this.offset * 30).then(res => {
                     this.count = res.result.songCount / 2
-                    if (res) {
+                    if (res.result.songCount) {
                         res = res.result.songs || []
                         res.forEach(async (item, index) => {
                             let mvid = item.mvid
@@ -89,16 +86,24 @@
                             let musicUrl = url
                             if (lrc && url) {
                                 this.newMusicInfo.has(item.id) ||
-                                this.musicInfo.push({mvid,id, songName, author, bg, musicUrl, lyric: dataLyric(lrc.lyric)})
+                                this.musicInfo.push({
+                                    mvid,
+                                    id,
+                                    songName,
+                                    author,
+                                    bg,
+                                    musicUrl,
+                                    lyric: dataLyric(lrc.lyric)
+                                })
                             }
                             if (index == res.length - 1) {
                                 this.loading = false
-                                this.showLoading = false
                             }
                             this.newMusicInfo.add(item.id)
                         })
                     } else {
                         this.searchSuccess = false
+                        this.finished = true
                     }
                 })
             },
@@ -121,9 +126,15 @@
 </script>
 
 <style lang="less" scoped>
+    .search-result-wrap {
+        width: 100%;
+        height: 100%;
+    }
+
     .search-result {
         padding-top: 49px;
-        /*background-color: rgba(255,0,0,.3);*/
+        width: 100%;
+        height: 100%;
     }
 
     .bottom-padding {

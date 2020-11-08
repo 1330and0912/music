@@ -45,6 +45,7 @@
             },
             ...mapActions('search', ['setSearchWord', 'addSearchHistory']),
             search(searchWord) {
+                this.searchSuggestList = []
                 if (searchWord.trim()) {
                     this.setSearchWord(searchWord)
                     this.addSearchHistory(searchWord)

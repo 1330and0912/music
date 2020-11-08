@@ -46,7 +46,7 @@
     .recommend-list-item {
         border-radius: 8px;
         margin-bottom: 10px;
-        box-shadow: 0px 0px 11px 1px rgba(0, 1, 33, .3);
+        box-shadow: 0px 0px 11px 1px rgba(1, 2, 2, .31);
         width: 48%;
     }
 
@@ -56,6 +56,7 @@
             border-top-left-radius: 8px;
             border-top-right-radius: 8px;
             width: 100%;
+            height: 100px;
         }
 
         .mv-info {
