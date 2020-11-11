@@ -77,9 +77,13 @@
 <style lang="less" scoped>
     .fixed {
         position: fixed;
-        top: 49px;
+        top: 47px;
         left: 0;
         right: 0;
         z-index: 999;
+    }
+    .drop-down-menu{
+        height: 100%;
+        overflow-y: scroll;
     }
 </style>

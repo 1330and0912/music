@@ -51,11 +51,13 @@
 
 <style lang="less" scoped>
     .bottom-padding {
-        padding-bottom: 49px!important;
+        padding-bottom: 49px !important;
     }
+
     #recentPlay {
-        color: white;
+        overflow: scroll;
         height: 100%;
+        color: white;
         background-size: cover;
         background-position: center center;
         background-repeat: no-repeat;

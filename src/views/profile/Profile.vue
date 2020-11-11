@@ -3,7 +3,6 @@
         <user-avatar class="user"/>
         <my-list/>
         <my-music/>
-        <swipe/>
     </div>
 </template>
 
@@ -34,17 +33,18 @@
 
 <style lang="less" scoped>
     #profile {
-
+        padding: 0 10px;
         height: 100vh;
-        background-size: 100% 280px;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-image: url("../../assets/img/profile/defaultbackgroundimg.jpg");
-
+        /*background-size: 100% 280px;*/
+        /*background-repeat: no-repeat;*/
+        /*background-attachment: fixed;*/
+        //background-image: url("../../assets/img/profile/defaultbackgroundimg.jpg");
+        background-color: #F8F8F8;
+        overflow-y: scroll;
     }
 
     .user {
-        padding-top: 64px;
+        padding-top: 49px;
     }
     .bottom-padding {
         padding-bottom: 49px!important;

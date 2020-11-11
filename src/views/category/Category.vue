@@ -15,7 +15,9 @@
 
 <style lang="less" scoped>
    #category {
-      padding: 49px 0 0;
+       height:100%;
+
+       padding: 49px 0 0;
    }
    .bottom-padding {
        padding-bottom: 49px !important;

@@ -13,10 +13,10 @@
         <template v-else>
             <div class="avatar-wrap">
                 <div class="avatar">
-                    <img src="~assets/img/profile/avatar.jpg" alt="">
+                    <van-icon name="contact"/>
                 </div>
                 <div class="user-name">
-                    登录即可同步个人信息
+                    立即登录
                 </div>
             </div>
         </template>
@@ -25,15 +25,15 @@
 
 <script>
     import {loginStatus} from "../../../api";
-    import {mapState}from 'vuex'
+    import {mapState} from 'vuex'
+
     export default {
         name: "UserAvatar",
         data() {
-            return {
-            }
+            return {}
         },
         computed: {
-            ...mapState('login',['profile']),
+            ...mapState('login', ['profile']),
 
         }
     }
@@ -49,10 +49,16 @@
         align-items: center;
 
         .avatar {
-            width: 60px;
-            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height:50px;
+            color: rgba(222,0,0,.5);
+            background-color: rgba(222,0,0,.1);
             border-radius: 50%;
             margin-right: 20px;
+            font-size: 30px;
 
             img {
                 width: 60px;
@@ -62,8 +68,9 @@
         }
 
         .user-name {
-            color: white;
-            font-size: 20px;
+            color: black;
+            font-size: 18px;
+            font-weight: 600;
         }
     }
 </style>

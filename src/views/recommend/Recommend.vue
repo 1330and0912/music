@@ -1,17 +1,18 @@
 <template>
     <div id="recommend">
-        <swipe/>
-        <van-list
-                :class="this.$store.state.isShowPlayBar?'bottom-padding':''"
-                v-model="loading"
-                :finished="finished"
-                finished-text="没有更多了"
-                @load="onLoad"
-                :immediate-check="false"
-                offset="1"
-        >
-            <van-sticky  :offset-top="49">
-                <div class="category">
+        <div class="scroll-wrap">
+            <swipe/>
+            <van-list
+                    :class="this.$store.state.isShowPlayBar?'bottom-padding':''"
+                    v-model="loading"
+                    :finished="finished"
+                    finished-text="没有更多了"
+                    @load="onLoad"
+                    :immediate-check="false"
+                    offset="1"
+            >
+                <van-sticky :offset-top="49">
+                    <div class="category">
                 <span
                         @click="changeTab(index)"
                         :class="index==currentIndex?'current-index':''" :key="index"
@@ -19,11 +20,12 @@
                         v-for="(item,index) in categoryList">
                     {{item}}
                 </span>
-                </div>
-            </van-sticky>
+                    </div>
+                </van-sticky>
 
-            <recommend-list :data-list="mvList[this.currentIndex][this.categoryList[this.currentIndex]]"/>
-        </van-list>
+                <recommend-list :data-list="mvList[this.currentIndex][this.categoryList[this.currentIndex]]"/>
+            </van-list>
+        </div>
     </div>
 </template>
 
@@ -66,7 +68,7 @@
         methods: {
             async getAllMVData() {
                 let offset = this.mvList[this.currentIndex].offset * this.limit
-                let keyWord=this.categoryList[this.currentIndex]
+                let keyWord = this.categoryList[this.currentIndex]
                 const res = await getAllMV(this.limit, offset, keyWord)
                 this.hasMore = res.hasMore
                 this.mvList[this.currentIndex][keyWord].push(...res.data.filter(item => item.cover))
@@ -75,7 +77,7 @@
                 this.finished = !this.hasMore
             },
             onLoad() {
-                if (this.mvList[this.currentIndex][this.categoryList[this.currentIndex]].length !== 0){
+                if (this.mvList[this.currentIndex][this.categoryList[this.currentIndex]].length !== 0) {
                     this.getAllMVData()
                 }
             },
@@ -94,13 +96,18 @@
 </script>
 
 <style lang="less" scoped>
+    .scroll-wrap {
+        overflow: scroll;
+        height: 100%;
+    }
+
     .bottom-padding {
         padding-bottom: 49px !important;
     }
 
     #recommend {
         height: 100%;
-        padding-top: 55px;
+        padding-top: 45px;
     }
 
     .category {

@@ -226,7 +226,7 @@
         }
 
         .r {
-            padding-left: 168px;
+            padding-left: 166px;
             display: flex;
             justify-content: center;
             align-items: center;

@@ -107,7 +107,7 @@ export function loginCellphone(phone, password) {
         data: {
             phone,
             password,
-            timestamp: new Date()
+            timestamp: new Date().getTime()
         }
     })
 }

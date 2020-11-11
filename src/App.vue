@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <keep-alive>
-            <nav-bar :path="path" v-if="isShowNavBar" :titles="['我的','最近播放','分类','推荐']"/>
+            <nav-bar :path="path" v-if="isShowNavBar" :titles="['我的','最近播放','歌手','MV']"/>
         </keep-alive>
         <keep-alive>
             <router-view/>

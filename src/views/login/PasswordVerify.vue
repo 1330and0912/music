@@ -35,8 +35,8 @@
                 const {phone, password} = this.$store.getters['login/getUserInfo']
                 loginCellphone(phone, password).then(res => {
                     if (res.code == 502) {
+                        console.log(phone, password);
                         this.$toast(res.message)
-                        return
                     }else {
                         window.sessionStorage.setItem('profile', JSON.stringify(res.profile))
                         this.setLoginStatus(true)
@@ -44,15 +44,6 @@
                         window.localStorage.cookie=res.cookie
                         this.$router.push('profile')
                     }
-                    // loginStatus().then(res => {
-                    //     console.log(res);
-                    //     if (res.code == 200) {
-                    //         //保存用户头像 id 名称信息
-                    //
-                    //     }
-                    // })
-
-
                 })
             },
             //将密码保存到vuex

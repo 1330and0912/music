@@ -59,10 +59,10 @@
 
 <style lang="less" scoped>
     .my-music {
-        border-top-left-radius: 20px;
-        border-top-right-radius: 20px;
+        box-shadow: 0 0 6px #EEEEEE;
+        border-radius: 10px;
         background-color: white;
-        padding: 30px 20px 0;
+        padding: 20px 20px  10px;
         margin-top: 20px;
     }
 

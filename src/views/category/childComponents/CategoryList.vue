@@ -44,7 +44,6 @@
 <style lang="less" scoped>
     .category-list {
         margin-top: 49px;
-
         header {
             color: black;
             font-size: 14px;
