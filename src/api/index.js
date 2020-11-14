@@ -36,7 +36,7 @@ import {
     RecommendPlayList,
     RecommendSong,
     RecommendMV,
-    NeteaseMV, AlbumNewSt
+    NeteaseMV, AlbumNewSt, TopList
 } from "./resource";
 import {fuchsia} from "color-name";
 
@@ -440,10 +440,18 @@ export function getNeteaseMV(limit = 8) {
     })
 }
 
-//获取网易出品mv
+//获取新专辑
 export function getAlbumNewSt() {
     return request({
         url: AlbumNewSt,
+        params: {}
+    })
+}
+
+//获取网易出品mv
+export function getTopList() {
+    return request({
+        url: TopList,
         params: {}
     })
 }
