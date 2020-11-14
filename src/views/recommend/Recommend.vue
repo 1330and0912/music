@@ -1,6 +1,6 @@
 <template>
     <div id="recommend">
-        <div class="scroll-wrap">
+        <div  class="scroll-wrap">
             <swipe/>
             <van-list
                     :class="this.$store.state.isShowPlayBar?'bottom-padding':''"
@@ -11,7 +11,7 @@
                     :immediate-check="false"
                     offset="1"
             >
-                <van-sticky :offset-top="49">
+                <van-sticky :offset-top="47">
                     <div class="category">
                 <span
                         @click="changeTab(index)"
@@ -33,10 +33,11 @@
     import {getAllMV} from "../../api";
     import RecommendList from "./childComponents/RecommendList";
     import Swipe from "../profile/childComponents/Swipe";
+    import Loading from "../../components/common/loading/Loading";
 
     export default {
         name: "Recommend",
-        components: {Swipe, RecommendList},
+        components: {Loading, Swipe, RecommendList},
         data() {
             return {
                 categoryList: ['内地', '港台', '欧美', '日本', '韩国'],
@@ -91,6 +92,9 @@
         },
         created() {
             this.getAllMVData()
+        },
+        mounted() {
+            console.log(1);
         }
     }
 </script>

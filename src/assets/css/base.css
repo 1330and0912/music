@@ -23,5 +23,9 @@ a {
     padding: 0;
     box-sizing: border-box;
     font-size: 16px;
+
 }
 
+*::-webkit-scrollbar{
+    display: none;
+}

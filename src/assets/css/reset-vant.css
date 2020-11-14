@@ -16,6 +16,9 @@
     font-weight: bold;
 }
 
+.netease-mv-swiper .van-swipe {
+    height: 160px;
+}
 /*.recommend .van-list {*/
 /*    height: 100vh;*/
 /*}*/

@@ -66,6 +66,11 @@ const routes = [
         component: () => import('views/profile/Profile'),
     },
     {
+        path: '/discover',
+        name: 'discover',
+        component: () => import('views/discover/Discover')
+    },
+    {
         path: '/category',
         name: 'category',
         component: () => import('views/category/Category'),
@@ -121,14 +126,14 @@ const routes = [
         component: () => import('views/favoriteMusic/FavoriteMusic.vue')
     },
     {
-        path:'/my-collect',
-        name:'myCollect',
-        component: () =>import('views/myCollect/MyCollect')
+        path: '/my-collect',
+        name: 'myCollect',
+        component: () => import('views/myCollect/MyCollect')
     },
     {
-        path:'/recommend',
-        name:'recommend',
-        component: () =>import('views/recommend/Recommend')
+        path: '/recommend',
+        name: 'recommend',
+        component: () => import('views/recommend/Recommend')
 
     }
 ]

@@ -46,7 +46,7 @@
             }
         },
         created() {
-            if (this.$route.path == '/recent') {
+            if (this.$route.path == '/discover') {
                 this.currentIndex = 1
             } else if (this.$route.path == '/category') {
                 this.currentIndex = 2
@@ -95,15 +95,27 @@
         height: 49px;
         /*background-color: #E74A43;*/
         justify-content: space-between;
+
         .search, .set {
-            flex: 2;
+            width: 20%;
             font-size: 26px;
             color: white;
             display: flex;
             align-items: center;
-            justify-content: center;
             height: 100%;
+            padding-bottom: 3px;
         }
+
+        .set{
+            justify-content: flex-start;
+            padding-left: 15px;
+            padding-bottom: 5px;
+        }
+        .search{
+            justify-content: flex-end;
+            padding-right: 15px;
+        }
+
 
     }
 
@@ -112,10 +124,11 @@
         display: flex;
         height: 100%;
         align-items: center;
-        justify-content: space-between;
-        width: 100%;
+        justify-content: space-around;
+        width: 60%;
+
         li {
-            color:#151419;
+            color: #151419;
             justify-content: space-between;
             transition: all .3s;
             letter-spacing: 1px;
@@ -123,6 +136,7 @@
             align-items: center;
             font-size: 15px;
             text-align: center;
+            padding-bottom: 3px;
         }
     }
 
@@ -131,8 +145,9 @@
 
     .current {
         color: black !important;
-        font-weight: 600 !important;
+        font-weight: 700 !important;
         transform: scale(1.2);
+        border-bottom: 2px solid red;
     }
 
 </style>

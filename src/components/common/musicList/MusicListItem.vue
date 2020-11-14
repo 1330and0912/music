@@ -8,7 +8,7 @@
                      {{musicInfo.songName}}
             </span>
             <span class="music-author">
-                歌手：{{musicInfo.author}}
+                {{musicInfo.author}}
             </span>
         </div>
         <i @click.stop="goMV(musicInfo.mvid)" v-if="musicInfo.mvid" class="go-mv iconfont icon-bofang1"></i>

@@ -27,7 +27,16 @@ import {
     LikeList,
     SongDetail,
     LikeMusic,
-    CollectSinger, SingerList, MVList, AllMV, SearchSuggest
+    CollectSinger,
+    SingerList,
+    MVList,
+    AllMV,
+    SearchSuggest,
+    DragonBar,
+    RecommendPlayList,
+    RecommendSong,
+    RecommendMV,
+    NeteaseMV, AlbumNewSt
 } from "./resource";
 import {fuchsia} from "color-name";
 
@@ -115,7 +124,7 @@ export function loginCellphone(phone, password) {
 //获取用户登录状态
 export function loginStatus() {
     return request({
-        url: LoginStatus,params:{}
+        url: LoginStatus, params: {}
     })
 }
 
@@ -188,24 +197,24 @@ export function search(keywords, limit = 30, type = 1018, offset = 0) {
 //获取热搜榜记录
 export function getSearchHotDetail() {
     return request({
-        url: SearchHotDetail,params:{}
+        url: SearchHotDetail, params: {}
     })
 }
 
 //获取默认搜索关键词
 export function getDefaultSearchWord() {
     return request({
-        url: DefaultSearchWord,params:{}
+        url: DefaultSearchWord, params: {}
     })
 }
 
 //获取搜索建议列表
 //@type mobile为移动端
 //@keywords 搜索关键字
-export function getSearchSuggest(keywords,type='mobile') {
+export function getSearchSuggest(keywords, type = 'mobile') {
     return request({
-        url:SearchSuggest,
-        params:{type,keywords,timestamp: new Date()}
+        url: SearchSuggest,
+        params: {type, keywords, timestamp: new Date()}
     })
 }
 
@@ -361,14 +370,14 @@ export function collectSinger(id, t = 1) {
 //收藏歌手列表
 export function getCollectSingerList() {
     return request({
-        url: SingerList,params:{}
+        url: SingerList, params: {}
     })
 }
 
 //收藏MV列表
 export function getCollectMVList() {
     return request({
-        url: MVList,params:{}
+        url: MVList, params: {}
     })
 }
 
@@ -386,6 +395,55 @@ export function getCollectMVList() {
 export function getAllMV(limit = 30, offset = 0, area = '内地') {
     return request({
         url: AllMV,
-        params: {limit, offset,area}
+        params: {limit, offset, area}
+    })
+}
+
+//获取首页圆形列表图标
+export function getDragonBar() {
+    return request({
+        url: DragonBar,
+        params: {}
+    })
+}
+
+//获取每日推荐歌单
+// @limit 数据量
+export function getRecommendPlayList(limit = 6) {
+    return request({
+        url: RecommendPlayList,
+        params: {limit}
+    })
+}
+
+//推荐音乐
+export function getRecommendSong() {
+    return request({
+        url: RecommendSong,
+        params: {}
+    })
+}
+
+//推荐mv
+export function getRecommendMV() {
+    return request({
+        url: RecommendMV,
+        params: {}
+    })
+}
+
+//获取网易出品mv
+export function getNeteaseMV(limit = 8) {
+    return request({
+        url: NeteaseMV,
+        params: {limit}
+    })
+}
+
+//获取网易出品mv
+export function getAlbumNewSt() {
+    return request({
+        url: AlbumNewSt,
+        params: {}
     })
 }
