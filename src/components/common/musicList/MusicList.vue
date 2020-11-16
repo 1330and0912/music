@@ -1,6 +1,6 @@
 <template>
-    <div class="music-list">
-        <loading :show-loading="isShowLoading"/>
+    <div class="music-list" :class="isScrollY? 'scroll':''">
+        <!--        <loading :show-loading="isShowLoading"/>-->
         <music-list-item :key="item.id" :music-info="item" id="item.id" v-for="item in musicInfo"/>
     </div>
 </template>
@@ -17,6 +17,10 @@
             musicInfo: {
                 type: Array,
                 default: () => []
+            },
+            isScrollY:{
+                type:Boolean,
+                default:true
             }
         },
         data() {
@@ -41,9 +45,12 @@
 
 <style lang="less" scoped>
     .music-list {
-        overflow-y: scroll;
         width: 100%;
         height: 100%;
         position: relative;
+    }
+
+    .scroll {
+        overflow-y: scroll !important;
     }
 </style>

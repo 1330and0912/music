@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
+
+//mv页面相关路由重定向
 const musicVideoRedirect = [
     {
         path: '/search/music-video/:id',
@@ -11,7 +13,9 @@ const musicVideoRedirect = [
         path: '/singer-detail/music-video/:id',
         redirect: '/music-video/:id'
     }
-]//mv页面相关路由重定向
+]
+
+//主播放器页面路由相关重定向
 const playRedirect = [
     {
         path: '/search/play',
@@ -21,7 +25,11 @@ const playRedirect = [
         path: '/singer-detail/play',
         redirect: '/play'
     },
-]//主播放器页面路由相关重定向
+    {
+        path: '/song-list/play',
+        redirect: '/play'
+    }
+]
 const routes = [
     ...musicVideoRedirect,
     ...playRedirect,
@@ -134,7 +142,12 @@ const routes = [
         path: '/recommend',
         name: 'recommend',
         component: () => import('views/recommend/Recommend')
-
+    },
+    {
+        path: '/song-list/:id',
+        name: 'songList',
+        props: true,
+        component: () => import('components/common/songlist/SongList')
     }
 ]
 

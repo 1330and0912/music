@@ -14,16 +14,6 @@
     export default {
         name: "Loading",
         props: ['showLoading', 'position'],
-        created() {
-        },
-        watch: {
-            // $route(){
-            //     console.log(this.$route.path);
-            //     if(this.$router.path=='/search/search-result'){
-            //         this.position = 'fixed'
-            //     }
-            // }
-        }
     }
 </script>
 
@@ -34,7 +24,6 @@
         height: 200px;
         position: absolute;
         top: 20%;
-        bottom: 50%;
         left: 50%;
         right: 50%;
         transform: translate(-50%, -50%);

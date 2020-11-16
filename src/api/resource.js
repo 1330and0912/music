@@ -39,4 +39,5 @@ export const RecommendMV = '/personalized/mv'//推荐mv
 export const NeteaseMV = '/mv/exclusive/rcmd'//网易出品mv
 export const AlbumNewSt = '/album/newest'//最新专辑
 export const TopList = '/toplist'//所有歌单
+export const PlayListDetail = '/playlist/detail'//获取歌单详情
 

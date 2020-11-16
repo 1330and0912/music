@@ -36,7 +36,7 @@ import {
     RecommendPlayList,
     RecommendSong,
     RecommendMV,
-    NeteaseMV, AlbumNewSt, TopList
+    NeteaseMV, AlbumNewSt, TopList, PlayListDetail
 } from "./resource";
 import {fuchsia} from "color-name";
 
@@ -453,5 +453,14 @@ export function getTopList() {
     return request({
         url: TopList,
         params: {}
+    })
+}
+//获取歌单详情
+// 必选参数 : id : 歌单 id
+// 可选参数 : s : 歌单最近的 s 个收藏者,默认为8
+export function getPlayListDetail(id) {
+    return request({
+        url: PlayListDetail,
+        params: {id}
     })
 }

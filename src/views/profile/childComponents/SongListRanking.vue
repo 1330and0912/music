@@ -5,7 +5,7 @@
             <van-icon name="cross" color="#797A74"/>
         </div>
         <div class="item-wrap">
-            <div class="item" :key="item.id" v-for="item of songList">
+            <div class="item" @click="goSongList(item.id)" :key="item.id" v-for="item of songList">
                 <div class="img-wrap">
                     <img :src="item.coverImgUrl" alt="">
                 </div>
@@ -27,8 +27,13 @@
         },
         async created() {
             const {list: res} = await getTopList()
-            this.songList = res.slice(0, 8)
+            this.songList = res.slice(0,6)
             console.log(this.songList);
+        },
+        methods: {
+            goSongList(id) {
+                this.$router.push(`song-list/${id}`)
+            }
         }
     }
 </script>
@@ -43,7 +48,7 @@
     }
 
     .title {
-        padding:  0 20px;
+        padding: 0 20px;
         width: 100%;
         height: 35px;
         display: flex;
@@ -60,8 +65,9 @@
             display: flex;
             align-items: center;
             transition: background-color .3s;
+
             &:active {
-                background-color: rgba(0,0,0,.1);
+                background-color: rgba(0, 0, 0, .1);
             }
 
             .img-wrap {
