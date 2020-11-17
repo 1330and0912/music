@@ -1,6 +1,8 @@
 <template>
     <div class="music-list" :class="isScrollY? 'scroll':''">
-        <!--        <loading :show-loading="isShowLoading"/>-->
+        <div v-if="isShowLoadingProps"  class="l">
+            <loading :show-loading="isShowLoading"/>
+        </div>
         <music-list-item :key="item.id" :music-info="item" id="item.id" v-for="item in musicInfo"/>
     </div>
 </template>
@@ -18,9 +20,13 @@
                 type: Array,
                 default: () => []
             },
-            isScrollY:{
-                type:Boolean,
-                default:true
+            isScrollY: {
+                type: Boolean,
+                default: true
+            },
+            isShowLoadingProps:{
+                type: Boolean,
+                default: true
             }
         },
         data() {

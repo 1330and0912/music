@@ -1,7 +1,7 @@
 <template>
     <div @click="goPlayMV(mv.id)" class="mv-list-item">
         <div class="img-wrap">
-            <img class="cover" v-lazy="mv.imgurl" alt="">
+            <img class="cover" v-lazy="mv.imgurl+'?param=150y130'" alt="">
             <div v-if="mv.playCount" class="play-icon-wrap">
                 <img class="play-icon" src="~assets/img/play.svg" alt="">
                 <span >{{mv.playCount |formatCount}}</span>

@@ -1,7 +1,7 @@
 <template>
     <div ref="item" @click="goMV" class="recommend-list-item">
         <div class="column1">
-            <img   ref="img" v-lazy="value.cover" alt="">
+            <img   ref="img" v-lazy="value.cover+'?param=180y100'" alt="">
             <div class="mv-name">
                 {{value.name}}
             </div>

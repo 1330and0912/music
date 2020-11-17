@@ -1,6 +1,6 @@
 <template>
     <div class="search-result-wrap">
-        <loading :show-loading="!musicInfo.length && !finished "/>
+        <loading :show-loading="isShowLoading"/>
         <van-list
                 :immediate-check="false"
                 :class="this.$store.state.isShowPlayBar?'bottom-padding':''"
@@ -36,6 +36,7 @@
                 finished: false,
                 offset: 0,
                 count: 0,//歌曲数量,
+                isShowLoading: true
             }
         },
         computed: {
@@ -44,6 +45,7 @@
         },
         watch: {
             async getSearchWord() {
+                this.isShowLoading = true
                 this.musicInfo = []
                 this.count = 0
                 this.finished = false
@@ -70,7 +72,8 @@
                     this.offset++
                 }
                 let musicInfo = []
-                search(this.getSearchWord, 30, 1, this.offset * 30).then(res => {
+                search(this.getSearchWord, 15, 1, this.offset * 30).then(res => {
+                    this.isShowLoading = false
                     this.count = res.result.songCount / 2
                     if (res.result.songCount) {
                         res = res.result.songs || []
@@ -78,13 +81,11 @@
                             let mvid = item.mvid
                             let pic = await getAlbum(item.artists[0].id)
                             let lrc = (await getLyric(item.id)).lrc || false
-                            let url = (await getSongURL(item.id)).data[0].url || false
                             let id = item.id
                             let songName = item.name
                             let author = item.artists[0].name
                             let bg = pic && pic.artist && pic.artist.picUrl || 0
-                            let musicUrl = url
-                            if (lrc && url) {
+                            if (lrc) {
                                 this.newMusicInfo.has(item.id) ||
                                 this.musicInfo.push({
                                     mvid,
@@ -92,7 +93,6 @@
                                     songName,
                                     author,
                                     bg,
-                                    musicUrl,
                                     lyric: dataLyric(lrc.lyric)
                                 })
                             }
@@ -104,6 +104,7 @@
                     } else {
                         this.searchSuccess = false
                         this.finished = true
+                        this.isShowLoading = false
                     }
                 })
             },

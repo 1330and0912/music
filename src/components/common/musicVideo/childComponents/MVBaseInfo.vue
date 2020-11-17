@@ -35,7 +35,7 @@
         <van-sticky :offset-top="offsetTop">
             <div @click="goSingerDetail(artists[0].id)" class="single">
                 <div v-if="artists.length"  class="single-info">
-                    <img  :src="artists[0].img1v1Url" alt="">
+                    <img  :src="artists[0].img1v1Url+'?param=50y50'" alt="">
                     <span>{{artists[0].name}}</span>
                 </div>
                 <div class="iconfont icon-jiantou"></div>

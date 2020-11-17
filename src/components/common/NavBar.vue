@@ -136,7 +136,7 @@
             align-items: center;
             font-size: 15px;
             text-align: center;
-            padding-bottom: 3px;
+            padding: 0 2px 3px;
         }
     }
 

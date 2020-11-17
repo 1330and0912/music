@@ -2,7 +2,7 @@
     <div class="recommend-play-list">
         <titles text-left="懂你的精选歌单" text-right="查看更多"/>
         <div class="item-wrap">
-            <div :key="item.id" class="item" v-for="item in playList">
+            <div @click="goPlayList(item.id)" :key="item.id" class="item" v-for="item in playList">
                 <div class="icon">
                     <van-icon name="play-circle-o"/>
                     <div class="play-count">
@@ -41,6 +41,11 @@
                     let s = count > 100000000 ? '亿' : '万'
                     return ((count / w).toFixed(0)) + s
                 }
+            }
+        },
+        methods:{
+            goPlayList(id){
+                this.$router.push(`song-list/${id}`)
             }
         }
     }

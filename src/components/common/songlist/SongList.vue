@@ -1,8 +1,8 @@
 <template>
     <div class="wrapper">
         <loading v-if="isShowLoading" :show-loading="isShowLoading"/>
-        <div v-else class="song-list-wrap" @scroll="scroll" @touchend="scrollEnd">
-            <div class="song-list" id="songList" :style="{backgroundImage:`url(${songList[0].bg})`}">
+        <div v-else class="song-list-wrap" @scroll="scroll" >
+            <div class="song-list" id="songList" :style="{backgroundImage:`url(${songList[0].bg+'?param=150y130'})`}">
             </div>
             <top-back ref="top" :title="songListName" :bg-color="topBarRgb"/>
             <base-info ref="base" :opacity="opacity" :subscribers="subscribers" :base-info="songList[0]"/>
@@ -45,6 +45,7 @@
         methods: {
             async getSongList() {
                 let res = await getPlayListDetail(this.id)
+                console.log(res);
                 this.songListName = res.playlist.name
                 this.subscribers = res.playlist.subscribers
                 res = res.playlist.tracks
@@ -77,14 +78,11 @@
                     } else if (this.scrollTop >= baseH - topH) {
                         this.topBarRgb = 1
                     } else {
-                        this.topBarRgb = this.scrollTop / 200
+                        this.topBarRgb = this.scrollTop / 400
                     }
 
                 }
 
-            },
-            scrollEnd() {
-                console.log(this.scrollTop);
             }
         },
         watch: {

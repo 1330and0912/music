@@ -2,13 +2,13 @@
     <div class="base-info" :style="{opacity:opacity}">
         <div class="m">
             <div class="img-wrap">
-                <img v-lazy="baseInfo.bg" alt="">
+                <img v-lazy="baseInfo.bg+'?param=150y130'" alt="">
             </div>
             <div class="info">
                 <div class="header">最近关注</div>
                 <div class="user-list">
                     <div class="item" v-for="item in subscribers">
-                        <img v-lazy="item.avatarUrl" alt="">
+                        <img v-lazy="item.avatarUrl+'?param=50y50'" alt="">
                     </div>
                 </div>
             </div>

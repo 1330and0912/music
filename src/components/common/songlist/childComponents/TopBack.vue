@@ -47,6 +47,10 @@
         .text {
             margin-left: 10px;
             color: white;
+            width: 100px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
         }
 
     }

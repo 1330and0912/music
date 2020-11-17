@@ -1,15 +1,18 @@
 <template>
-    <div :style="{paddingTop:`${h}`}" id="musicVideo">
-        <div ref="videoWrap" class="video-wrap">
-            <back/>
-            <video x5-video-player-type="h5-page" x5-playsinline="" playsinline="" webkit-playsinline="" ref="video"
-                   @canplay="playVideo" controls
-                   :src="url">
-            </video>
+    <div class="wrapper">
+<!--        <loading v-if="isShowLoading" :show-loading="isShowLoading"/>-->
+        <div   :style="{paddingTop:`${h}`}" id="musicVideo">
+            <div ref="videoWrap" class="video-wrap">
+                <back/>
+                <video x5-video-player-type="h5-page" x5-playsinline="" playsinline="" webkit-playsinline="" ref="video"
+                       @canplay="playVideo" controls
+                       :src="url">
+                </video>
+            </div>
+            <m-v-base-info :offset-top="h" :id="id"/>
+            <m-v-related-video :id="id"/>
+            <comment :comment-data="commentData"/>
         </div>
-        <m-v-base-info :offset-top="h" :id="id"/>
-        <m-v-related-video :id="id"/>
-        <comment :comment-data="commentData"/>
     </div>
 </template>
 
@@ -19,16 +22,18 @@
     import MVBaseInfo from "./childComponents/MVBaseInfo";
     import MVRelatedVideo from "./childComponents/MVRelatedVideo";
     import Comment from "./childComponents/Comment";
+    import Loading from "../loading/Loading";
 
     export default {
         name: "MusicVideo",
-        components: {Comment, MVRelatedVideo, MVBaseInfo, Back},
+        components: {Loading, Comment, MVRelatedVideo, MVBaseInfo, Back},
         props: ['id'],
         watch: {
             id(newID) {
                 this.url = ''
                 this.getMVUrlData()
                 this.getCommentData()
+                this.isShowLoading = true
 
             }
         },
@@ -38,7 +43,8 @@
                 isShowBack: true,
                 mvData: {},
                 h: 0,
-                commentData: []
+                commentData: [],
+                isShowLoading: true
             }
         },
         methods: {
@@ -64,6 +70,7 @@
                     const {nickname, avatarUrl} = item.user
                     this.commentData.push({commentId, content, likedCount, nickname, avatarUrl, time})
                 })
+
             }
         },
         deactivated() {
