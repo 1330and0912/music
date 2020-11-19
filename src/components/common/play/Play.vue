@@ -1,15 +1,17 @@
 <template>
+    <transition name="fade">
         <div v-if="Object.keys(getCurrentMusic).length" id="play"
-             :style="{backgroundImage:`url(${getCurrentMusic.bg})`}">
+             :style="{backgroundImage:`url(${getCurrentMusic.bg}?param=1080y500)`}">
             <div class="nav-bar">
                 <i @click="back" class="iconfont icon-zuojiantou"></i>
                 <span>{{getCurrentMusic.author}}-{{getCurrentMusic.songName}}</span>
             </div>
             <record :is-rotate="getIsPlay" :bg="getCurrentMusic.bg"/>
             <lyric-detail :lyric="getCurrentMusic.lyric" class="lyric"></lyric-detail>
-            <progress-bar />
+            <progress-bar/>
             <music-control :id="getCurrentMusic.id" class="control"/>
         </div>
+    </transition>
 </template>
 
 <script>
@@ -33,13 +35,25 @@
         computed: {
             ...mapGetters('musicDetail', ['getCurrentMusic', 'getIsPlay'])
         },
-        beforeRouteUpdate(to){
+        beforeRouteUpdate(to) {
             console.log(to);
         }
     }
 </script>
 
 <style lang="less" scoped>
+    .fade-enter-active, .fade-leave-active {
+        transition: all .3s linear !important;
+    }
+
+    .fade-enter {
+        opacity: 0.5;
+    }
+
+    .fade-leave-to {
+        transform: translateY(1100px);
+    }
+
     #play {
         transition: all .3s;
         background-color: #cccccc;

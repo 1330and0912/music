@@ -4,7 +4,7 @@
         <div class="album-wrap">
             <div class="item" v-for="item in albumData" :key="item.id">
                 <div class="img-wrap">
-                    <img v-lazy="item.blurPicUrl" alt="">
+                    <img v-lazy="item.blurPicUrl+'?param=200y260'" alt="">
                 </div>
                 <div class="text">{{item.name}}</div>
             </div>

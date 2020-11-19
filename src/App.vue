@@ -4,7 +4,7 @@
             <nav-bar :path="path" v-if="isShowNavBar" :titles="['我的','发现','歌手','MV']"/>
         </keep-alive>
         <keep-alive>
-            <router-view/>
+                <router-view/>
         </keep-alive>
 <!--        <loading v-show="$store.state.isShowLoading"/>-->
         <template v-if="removePlayBar ">
@@ -124,7 +124,6 @@
 </script>
 <style>
     @import "assets/css/base.css";
-
     #app {
         height: 100%;
         width: 100%;

@@ -5,7 +5,7 @@
         </header>
         <div @click="goDetail(item.id)" :key="item.id" v-for="(item) in categoryList" class="category-list-item">
             <div class="name">
-                <img v-lazy="item.picUrl" alt="">
+                <img v-lazy="item.picUrl+'?param=50y50'" alt="">
                 {{item.name}}
             </div>
             <div class="followed" :class="item.followed?'followed-false':'followed-true'">

@@ -32,7 +32,7 @@ Vue.use(Tab)
 Vue.use(Swipe)
 Vue.use(SwipeItem)
 Vue.use(Lazyload, {
-    loading: require('assets/img/loading.jpg'),
+    loading: require('assets/img/l1.jpg'),
 })
 Vue.use(Search)
 Vue.use(Icon)

@@ -1,7 +1,10 @@
 <template>
     <div :class="this.$store.state.isShowPlayBar?'bottom-padding':''" class="album ">
+        <template>
+            <loading :show-loading="isShowLoading"/>
+        </template>
         <div @click.stop="goAlbumDetail(item.id)" :id="item.id" v-for="item in albumsList" class="wrap">
-            <img v-lazy="item.picUrl" alt="">
+            <img v-lazy="item.picUrl+'?param=200y200'" alt="">
             <div class="album-info">
                 <div class="album-name">
                     {{item.name}}
@@ -15,7 +18,7 @@
         <van-popup @closed="popupClosed" close-on-popstate :overlay="false" v-model="showPopup" position="right"
                    :style="{ width: '80%',height:'100%',right:'-200%'}">
             <div class="album-detail">
-                <header :style="{backgroundImage:`url(${albumInfo.blurPicUrl})`}" class="header">
+                <header :style="{backgroundImage:`url(${albumInfo.blurPicUrl+'?param=150y130'})`}" class="header">
                 </header>
                 <div class="list">
                     <div class="h">
@@ -33,10 +36,11 @@
     import {getAlbum, getAlbumContent, getLyric, getSongURL} from "../../../api";
     import {dataLyric} from "../../../common/dataLyric";
     import MusicList from "../../../components/common/musicList/MusicList";
+    import Loading from "../../../components/common/loading/Loading";
 
     export default {
         name: "Album",
-        components: {MusicList},
+        components: {Loading, MusicList},
         props: ['id'],
         data() {
             return {
@@ -44,11 +48,13 @@
                 showPopup: false,
                 albumContent: [],
                 albumInfo: {},
-                closed: true
+                closed: true,
+                isShowLoading: true
             }
         },
         watch: {
             id() {
+                this.isShowLoading = true
                 this.albumsList = []
 
                 this.getAlbumList()
@@ -67,9 +73,10 @@
             getAlbumList() {
                 getAlbum(this.id).then(res => {
                     const {hotAlbums} = res
-                    hotAlbums.forEach(item => {
+                    hotAlbums.forEach((item, index) => {
                         const {picUrl, name, id, publishTime, size} = item
                         this.albumsList.push({picUrl, name, id, publishTime, size})
+                        if (index == hotAlbums.length - 1) this.isShowLoading = false
                     })
                 })
             },
@@ -94,7 +101,7 @@
                         const {picUrl: bg} = item.al
                         const author = item.ar[0].name
                         const lyric = (await getLyric(id)).lrc && dataLyric((await getLyric(id)).lrc.lyric) || ''//歌词
-                        lyric && this.albumContent.push({mvid,id, songName, bg, author, lyric})
+                        lyric && this.albumContent.push({mvid, id, songName, bg, author, lyric})
                     })
                 }
             }
@@ -111,6 +118,7 @@
     }
 
     .album {
+        position: relative;
         overflow-y: scroll;
         height: 100%;
         padding: 10px 10px 0;
@@ -125,6 +133,7 @@
             margin-bottom: 20px;
             padding: 0 0px 10px;
             transition: all .3s;
+            height: 210px;
 
             &:active {
                 transform: translate(-10px, 0);
@@ -133,13 +142,18 @@
             img {
                 border-radius: 10px;
                 width: 100%;
+                height: 160px;
             }
 
             .album-info {
-                padding: 0 4px;
+                padding: 0 6px;
+                width: 140px;
 
                 .album-name {
                     font-size: 14px;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
                 }
 
                 .create-time {

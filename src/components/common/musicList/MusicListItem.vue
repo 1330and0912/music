@@ -2,16 +2,22 @@
     <div :class="musicInfo.id==getCurrentMusic.id?'current-play-music':''"
          @click="songPlay(musicInfo.id)"
          class="music-list-item">
-        <img v-lazy="musicInfo.bg+'?param=50y50'" alt="">
+
         <div class="music-info">
-            <span class="music-name">
-                     {{musicInfo.songName}}
-            </span>
-            <span class="music-author">
-                {{musicInfo.author}}
-            </span>
+            <img v-lazy="musicInfo.bg+'?param=100y100'" alt="">
+            <div>
+                <div class="music-name">
+                    {{musicInfo.songName}}
+                </div>
+                <div class="music-author">
+                    {{musicInfo.author}}
+                </div>
+            </div>
         </div>
-        <i @click.stop="goMV(musicInfo.mvid)" v-if="musicInfo.mvid" class="go-mv iconfont icon-bofang1"></i>
+        <div class="icon">
+            <i @click.stop="goMV(musicInfo.mvid)" v-if="musicInfo.mvid" class="go-mv iconfont icon-bofang1"></i>
+            <i class=" iconfont icon-ziyuan"></i>
+        </div>
     </div>
 </template>
 
@@ -78,48 +84,63 @@
         padding: 10px;
         display: flex;
         align-items: center;
+        justify-content: space-between;
         // border-bottom: 1px solid rgba(0, 0, 0, .2);
 
         &:active {
             background-color: rgba(0, 0, 0, .1);
         }
 
-        img {
-            margin-right: 10px;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-        }
 
         .music-info {
             display: flex;
-            flex-direction: column;
+            align-items: center;
+
+            img {
+                margin-right: 10px;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+            }
 
             .music-name {
                 color: @night-mode-height-color;
                 font-size: 14px;
+                width: 200px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
             }
 
             .music-author {
                 font-size: 12px;
                 padding-top: 3px;
-                color: @night-mode-color;
+                color: #57748D;
             }
         }
 
-        .go-mv {
-            font-size: 20px  ;
-
-            color: teal;
-            position: absolute;
-            right: 15px;
+        .icon {
+            display: flex;
+            align-items: center;
+            color: @night-mode-color;
             transition: .3s;
+            justify-content: space-between;
 
             &:active {
                 transform: scale(1.5);
             }
-        }
 
+            i {
+                color: rgba(0,0,0,.5);
+                font-size: 20px;
+                width: 20px;
+                &:last-child {
+                    font-size:  22px;
+                }
+            }
+
+
+        }
 
     }
 </style>

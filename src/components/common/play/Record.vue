@@ -1,7 +1,7 @@
 <template>
     <div class="record-wrap">
         <div class="record " :class="isRotate?'move-start':'move-pause'">
-            <div class="record-bg" :style="{backgroundImage:`url(${bg})`}"></div>
+            <div class="record-bg" :style="{backgroundImage:`url(${bg}?param=400y400)`}"></div>
         </div>
     </div>
 

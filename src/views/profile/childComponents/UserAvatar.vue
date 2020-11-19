@@ -3,7 +3,7 @@
         <template v-if="profile">
             <div class="avatar-wrap">
                 <div class="avatar">
-                    <img :src="profile.avatarUrl" alt="">
+                    <img :src="profile.avatarUrl+'?param=100y100'" alt="">
                 </div>
                 <div class="user-name">
                     {{profile.nickname}}

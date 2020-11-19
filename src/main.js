@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import Toast from '../plugins/toast/index'
 import './plugins/vant'
+
 // import FastClick from 'fastclick'
 //初始化FastClick实例。在页面的DOM文档加载完成后
 // FastClick.attach(document.body)

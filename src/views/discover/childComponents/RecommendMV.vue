@@ -4,7 +4,7 @@
         <div class="mv-wrap">
             <div @click="playMV(item.id)" :key="item.id" class="item" v-for="item in mvData">
                 <div class="img-wrap">
-                    <img v-lazy="item.picUrl" alt="">
+                    <img v-lazy="item.picUrl+'?param=200y200'" alt="">
                 </div>
                 <div class="text">{{item.name}}</div>
             </div>

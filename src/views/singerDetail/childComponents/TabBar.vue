@@ -5,7 +5,7 @@
                 lazy-render
                 duration=".3"
                 title-inactive-color="black" title-active-color="#000"
-                background="#fff"  @click="tabClick"
+                background="#fff" @click="tabClick"
                 swipeable animated sticky v-model="active"
         >
             <van-tab title="简介">
@@ -43,6 +43,11 @@
             tabClick(name, title) {
             }
         },
+        watch: {
+            id() {
+                this.active = 0
+            }
+        }
     }
 </script>
 

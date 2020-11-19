@@ -1,7 +1,7 @@
 <template>
     <div @click.stop="goMusciDetail" id="playBar">
         <div class="music-info">
-            <img :class="getIsPlay?'move-start':'move-pause'" :src="getCurrentMusic.bg" alt="">
+            <img :class="getIsPlay?'move-start':'move-pause'" :src="getCurrentMusic.bg+'?param=50y50'" alt="">
             <p class="music-name">
                 <span class="song-name">{{getCurrentMusic.songName}}</span>
                 <span class="author-name">{{getCurrentMusic.author}}</span>

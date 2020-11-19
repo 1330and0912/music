@@ -1,6 +1,6 @@
 <template>
     <div class="recommend-play-list">
-        <titles text-left="懂你的精选歌单" text-right="查看更多"/>
+        <titles text-left="懂你的精选歌单" text-right="查看更多" @click="morePlaylist"/>
         <div class="item-wrap">
             <div @click="goPlayList(item.id)" :key="item.id" class="item" v-for="item in playList">
                 <div class="icon">
@@ -10,7 +10,7 @@
                     </div>
                 </div>
                 <div class="img-wrap">
-                    <img v-lazy="item.picUrl" alt="">
+                    <img v-lazy="item.picUrl+'?param=300y300'" alt="">
                 </div>
                 <div class="text">{{item.name}}</div>
             </div>
@@ -43,9 +43,12 @@
                 }
             }
         },
-        methods:{
-            goPlayList(id){
+        methods: {
+            goPlayList(id) {
                 this.$router.push(`song-list/${id}`)
+            },
+            morePlaylist() {
+                this.$router.push('playlist-high-quality')
             }
         }
     }
@@ -81,7 +84,7 @@
                 right: 5px;
                 color: white;
 
-                .play-count{
+                .play-count {
                     margin-left: 3px;
                     font-size: 12px;
                 }

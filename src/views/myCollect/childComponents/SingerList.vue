@@ -1,7 +1,7 @@
 <template>
     <div class="singer-list" >
         <div @click="goSingerDetail(item.id)" class="singer-list-item" v-for="item in singerList" :key="item.id">
-            <img :src="item.picUrl" alt="">
+            <img :src="item.picUrl+'?param=50y50'" alt="">
             <div class="singer-info">
                 <div class="singer-name">{{item.name}}</div>
                 <div class="info">{{item.info}}</div>

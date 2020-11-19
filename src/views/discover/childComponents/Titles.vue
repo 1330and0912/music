@@ -1,14 +1,19 @@
 <template>
     <div class="title">
         <div class="text">{{textLeft}}</div>
-        <div class="btn">{{textRight}}</div>
+        <div @click="btnClick" class="btn">{{textRight}}</div>
     </div>
 </template>
 
 <script>
     export default {
         name: "Title",
-        props: ['text-left', 'text-right']
+        props: ['text-left', 'text-right'],
+        methods:{
+            btnClick() {
+                this.$emit('click')
+            }
+        }
     }
 </script>
 

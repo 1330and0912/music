@@ -1,31 +1,38 @@
 <template>
-    <div>
-        <div v-if="mvData.length" :class="this.$store.state.isShowPlayBar?'bottom-padding':''" id="mvPlay">
-            <div class="mv-count">
-                <div>
-                    <span class="m">MV</span>
-                    <span>(共{{mvData.length}}个)</span>
+    <div class="mv-list-wrap">
+        <template v-if="isShowLoading" >
+            <loading :show-loading="true"/>
+        </template>
+        <template v-else>
+            <div v-if="mvData.length" :class="this.$store.state.isShowPlayBar?'bottom-padding':''" id="mvPlay">
+                <div class="mv-count">
+                    <div>
+                        <span class="m">MV</span>
+                        <span>(共{{mvData.length}}个)</span>
+                    </div>
                 </div>
+                <m-v-list :mv-data="mvData"/>
             </div>
-            <m-v-list :mv-data="mvData"/>
-        </div>
-        <div class="empty" v-else>暂无
-            内容
-        </div>
+            <div class="empty" v-else>暂无
+                内容
+            </div>
+        </template>
     </div>
 </template>
 
 <script>
     import {getSingleMV} from "../../../api";
     import MVList from "./childComponents/MVList";
+    import Loading from "../loading/Loading";
 
     export default {
         name: "MVPlay",
-        components: {MVList},
+        components: {Loading, MVList},
         props: ['id'],
         data() {
             return {
-                mvData: []
+                mvData: [],
+                isShowLoading:true
             }
         },
         created() {
@@ -33,6 +40,7 @@
         },
         watch: {
             id() {
+                this.isShowLoading = true
                 this.getMVData()
             }
         },
@@ -40,9 +48,10 @@
             async getMVData() {
                 this.mvData = []
                 const res = await getSingleMV(this.id)
-                res.mvs.forEach(item => {
+                res.mvs.forEach((item,index) => {
                     const {id, name, imgurl, artistName: author, playCount, publishTime} = item
                     this.mvData.push({id, name, imgurl, author, playCount, publishTime})
+                    this.isShowLoading = index!=res.mvs.length-1
                 })
             }
         }
@@ -64,8 +73,10 @@
         height: 100vh;
     }
 
-    video {
+    .mv-list-wrap{
+        height: 100%;
         width: 100%;
+        position: relative;
     }
 
     .mv-count {

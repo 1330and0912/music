@@ -2,7 +2,7 @@
     <div class="swpie">
         <van-swipe :autoplay="3000"  >
             <van-swipe-item v-for="(image, index) in banner" :key="index">
-                <img v-lazy="image+'?param=400y200'"/>
+                <img v-lazy="image+'?param=1080y500'"/>
             </van-swipe-item>
         </van-swipe>
     </div>

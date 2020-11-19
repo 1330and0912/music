@@ -12,6 +12,9 @@ const musicVideoRedirect = [
     {
         path: '/singer-detail/music-video/:id',
         redirect: '/music-video/:id'
+    } , {
+        path: '/song-list/music-video/:id',
+        redirect: '/music-video/:id'
     }
 ]
 
@@ -82,6 +85,11 @@ const routes = [
         path: '/category',
         name: 'category',
         component: () => import('views/category/Category'),
+    },
+    {
+        path: '/playlist-high-quality',
+        name: 'playlistHighQuality',
+        component: () => import('views/PlaylistHighQuality'),
     },
 
     {

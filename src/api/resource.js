@@ -40,4 +40,6 @@ export const NeteaseMV = '/mv/exclusive/rcmd'//网易出品mv
 export const AlbumNewSt = '/album/newest'//最新专辑
 export const TopList = '/toplist'//所有歌单
 export const PlayListDetail = '/playlist/detail'//获取歌单详情
+export const HighqualityTags = '/playlist/highquality/tags'//获取精品歌单标签
+export const TopPlayList = '/top/playlist/highquality'//获取精品歌单标签
 

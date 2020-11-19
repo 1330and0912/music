@@ -1,35 +1,44 @@
 <template>
     <div v-if="!this.$store.state.isShowLoading"
          class="introduction">
-        <img class="singer-img" :src="bg" alt="">
-        <div class="tags">
-            <!--            {{introduction.topicData[0].tags[0]}}-->
-        </div>
-        <div class="title">个人简介</div>
-        <div :class="this.$store.state.isShowPlayBar?'bottom-padding':''" class="content-wrap">
-            <ul>
-                <li v-for="item in introduction">
-                    {{item}}
-                </li>
-            </ul>
-        </div>
+        <template v-if="isShowLoading">
+            <loading :show-loading="true"/>
+        </template>
+        <template v-else>
+            <img class="singer-img" :src="bg+'?param=200y200'" alt="">
+            <div class="tags">
+                <!--            {{introduction.topicData[0].tags[0]}}-->
+            </div>
+            <div class="title">个人简介</div>
+            <div :class="this.$store.state.isShowPlayBar?'bottom-padding':''" class="content-wrap">
+                <ul>
+                    <li v-for="item in introduction">
+                        {{item}}
+                    </li>
+                </ul>
+            </div>
+        </template>
     </div>
 </template>
 
 <script>
     import {getAlbum, getSingerIntroduction} from "api";
+    import Loading from "../../../components/common/loading/Loading";
 
     export default {
         name: "Introduction",
+        components: {Loading},
         props: ['id'],
         data() {
             return {
                 bg: '',
-                introduction: ''
+                introduction: '',
+                isShowLoading: true
             }
         },
         watch: {
             id() {
+                this.isShowLoading = true
                 this.bg = ''
                 this.introduction = {}
                 this.getBg()
@@ -39,6 +48,7 @@
         methods: {
             async getBg() {
                 this.bg = (await getAlbum(this.id, 1)).artist.picUrl
+                this.isShowLoading = false
             },
             async getIntroduction() {
                 let res = await getSingerIntroduction(this.id)
@@ -66,19 +76,22 @@
             width: 100%;
         }
     }
+
     .title {
         font-weight: bold;
         font-size: 20px;
         padding-left: 10px;
         margin-top: 20px;
     }
+
     .content-wrap {
         padding: 10px;
         overflow: scroll;
+
         li {
             position: relative;
             border: 10px solid #FF3A3A;
-            border-color: transparent transparent transparent  #FF3A3A;
+            border-color: transparent transparent transparent #FF3A3A;
             padding-left: 10px;
             line-height: 28px;
             margin-bottom: 10px;

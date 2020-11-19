@@ -2,7 +2,7 @@
     <div class="netease-mv-swiper">
         <van-swipe autoplay="2300" indicator-color="#FF3A3A"  vertical>
             <van-swipe-item @click="playMV(item.id)" v-for="item in mvData" :key="item.id">
-                <img v-lazy="item.cover" alt="">
+                <img v-lazy="item.cover+'?param=400y200'" alt="">
             </van-swipe-item>
         </van-swipe>
     </div>

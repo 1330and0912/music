@@ -2,7 +2,7 @@
     <div class="dragon-bar">
         <div class="item" :key="item.id" v-for="item in list">
             <div class="icon">
-                <img v-lazy="item.iconUrl"/>
+                <img v-lazy="item.iconUrl+'?param=50y50'"/>
             </div>
             <div class="text">{{item.name}}</div>
         </div>

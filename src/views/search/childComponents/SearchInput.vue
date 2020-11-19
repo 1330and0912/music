@@ -31,6 +31,7 @@
                 debounceFn: null,
                 searchSuggestList: [],
                 fuzzySearch: '',
+                startSearch: false
             }
         },
         computed: {
@@ -45,6 +46,7 @@
             },
             ...mapActions('search', ['setSearchWord', 'addSearchHistory']),
             search(searchWord) {
+                this.startSearch = true
                 this.searchSuggestList = []
                 if (searchWord.trim()) {
                     this.setSearchWord(searchWord)
@@ -60,7 +62,7 @@
                 }
             },
             getSuggest() {
-                if (this.fuzzySearch.length !== 0) {
+                if (this.fuzzySearch.length !== 0 &&!this.startSearch) {
                     getSearchSuggest(this.fuzzySearch).then(res => {
                         this.searchSuggestList = res.result.allMatch
                     })

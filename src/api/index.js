@@ -36,9 +36,10 @@ import {
     RecommendPlayList,
     RecommendSong,
     RecommendMV,
-    NeteaseMV, AlbumNewSt, TopList, PlayListDetail
+    NeteaseMV, AlbumNewSt, TopList, PlayListDetail, HighqualityTags, TopPlayList
 } from "./resource";
 import {fuchsia} from "color-name";
+import PlaylistHighQuality from "../views/PlaylistHighQuality";
 
 //@phone 手机号码 判断手机号码是否已注册
 export function isRegister(phone) {
@@ -455,6 +456,7 @@ export function getTopList() {
         params: {}
     })
 }
+
 //获取歌单详情
 // 必选参数 : id : 歌单 id
 // 可选参数 : s : 歌单最近的 s 个收藏者,默认为8
@@ -462,5 +464,20 @@ export function getPlayListDetail(id) {
     return request({
         url: PlayListDetail,
         params: {id}
+    })
+}
+
+//获取精品歌单标签
+export function getPlaylistHighQuality() {
+    return request({
+        url: HighqualityTags,
+        params: {}
+    })
+}
+//获取精品歌单列表
+export function getTopPlayList(limt = 50) {
+    return request({
+        url: TopPlayList,
+        params: {}
     })
 }

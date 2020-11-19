@@ -13,6 +13,24 @@
                 </div>
             </div>
         </div>
+        <div class="b-icon">
+            <div class="icon-wrap">
+                <van-icon name="chat-o" />
+                <div class="text">2165</div>
+            </div>
+            <div class="icon-wrap">
+                <van-icon name="good-job-o" />
+                <div class="text">999</div>
+            </div>
+            <div class="icon-wrap">
+                <van-icon name="browsing-history-o" />
+                <div class="text">关注</div>
+            </div>
+            <div class="icon-wrap">
+                <van-icon name="warning-o" />
+                <div class="text">信息</div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -33,11 +51,10 @@
 
         .m {
             display: flex;
-            padding: 15px 15px 0;
+            padding: 0px 15px 0;
             width: 100%;
-            height: 100%;
             align-items: center;
-
+            padding-top: 65px;
             .img-wrap {
                 flex-shrink: 0;
                 height: 50%;
@@ -78,6 +95,22 @@
                         width: 100%;
                         height: 100%;
                     }
+                }
+            }
+        }
+        .b-icon{
+            margin-top: 15px;
+            color: white;
+            padding:0 40px;
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+
+            .icon-wrap{
+                font-size: 24px;
+                text-align: center;
+                .text{
+                    font-size: 14px;
                 }
             }
         }
