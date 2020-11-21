@@ -4,9 +4,8 @@
             <nav-bar :path="path" v-if="isShowNavBar" :titles="['我的','发现','歌手','MV']"/>
         </keep-alive>
         <keep-alive>
-                <router-view/>
+            <router-view/>
         </keep-alive>
-<!--        <loading v-show="$store.state.isShowLoading"/>-->
         <template v-if="removePlayBar ">
             <play-bar v-show="this.$store.state.isShowPlayBar"/>
         </template>
@@ -39,38 +38,27 @@
                                 window.sessionStorage.setItem('profile', JSON.stringify(res.profile))
                                 this.setUid()
                                 this.saveLikeMusicIds()
+
                             }
                         });
                     }
                 }
             },
             $route(to, from) {
-                if (this.redirectCop.some(item => item == to.path)) {
-                    !this.isLogin && this.$router.replace('/login')
-                }
-                to.path.includes('music-video') && this.getIsPlay && this.toggleMusicState()
-                let flag = this.path.some(item => item == to.path)
-                if (flag) {
-                    this.isShowNavBar = true
-                } else {
-                    this.isShowNavBar = flag
-                }
-                let flag1 = ['/play', '/login', '/phoneVerify', '/phoneRegister', '/nickName', '/passwordVerify', '/music-video']
-                let f = flag1.some(item => to.path.includes(item))
-                if (f || (!(Object.keys(this.getCurrentMusic).length))) {
-                    this.$store.state.isShowPlayBar = false
-                } else {
-                    this.$store.state.isShowPlayBar = true
-                }
+                !to.meta.isShowPlayBar && to.meta.isPauseMusic && this.getIsPlay && this.toggleMusicState()
+                this.isShowNavBar = to.meta.isShowNavBar
+                this.$store.state.isShowPlayBar = to.meta.isShowPlayBar
             },
+            //是否显示音乐播放器
             getCurrentMusic() {
                 this.$store.state.isShowPlayBar = !!(Object.keys(this.getCurrentMusic).length);
-                if (this.$route.path.includes('/play')) {
+                if (this.$route.path === '/play') {
                     this.$store.state.isShowPlayBar = false
                 }
             },
+            //微播放器的删除
             getPlayQueuedData(newVal) {
-                if (newVal.length == 0) {
+                if (!newVal.length) {
                     this.removePlayBar = false
                     this.setCurrentMusic({})
                 } else {
@@ -108,7 +96,7 @@
         ,
         methods: {
             ...mapActions('musicDetail', ['setCurrentMusic', 'writePlayQueuedData', 'toggleMusicState']),
-            ...mapActions('login', ['setUid','setLoginStatus']),
+            ...mapActions('login', ['setUid', 'setLoginStatus']),
             ...mapActions('collect', ['saveIds']),
             //获取一些localStorage数据
             getInitData() {
@@ -118,12 +106,14 @@
             async saveLikeMusicIds() {
                 let res = await getLikeList(this.uid)
                 this.saveIds(res.ids)
+                window.localStorage.setItem('ids', JSON.stringify(res.ids))
             }
         }
     }
 </script>
-<style>
+<style lang="less">
     @import "assets/css/base.css";
+
     #app {
         height: 100%;
         width: 100%;

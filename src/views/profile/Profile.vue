@@ -1,12 +1,12 @@
 <template>
-    <div :class="this.$store.state.isShowPlayBar?'bottom-padding':''" id="profile">
-        <div class="scroll-wrap">
-            <user-avatar class="user"/>
-            <my-list/>
-            <my-music/>
-            <song-list-ranking/>
+        <div :class="this.$store.state.isShowPlayBar?'bottom-padding':''" id="profile">
+            <div class="scroll-wrap">
+                <user-avatar class="user"/>
+                <my-list/>
+                <my-music/>
+                <song-list-ranking/>
+            </div>
         </div>
-    </div>
 </template>
 
 <script>
@@ -35,6 +35,7 @@
 </script>
 
 <style lang="less" scoped>
+
     #profile {
         width: 100%;
         padding: 49px 10px 0;
@@ -51,6 +52,7 @@
         height: 100%;
         overflow-y: scroll;
     }
+
     .bottom-padding {
         padding-bottom: 49px !important;
     }

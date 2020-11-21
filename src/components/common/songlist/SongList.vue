@@ -1,14 +1,17 @@
 <template>
-    <div class="wrapper">
-        <loading v-if="isShowLoading" :show-loading="isShowLoading"/>
-        <div v-else class="song-list-wrap" @scroll="scroll" >
-            <div class="song-list" id="songList" :style="{backgroundImage:`url(${songList[0].bg+'?param=150y130'})`}">
+    <transition name="slide-down">
+        <div class="wrapper">
+            <loading v-if="isShowLoading" :show-loading="isShowLoading"/>
+            <div v-else class="song-list-wrap" @scroll="scroll">
+                <div class="song-list" id="songList"
+                     :style="{backgroundImage:`url(${songList[0].bg+'?param=150y130'})`}">
+                </div>
+                <top-back ref="top" :title="songListName" :bg-color="topBarRgb"/>
+                <base-info ref="base" :opacity="opacity" :subscribers="subscribers" :base-info="songList[0]"/>
+                <play-list :is-scroll-y="isScrollY" :play-list="songList"/>
             </div>
-            <top-back ref="top" :title="songListName" :bg-color="topBarRgb"/>
-            <base-info ref="base" :opacity="opacity" :subscribers="subscribers" :base-info="songList[0]"/>
-            <play-list :is-scroll-y="isScrollY" :play-list="songList"/>
         </div>
-    </div>
+    </transition>
 </template>
 
 <script>
@@ -45,7 +48,6 @@
         methods: {
             async getSongList() {
                 let res = await getPlayListDetail(this.id)
-                console.log(res);
                 this.songListName = res.playlist.name
                 this.subscribers = res.playlist.subscribers
                 res = res.playlist.tracks
@@ -58,13 +60,9 @@
                 this.songList = this.songList.length > 30 ? this.songList.slice(0, 30) : this.songList
                 this.songList.forEach(async (item, index) => {
                     const res = (await getLyric(item.id))
-                    let lyric = res
-                    if (lyric.lrc) {
-                        lyric = dataLyric(lyric.lrc.lyric)
-                        item.lyric = lyric
-                    } else {
-                        item.lyric = [{lyricStr: '暂无歌词', duration: 1}]
-                    }
+                    let lyric = res.lrc
+                    lyric = dataLyric(lyric)
+                    this.songList[index].lyric = lyric
                 })
                 this.isShowLoading = false
             },
@@ -99,13 +97,29 @@
 </script>
 
 <style lang="less" scoped>
+
+    .slide-down-enter-active {
+        transition: all .3s !important;
+    }
+
+    .slide-down-leave-to {
+        transform: translateX(100%);
+        position: fixed;
+        top: 0;
+        z-index: 9999;
+    }
+
+    .slide-down-leave-active {
+        opacity: 1;
+        transition: all .3s !important;
+    }
+
     .bottom-padding {
         padding-bottom: 49px !important;
     }
 
     .wrapper {
         overflow: scroll;
-        position: relative;
         width: 100%;
         height: 100%;
     }

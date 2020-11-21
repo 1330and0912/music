@@ -16,7 +16,7 @@
 <style lang="less" scoped>
    #category {
        height:100%;
-
+       background-color: white;
        padding: 49px 0 0;
    }
    .bottom-padding {

@@ -28,7 +28,6 @@
         async created() {
             const {list: res} = await getTopList()
             this.songList = res.slice(0,6)
-            console.log(this.songList);
         },
         methods: {
             goSongList(id) {

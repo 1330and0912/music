@@ -4,13 +4,18 @@
 //     password: ''
 // })
 // 对象方式
-
+const isLogin = window.sessionStorage.getItem('profile') ? true : false
+let uid,profile=null
+if(isLogin){
+    profile = JSON.parse(window.sessionStorage.getItem('profile'))
+}
+uid  = profile?profile.userId:''
 const state = {
     phone: '',
-    password: '',
-    isLogin: false,
-    uid: '',
-    profile:null
+    password: '34040hu*',
+    isLogin: isLogin,
+    uid:uid,
+    profile: null
 }
 const mutations = {
     savePhone(state, phone) {
@@ -24,7 +29,7 @@ const mutations = {
     },
     saveLoginStatus(state, isLogin) {
         state.isLogin = isLogin
-        state.profile =JSON.parse(window.sessionStorage.getItem('profile'))
+        state.profile = JSON.parse(window.sessionStorage.getItem('profile'))
     }
 }
 const getters = {

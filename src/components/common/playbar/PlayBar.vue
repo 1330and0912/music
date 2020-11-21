@@ -1,26 +1,29 @@
 <template>
-    <div @click.stop="goMusciDetail" id="playBar">
-        <div class="music-info">
-            <img :class="getIsPlay?'move-start':'move-pause'" :src="getCurrentMusic.bg+'?param=50y50'" alt="">
-            <p class="music-name">
-                <span class="song-name">{{getCurrentMusic.songName}}</span>
-                <span class="author-name">{{getCurrentMusic.author}}</span>
-            </p>
+    <transition name="slide-down">
+        <div @click.stop="goMusciDetail" id="playBar">
+            <div class="music-info">
+                <img :class="getIsPlay?'move-start':'move-pause'" :src="getCurrentMusic.bg+'?param=50y50'" alt="">
+                <p class="music-name">
+                    <span class="song-name">{{getCurrentMusic.songName}}</span>
+                    <span class="author-name">{{getCurrentMusic.author}}</span>
+                </p>
+            </div>
+            <div class="music-control">
+                <i @click.stop="isPlayMusic" class="play iconfont" :class="getIsPlay?'icon-bofang':'icon-bofang1'"></i>
+                <i @click.stop="showPopup" class=" iconfont icon-zhankai "></i>
+            </div>
+            <audio @ended="playFinish" @timeupdate="getCurrentPlayTime" @canplay="loadMusicSuccess" ref="audio"
+                   :src="url">
+            </audio>
+            <van-popup round position="bottom"
+                       v-model="isShowPopup"
+                       @open="popupOpen"
+                       @click.stop="popupClick">
+                <play-queued/>
+            </van-popup>
         </div>
-        <div class="music-control">
-            <i @click.stop="isPlayMusic" class="play iconfont" :class="getIsPlay?'icon-bofang':'icon-bofang1'"></i>
-            <i @click.stop="showPopup" class=" iconfont icon-zhankai "></i>
-        </div>
-        <audio @ended="playFinish" @timeupdate="getCurrentPlayTime" @canplay="loadMusicSuccess" ref="audio"
-               :src="url">
-        </audio>
-        <van-popup round position="bottom"
-                   v-model="isShowPopup"
-                   @open="popupOpen"
-                   @click.stop="popupClick">
-            <play-queued/>
-        </van-popup>
-    </div>
+    </transition>
+
 </template>
 
 <script>
@@ -113,6 +116,31 @@
 </script>
 
 <style lang="less" scoped>
+    .slide-down-enter {
+        opacity: 0;
+    }
+
+    .slide-down-enter-to {
+        position: fixed;
+        opacity: 1;
+        z-index: 9999;
+    }
+
+    .slide-down-enter-active {
+        transition: all .3s;
+    }
+
+    .slide-down-leave-to {
+        position: fixed;
+        z-index: 9999;
+        transform: translateY(100%);
+
+    }
+    .slide-down-leave-active {
+        opacity: 0;
+        transition: all .1s !important;
+    }
+
     .move-start {
         animation: move 12s infinite linear;
     }
@@ -144,6 +172,7 @@
         align-items: center;
         transition: bottom .3s;
         z-index: 11;
+
         .music-info {
             display: flex;
             align-items: center;

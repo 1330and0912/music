@@ -83,12 +83,8 @@
     .search-input {
         padding: 0px 10px 0;
         height: 49px;
-        background-color: #009966;
-        position: fixed;
-        z-index: 9999;
-        top: 0px;
-        left: 0px;
-        right: 0px;
+        background-color: #FF3A3A;
+
         display: flex;
         justify-content: space-between;
         align-items: center;

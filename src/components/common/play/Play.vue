@@ -1,5 +1,5 @@
 <template>
-    <transition name="fade">
+    <transition name="slide-down">
         <div v-if="Object.keys(getCurrentMusic).length" id="play"
              :style="{backgroundImage:`url(${getCurrentMusic.bg}?param=1080y500)`}">
             <div class="nav-bar">
@@ -42,20 +42,34 @@
 </script>
 
 <style lang="less" scoped>
-    .fade-enter-active, .fade-leave-active {
-        transition: all .3s linear !important;
+    .slide-down-enter {
+        opacity: .5;
     }
 
-    .fade-enter {
-        opacity: 0.5;
+    .slide-down-enter-to {
+        position: absolute;
     }
 
-    .fade-leave-to {
-        transform: translateY(1100px);
+    .slide-down-enter-active {
+        transition: all .5s !important;
+    }
+
+    .slide-down-leave {
+    }
+
+    .slide-down-leave-to {
+        position: fixed;
+        z-index: 9999;
+    }
+
+    .slide-down-leave-active {
+        opacity: 0;
+        transition: all .8s !important;
+        transform: translateY(100%);
     }
 
     #play {
-        transition: all .3s;
+        transition: font-size .3s;
         background-color: #cccccc;
         height: 100%;
         width: 100%;

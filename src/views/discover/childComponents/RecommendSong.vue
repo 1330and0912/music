@@ -25,7 +25,7 @@
             const {result: res} = await getRecommendSong()
             res.forEach(async item => {
                 const {id, name: songName, picUrl: bg} = item
-                let lyric =(await getLyric(id)).lrc.lyric
+                let lyric =(await getLyric(id)).lrc
                 lyric = dataLyric(lyric)
                 const author = item.song.artists[0].name
                 this.musicData.push({id, songName, bg, author,lyric})

@@ -1,28 +1,51 @@
 <template>
-    <div id="playlistHighQuality">
-        <div v-for="item in tags" class="item">
-            <strong class="name">{{item}}</strong>
-            <div class="wrap">
-                <div v-for="list in list(item)" :key="list.id" class="wrap-con">
-                    <img v-lazy="list.bg+'?param=100y100'" alt="">
-                    <div class="desc">
-                        {{ list.description}}
+    <transition name="slide-right">
+        <div class="play-wrap">
+            <template v-if="isShowLoading">
+                <loading :show-loading="true"/>
+            </template>
+            <template v-else>
+                <div id="playlistHighQuality">
+                    <div class="h">
+                        <div class="icon" @click="back">
+                            <van-icon name="down"/>
+                        </div>
+                        <div class="text">
+                            返回
+                        </div>
+                    </div>
+                    <div class="item-wrap">
+                        <div v-for="item in tags" class="item">
+                            <strong class="name">{{item}}</strong>
+                            <div class="wrap">
+                                <div @click="openPlaylist(list.id)" v-for="list in list(item)" :key="list.id"
+                                     class="wrap-con">
+                                    <img v-lazy="list.bg+'?param=100y100'" alt="">
+                                    <div class="desc">
+                                        {{ list.description}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </template>
         </div>
-    </div>
+    </transition>
 </template>
 
 <script>
     import {getPlaylistHighQuality, getTopPlayList} from "../api";
+    import Loading from "../components/common/loading/Loading";
 
     export default {
         name: "PlaylistHighQuality",
+        components: {Loading},
         data() {
             return {
                 playlist: [],
-                tags: []
+                tags: [],
+                isShowLoading: true,
             }
         },
         created() {
@@ -41,13 +64,19 @@
                         bg: item.coverImgUrl
                     }
                 })
-                console.log(this.playlist);
                 let tags = this.playlist.map(item => {
                     return item.tag
                 })
 
                 this.tags = [...new Set(tags)]
-                console.log(this.tags);
+                this.isShowLoading = false
+            },
+            //打开歌单
+            openPlaylist(id) {
+                this.$router.push(`song-list/${id}`)
+            },
+            back() {
+                this.$router.back()
             }
         },
         computed: {
@@ -55,28 +84,76 @@
                 return (tag) => {
                     return this.playlist.filter(item => item.tag == tag)
                 }
-            }
-        }
+            },
+
+
+        },
+
     }
 </script>
 
 <style lang="less" scoped>
+
+    .slide-right-leave-active {
+        transition: all .3s ease;
+    }
+
+    .slide-right-leave-to {
+        position: fixed;
+        z-index: 9999;
+        transform: translateX(100%);
+
+    }
+
+    .play-wrap {
+        width: 100%;
+        height: 100%;
+    }
+
     #playlistHighQuality {
+        padding-bottom: 30px;
         width: 100%;
         height: 100%;
         overflow: scroll;
-        background-image: linear-gradient(#EEEEEE,#F3F3F3,#f5f2f0,#e9e9e9);
+        background-image: linear-gradient(#EEEEEE, #F3F3F3, #f5f2f0, #e9e9e9);
         background-attachment: scroll;
     }
 
     .item {
+        padding: 0 0 0 10px;
+    }
+
+    .item-wrap {
+        padding-top: 20px;
+        height: calc(100% - 49px);
+        overflow: scroll;
+
+    }
+
+    .h {
+        height: 35px;
+        background-color: #FF3A3A;
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+
+        .icon {
+            transform: rotate(90deg);
+            margin-right: 10px;
+            color: white;
+            font-size: 24px;
+        }
+
+        .text {
+            color: white;
+        }
     }
 
     .name {
         width: 100%;
         display: block;
-        padding:6px 15px;
-        border: 7px solid lightskyblue;
+        padding: 2px 10px;
+        border: 7px solid #FF3A3A;
         border-right-color: transparent;
         border-top-color: transparent;
         border-bottom-color: transparent;
@@ -86,14 +163,16 @@
         display: flex;
         flex-wrap: wrap;
         width: 100%;
-        padding: 0 10px;
+
         .wrap-con {
-            padding: 10px 5px;
+            padding: 10px 0;
             flex-shrink: 0;
-            width: 33%;
+            width: 31%;
+            margin-right: 2%;
+
             img {
                 border-radius: 10px;
-                width:100% ;
+                width: 100%;
             }
 
             .desc {

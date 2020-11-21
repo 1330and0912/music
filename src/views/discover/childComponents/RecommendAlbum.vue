@@ -4,7 +4,7 @@
         <div class="album-wrap">
             <div class="item" v-for="item in albumData" :key="item.id">
                 <div class="img-wrap">
-                    <img v-lazy="item.blurPicUrl+'?param=200y260'" alt="">
+                    <img v-lazy="item.blurPicUrl+'?param=200y200'" alt="">
                 </div>
                 <div class="text">{{item.name}}</div>
             </div>
@@ -34,19 +34,17 @@
 <style lang="less" scoped>
     .recommend-album {
         width: 100%;
-        height: 240px;
         margin-top: 20px;
     }
 
     .album-wrap {
         width: 100%;
-        height:195px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         overflow-x: scroll;
         .item {
-            width: 40%;
+            width: 30%;
             height: 100%;
             flex-shrink: 0;
             margin-right:10px;
@@ -57,7 +55,6 @@
                 padding: 0;
                 margin: 0;
                 width: 100%;
-                height: 160px;
             }
             .text{
                 height: 35px;

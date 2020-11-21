@@ -41,6 +41,10 @@
                 return flag ? t - 1 : this.lyrics.length - 1
             },
             lyrics() {
+                if (!this.lyric.length) return [{
+                    lyricStr: '占无歌词',
+                    duration: 1
+                }]
                 return this.lyric.filter(item => {
                     return item.lyricStr !== ''
                 })

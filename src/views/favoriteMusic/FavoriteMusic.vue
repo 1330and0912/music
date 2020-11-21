@@ -35,14 +35,13 @@
         methods: {
             ...mapActions('collect', ['saveLikeMusic']),
             async getMusicInfo() {
-                let ids = this.ids.join(',')
-                const {songs} = await getSongDetail(ids)
+                const {songs} = await getSongDetail(this.ids.join(','))
                 songs.forEach(async item => {
                     const mvid = item.mv
                     const {id, name: songName} = item
                     const author = item.ar[0].name
                     const bg = item.al.picUrl
-                    const lyric = dataLyric((await getLyric(item.id)).lrc.lyric)
+                    const lyric = dataLyric((await getLyric(item.id)).lrc)
                     this.likeList.push({mvid, id, songName, author, bg, lyric})
                     this.saveLikeMusic({mvid, id, songName, author, bg, lyric})
                 })

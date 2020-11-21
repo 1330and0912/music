@@ -36,7 +36,10 @@
                 finished: false,
                 offset: 0,
                 count: 0,//歌曲数量,
-                isShowLoading: true
+                isShowLoading: true,
+                limit: 15,
+                hasMore: null,
+                songCount: 1000
             }
         },
         computed: {
@@ -45,9 +48,6 @@
         },
         watch: {
             async getSearchWord() {
-                this.isShowLoading = true
-                this.musicInfo = []
-                this.count = 0
                 this.finished = false
                 if (this.getSearchWord) {
                     this.newMusicInfo.clear()
@@ -64,49 +64,65 @@
         },
         methods: {
             async getMusicInfo(isClear = true, restOffset = true) {
-                this.searchSuccess = true
-                isClear && (this.musicInfo = [])
-                if (restOffset) {
-                    this.offset = 0
-                } else {
-                    this.offset++
-                }
-                let musicInfo = []
-                search(this.getSearchWord, 15, 1, this.offset * 30).then(res => {
-                    this.isShowLoading = false
-                    this.count = res.result.songCount / 2
-                    if (res.result.songCount) {
-                        res = res.result.songs || []
-                        res.forEach(async (item, index) => {
-                            let mvid = item.mvid
-                            let pic = await getAlbum(item.artists[0].id)
-                            let lrc = (await getLyric(item.id)).lrc || false
-                            let id = item.id
-                            let songName = item.name
-                            let author = item.artists[0].name
-                            let bg = pic && pic.artist && pic.artist.picUrl || 0
-                            if (lrc) {
-                                this.newMusicInfo.has(item.id) ||
-                                this.musicInfo.push({
-                                    mvid,
-                                    id,
-                                    songName,
-                                    author,
-                                    bg,
-                                    lyric: dataLyric(lrc.lyric)
-                                })
-                            }
-                            if (index == res.length - 1) {
-                                this.loading = false
-                            }
-                            this.newMusicInfo.add(item.id)
-                        })
-                    } else {
-                        this.searchSuccess = false
-                        this.finished = true
-                        this.isShowLoading = false
+                // this.searchSuccess = true
+                // isClear && (this.musicInfo = [])
+                // if (restOffset) {
+                //     this.offset = 0
+                // } else {
+                //     this.offset++
+                // }
+                // let musicInfo = []
+                // search(this.getSearchWord, 15, 1, this.offset * 30).then(res => {
+                //     this.isShowLoading = false
+                //     this.count = res.result.songCount / 2
+                //     if (res.result.songCount) {
+                //         res = res.result.songs || []
+                //         res.forEach(async (item, index) => {
+                //             let mvid = item.mvid
+                //             let pic = await getAlbum(item.artists[0].id)
+                //             let lrc = (await getLyric(item.id)).lrc || false
+                //             let id = item.id
+                //             let songName = item.name
+                //             let author = item.artists[0].name
+                //             let bg = pic && pic.artist && pic.artist.picUrl || 0
+                //             if (lrc) {
+                //                 this.newMusicInfo.has(item.id) ||
+                //                 this.musicInfo.push({
+                //                     mvid,
+                //                     id,
+                //                     songName,
+                //                     author,
+                //                     bg,
+                //                     lyric: dataLyric(lrc.lyric)
+                //                 })
+                //             }
+                //             if (index == res.length - 1) {
+                //                 this.loading = false
+                //             }
+                //             this.newMusicInfo.add(item.id)
+                //         })
+                //     } else {
+                //         this.searchSuccess = false
+                //         this.finished = true
+                //         this.isShowLoading = false
+                //     }
+                // })
+                const {result: song} = await search(this.getSearchWord, this.limit, 1, this.offset * this.limit)
+                this.songCount = song.songCount
+                this.hasMore = song.hasMore
+                const songs = song.songs
+                let musicInfo = songs.map(async item => {
+                    return {
+                        pic: await getAlbum(item.artists[0].id),
+                        lrc: (await getLyric(item.id)).lrc || ''
                     }
                 })
+                // let mvid = item.mvid
+                // //             let pic = await getAlbum(item.artists[0].id)
+                // //             let lrc = (await getLyric(item.id)).lrc || false
+                // //             let id = item.id
+                // //             let songName = item.name
+                // //             let author = item.artists[0].name
             },
 
             ...mapActions('search', ['setSearchWord']),

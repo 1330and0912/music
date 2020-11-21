@@ -15,7 +15,7 @@
                 <div class="avatar">
                     <van-icon name="contact"/>
                 </div>
-                <div class="user-name">
+                <div @click="login" class="user-name">
                     立即登录
                 </div>
             </div>
@@ -35,6 +35,11 @@
         computed: {
             ...mapState('login', ['profile']),
 
+        },
+        methods: {
+            login() {
+                this.$router.push('/login')
+            }
         }
     }
 </script>
@@ -53,9 +58,9 @@
             align-items: center;
             justify-content: center;
             width: 50px;
-            height:50px;
-            color: rgba(222,0,0,.5);
-            background-color: rgba(222,0,0,.1);
+            height: 50px;
+            color: rgba(222, 0, 0, .5);
+            background-color: rgba(222, 0, 0, .1);
             border-radius: 50%;
             margin-right: 20px;
             font-size: 30px;

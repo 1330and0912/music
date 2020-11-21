@@ -63,7 +63,7 @@
         margin-top: 10px;
     }
     .search-history {
-        padding: 65px 10px 0;
+        padding: 10px 10px 0;
 
         .h-header {
             display: flex;

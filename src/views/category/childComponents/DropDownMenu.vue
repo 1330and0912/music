@@ -1,18 +1,20 @@
 <template>
-    <div class="drop-down-menu">
+    <div class="drop-wrap">
         <van-dropdown-menu class="fixed">
             <van-dropdown-item @change="changeCategory" v-model="area" :options="option1"/>
             <van-dropdown-item @change="changeCategory" v-model="type" :options="option2"/>
         </van-dropdown-menu>
-        <van-list
-                :immediate-check="false"
-                v-model="loading"
-                :finished="finished"
-                finished-text="没有更多了"
-                @load="onLoad"
-        >
-            <category-list :category-list="categoryList"/>
-        </van-list>
+        <div class="drop-down-menu">
+            <van-list
+                    :immediate-check="false"
+                    v-model="loading"
+                    :finished="finished"
+                    finished-text="没有更多了"
+                    @load="onLoad"
+            >
+                <category-list class="list" :category-list="categoryList"/>
+            </van-list>
+        </div>
     </div>
 </template>
 
@@ -75,15 +77,13 @@
 </script>
 
 <style lang="less" scoped>
-    .fixed {
-        position: fixed;
-        top: 47px;
-        left: 0;
-        right: 0;
-        z-index: 999;
-    }
-    .drop-down-menu{
+
+    .drop-wrap {
         height: 100%;
+    }
+
+    .drop-down-menu {
+        height: calc(100% - 49px);
         overflow-y: scroll;
     }
 </style>

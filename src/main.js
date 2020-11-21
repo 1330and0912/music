@@ -3,21 +3,31 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import Toast from '../plugins/toast/index'
-import './plugins/vant'
+import  './plugins/vant'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import 'swiper/swiper-bundle.css'
 
-// import FastClick from 'fastclick'
-//初始化FastClick实例。在页面的DOM文档加载完成后
-// FastClick.attach(document.body)
+Vue.use(VueAwesomeSwiper, /* { default options with global component } */)
 Vue.config.productionTip = false
 Vue.use(Toast)
 //插入方法
-Array.prototype.insert = function (index, value, arr = this) {
-    let towObj = this.slice(index)
-    let val = this.splice(0, index)
-    val.push(value)
-    val.push(...towObj)
-    return val
-}
+Array.prototype.insert = function (value, index) {
+    let that =this
+    let newVal = that.slice(0,index-1)
+    newVal.push(value)
+    newVal.push(...that.slice(index-1))
+    return newVal
+};
+
+router.beforeEach((to, from, next) => {
+    if (to.meta.isLogin) {
+        if (!store.state.login.isLogin){
+            return next('/login')
+        }
+    }
+    next()
+})
+
 Vue.directive('focus', {
     inserted(el) {
         el.focus()

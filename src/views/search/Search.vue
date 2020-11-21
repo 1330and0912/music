@@ -3,7 +3,9 @@
         <div id="search">
             <search-input/>
             <keep-alive>
-                <router-view/>
+                <div class="serach-wrapper">
+                    <router-view/>
+                </div>
             </keep-alive>
         </div>
     </transition>
@@ -27,16 +29,25 @@
         height: 100%;
         background-color: @content-color;
     }
+
+    .serach-wrapper {
+        height: calc(100% - 49px);
+        overflow: scroll;
+    }
+
     .fade-enter-active, .fade-leave-active {
         transition: all .3s linear;
     }
-    .fade-leave-to  {
-        transform: translateX(400px);
+
+    .fade-leave-to {
+        position: fixed;
+        z-index: 9999;
         opacity: 0;
+        transform: translateX(100%);
 
     }
-    .fade-enter{
-        transform: translateX(400px);
+
+    .fade-enter {
         opacity: .5;
     }
 </style>

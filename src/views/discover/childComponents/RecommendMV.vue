@@ -53,7 +53,7 @@
 
         .item {
             flex-shrink: 0;
-            width: 40%;
+            width: 30%;
             height: 100%;
             margin-right: 10px;
             border-radius: 8px;

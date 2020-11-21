@@ -186,7 +186,7 @@ export function getBanner(type = 2) {
 // 默认为 1 即单曲 ,
 // 取值意义 : 1: 单曲, 10: 专辑, 100: 歌手, 1000: 歌单, 1002: 用户,
 // 1004: MV, 1006: 歌词, 1009: 电台, 1014: 视频, 1018:综合
-export function search(keywords, limit = 30, type = 1018, offset = 0) {
+export function search(keywords, limit = 30, type = 1, offset = 0) {
     return request({
         url: Search,
         params: {
@@ -475,9 +475,9 @@ export function getPlaylistHighQuality() {
     })
 }
 //获取精品歌单列表
-export function getTopPlayList(limt = 50) {
+export function getTopPlayList(limit =100) {
     return request({
         url: TopPlayList,
-        params: {}
+        params: {limit}
     })
 }
