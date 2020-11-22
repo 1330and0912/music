@@ -18,11 +18,6 @@
                 showList: true
             }
         },
-        watch: {
-            fuzzyData() {
-                this.showList = true
-            }
-        },
         methods: {
             ...mapActions('search', ['setSearchWord', 'addSearchHistory']),
             search(searchWord) {
@@ -51,6 +46,7 @@
         left: 0;
         right: 0;
         box-shadow: 1px 1px 11px darkgrey;
+        z-index: 9999;
     }
 
     .item {

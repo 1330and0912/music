@@ -1,7 +1,8 @@
 <template>
     <div class="search-result-wrap">
-        <loading :show-loading="isShowLoading"/>
+        <!--        <loading :show-loading="isShowLoading"/>-->
         <van-list
+                offset="0"
                 :immediate-check="false"
                 :class="this.$store.state.isShowPlayBar?'bottom-padding':''"
                 v-model="loading"
@@ -10,8 +11,7 @@
                 @load="onLoad"
         >
             <div class="search-result">
-                <music-list v-if="searchSuccess" class="music-list" :music-info="musicInfo"/>
-                <div v-else>未找到</div>
+                <music-list class="music-list" :music-info="musicInfo"/>
             </div>
         </van-list>
     </div>
@@ -30,16 +30,12 @@
         data() {
             return {
                 musicInfo: [],
-                newMusicInfo: new Set(),
-                searchSuccess: true,
-                loading: false,
+                loading: true,
                 finished: false,
                 offset: 0,
-                count: 0,//歌曲数量,
                 isShowLoading: true,
                 limit: 15,
-                hasMore: null,
-                songCount: 1000
+                songCount: 1000,
             }
         },
         computed: {
@@ -49,94 +45,58 @@
         watch: {
             async getSearchWord() {
                 this.finished = false
-                if (this.getSearchWord) {
-                    this.newMusicInfo.clear()
-                    this.getMusicInfo(true, true)
-                }
+                this.loading = true
+                this.offset = 0
+                this.musicInfo = []
+                this.getMusicInfo()
             }
         },
         created() {
-            if (!this.getSearchWord) {
-                this.$router.back()
-            } else {
-                this.getMusicInfo(true, true)
-            }
+            if (this.getSearchWord == '') return this.$router.back()
+            this.getMusicInfo()
         },
         methods: {
-            async getMusicInfo(isClear = true, restOffset = true) {
-                // this.searchSuccess = true
-                // isClear && (this.musicInfo = [])
-                // if (restOffset) {
-                //     this.offset = 0
-                // } else {
-                //     this.offset++
-                // }
-                // let musicInfo = []
-                // search(this.getSearchWord, 15, 1, this.offset * 30).then(res => {
-                //     this.isShowLoading = false
-                //     this.count = res.result.songCount / 2
-                //     if (res.result.songCount) {
-                //         res = res.result.songs || []
-                //         res.forEach(async (item, index) => {
-                //             let mvid = item.mvid
-                //             let pic = await getAlbum(item.artists[0].id)
-                //             let lrc = (await getLyric(item.id)).lrc || false
-                //             let id = item.id
-                //             let songName = item.name
-                //             let author = item.artists[0].name
-                //             let bg = pic && pic.artist && pic.artist.picUrl || 0
-                //             if (lrc) {
-                //                 this.newMusicInfo.has(item.id) ||
-                //                 this.musicInfo.push({
-                //                     mvid,
-                //                     id,
-                //                     songName,
-                //                     author,
-                //                     bg,
-                //                     lyric: dataLyric(lrc.lyric)
-                //                 })
-                //             }
-                //             if (index == res.length - 1) {
-                //                 this.loading = false
-                //             }
-                //             this.newMusicInfo.add(item.id)
-                //         })
-                //     } else {
-                //         this.searchSuccess = false
-                //         this.finished = true
-                //         this.isShowLoading = false
-                //     }
-                // })
+            async getMusicInfo() {
+                this.loading = true
                 const {result: song} = await search(this.getSearchWord, this.limit, 1, this.offset * this.limit)
-                this.songCount = song.songCount
-                this.hasMore = song.hasMore
+                if (song.songCount == 0) {
+                    this.loading = false
+                    this.finished = true
+                    return
+                }
+                this.offset++
+                song.songCount && (this.songCount = song.songCount)
                 const songs = song.songs
-                let musicInfo = songs.map(async item => {
+                let musicInfo = songs.map(item => {
                     return {
-                        pic: await getAlbum(item.artists[0].id),
-                        lrc: (await getLyric(item.id)).lrc || ''
+                        id: item.id,
+                        songName: item.name,
+                        author: item.artists[0].name,
+                        mvid: item.mvid,
+                        singleId: item.artists[0].id
                     }
                 })
-                // let mvid = item.mvid
-                // //             let pic = await getAlbum(item.artists[0].id)
-                // //             let lrc = (await getLyric(item.id)).lrc || false
-                // //             let id = item.id
-                // //             let songName = item.name
-                // //             let author = item.artists[0].name
-            },
+                musicInfo.forEach(async (item, index) => {
 
+                    item.singleId && (musicInfo[index].bg = (await getAlbum(item.singleId, 1)).artist.picUrl)
+                    musicInfo[index].lyric = dataLyric((await getLyric(item.id)).lrc);
+                    if (index == musicInfo.length - 1) {
+                        this.musicInfo.push(...musicInfo)
+                        this.loading = false
+                        if (this.musicInfo.length >= this.songCount) {
+                            this.finished = true
+                        }
+                    }
+                })
+            },
             ...mapActions('search', ['setSearchWord']),
             onLoad() {
-                if (this.newMusicInfo.size >= this.count) {
-                    this.finished = true
-                } else {
-                    this.getMusicInfo(false, false)
-                }
+                this.getMusicInfo()
             }
 
         },
         deactivated() {
-            this.$route.path != '/play' && this.setSearchWord('')
+            //this.$route.path != '/play' && this.setSearchWord('')
         }
 
     }
@@ -149,7 +109,6 @@
     }
 
     .search-result {
-        padding-top: 49px;
         width: 100%;
         height: 100%;
     }

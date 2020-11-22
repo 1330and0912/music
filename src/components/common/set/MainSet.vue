@@ -1,7 +1,9 @@
 <template>
     <div id="mainSet">
-        <top/>
-        <music-serve/>
+        <div class="set-wrap">
+            <top/>
+            <music-serve/>
+        </div>
         <bottom-control/>
     </div>
 </template>
@@ -10,6 +12,7 @@
     import Top from "./childComponents/Top";
     import MusicServe from "./childComponents/MusicServe";
     import BottomControl from "./childComponents/BottomControl";
+
     export default {
         name: "MainSet",
         components: {BottomControl, MusicServe, Top},
@@ -22,11 +25,16 @@
 
 <style lang="less" scoped>
     #mainSet {
+        position: relative;
         width: 100%;
         height: 100%;
         background-color: #F7F7F7;
-        padding: 20px 10px;
+        padding:  0px 10px ;
         overflow-y: scroll;
-        padding-bottom: 69px;
+    }
+    .set-wrap {
+        padding-top: 10px;
+        height: calc(100% - 49px);
+        overflow-y: scroll;
     }
 </style>

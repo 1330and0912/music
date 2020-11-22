@@ -1,6 +1,8 @@
-export function dataLyric(lyric) {
-    if ( !lyric.lyric) return []
-    lyric =lyric.lyric
+export function dataLyric(lyric=[]) {
+    if(lyric &&!lyric.lyric){
+        return []
+    }
+    lyric = lyric.lyric
     let newLyric = lyric.replace(/\[.*?\]/g, '').trim().split('\n')
     let lyricDuration = lyric.replace(/[\u4e00-\u9fa5 | a-z|A-Z |\[|\]|:|,|(,|)|/]/g, '').trim().split('\n')            // this.lyricDuration = res.lrc.lyric.replace(/[\u4e00-\u9fa5 | a-z|A-Z |\[|\]|:|,]/g, ',')
     //把时间转换为秒

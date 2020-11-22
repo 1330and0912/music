@@ -27,19 +27,21 @@
                 this.musicInfo = []
                 let res = await getHotSongTop50(this.id)
                 let tempInfo = []
-                res.songs.forEach(async (item, index) => {
-                    let lrc = (await getLyric(item.id)).lrc || []
-                    let lyric = dataLyric(lrc)
-                    let id = item.id
-                    let author = item.ar[0].name
-                    let songName = item.name
-                    let bg = item.al.picUrl
-                    let mvid = item.mv
-                        tempInfo.push({mvid, id, songName, author, bg, lyric})
-                    if (index == res.songs.length - 1) {
-                        this.musicInfo.push(...tempInfo)
+                tempInfo = res.songs.map( (item, index) => {
+                    return {
+                        id: item.id,
+                        author: item.ar[0].name,
+                        songName: item.name,
+                        bg: item.al.picUrl,
+                        mvid: item.mv,
                     }
                 })
+                tempInfo.forEach(async (item, index) => {
+                    let lrc = (await getLyric(item.id)).lrc
+                    lrc = dataLyric(lrc)
+                    tempInfo[index].lyric = lrc
+                })
+                this.musicInfo = tempInfo
             }
         },
         watch: {

@@ -2,11 +2,12 @@
     <transition name="fade">
         <div id="search">
             <search-input/>
-            <keep-alive>
-                <div class="serach-wrapper">
+            <div class="search-wrapper">
+                <keep-alive>
                     <router-view/>
-                </div>
-            </keep-alive>
+                </keep-alive>
+            </div>
+
         </div>
     </transition>
 </template>
@@ -30,24 +31,19 @@
         background-color: @content-color;
     }
 
-    .serach-wrapper {
+    .search-wrapper {
         height: calc(100% - 49px);
         overflow: scroll;
     }
 
     .fade-enter-active, .fade-leave-active {
-        transition: all .3s linear;
+        transition: all .3s ease-out;
     }
 
     .fade-leave-to {
         position: fixed;
         z-index: 9999;
-        opacity: 0;
         transform: translateX(100%);
 
-    }
-
-    .fade-enter {
-        opacity: .5;
     }
 </style>

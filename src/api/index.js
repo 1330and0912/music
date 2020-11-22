@@ -190,7 +190,7 @@ export function search(keywords, limit = 30, type = 1, offset = 0) {
     return request({
         url: Search,
         params: {
-            keywords, limit, type, offset
+            keywords, limit, type, offset,
         }
     })
 }
@@ -263,7 +263,7 @@ export function getCategoryList(area = 7, type = 1, limit = 30, offset = 0) {
         url: ArtistCategoryList,
         params: {
             area, type, limit, offset
-        }
+        },
     })
 }
 

@@ -38,10 +38,6 @@
 <style lang="less" scoped>
     .bottom-control {
         width: 100%;
-        position: fixed;
-        left: 0;
-        right: 0;
-        bottom: 0;
         background-color: white;
         height: 49px;
         padding: 10px 0px;

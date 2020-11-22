@@ -1,9 +1,9 @@
 <template>
     <div class="music-list" :class="isScrollY? 'scroll':''">
-        <div v-if="isShowLoadingProps"  class="l">
+        <div v-if="isShowLoadingProps" class="l">
             <loading :show-loading="isShowLoading"/>
         </div>
-        <music-list-item :key="item.id" :music-info="item" id="item.id" v-for="item in musicInfo"/>
+        <music-list-item :key="index" :music-info="item"   v-for="(item,index) in musicInfo"/>
     </div>
 </template>
 
@@ -24,7 +24,7 @@
                 type: Boolean,
                 default: true
             },
-            isShowLoadingProps:{
+            isShowLoadingProps: {
                 type: Boolean,
                 default: true
             }
@@ -35,7 +35,7 @@
             }
         },
         watch: {
-            musicInfo(newVal) {
+            musicInfo(newVal, oldVal) {
                 if (newVal.length) {
                     this.isShowLoading = false
                 }
@@ -45,7 +45,7 @@
             if (this.musicInfo.length == 0) {
                 this.isShowLoading = true
             }
-        }
+        },
     }
 </script>
 

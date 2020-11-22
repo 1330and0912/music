@@ -29,7 +29,7 @@
 
 <style lang="less" scoped>
     .bottom-padding {
-        padding-bottom: 49px!important;
+        padding-bottom: 49px !important;
     }
     #discover {
         padding: 0 15px;

@@ -25,7 +25,7 @@
             return {
                 isShowNavBar: false,
                 path: ['/profile', '/discover', '/category', '/recommend'],
-                removePlayBar: true,
+                removePlayBar: false,
                 redirectCop: ['/recent', '/favorite-music', '/my-collect']
             }
         },
@@ -38,7 +38,6 @@
                                 window.sessionStorage.setItem('profile', JSON.stringify(res.profile))
                                 this.setUid()
                                 this.saveLikeMusicIds()
-
                             }
                         });
                     }
@@ -47,7 +46,11 @@
             $route(to, from) {
                 !to.meta.isShowPlayBar && to.meta.isPauseMusic && this.getIsPlay && this.toggleMusicState()
                 this.isShowNavBar = to.meta.isShowNavBar
-                this.$store.state.isShowPlayBar = to.meta.isShowPlayBar
+                if (!this.getPlayQueuedData.length) {
+                    this.$store.state.isShowPlayBar = false
+                }else {
+                    this.$store.state.isShowPlayBar = to.meta.isShowPlayBar
+                }
             },
             //是否显示音乐播放器
             getCurrentMusic() {
@@ -58,8 +61,9 @@
             },
             //微播放器的删除
             getPlayQueuedData(newVal) {
-                if (!newVal.length) {
+                if (newVal.length == 0) {
                     this.removePlayBar = false
+                    this.$store.state.isShowPlayBar = false
                     this.setCurrentMusic({})
                 } else {
                     this.removePlayBar = true

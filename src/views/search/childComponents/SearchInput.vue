@@ -31,7 +31,12 @@
                 debounceFn: null,
                 searchSuggestList: [],
                 fuzzySearch: '',
-                startSearch: false
+                cancelSearch: false
+            }
+        },
+        watch: {
+            $route(to, from) {
+                this.cancelSearch = true
             }
         },
         computed: {
@@ -46,8 +51,8 @@
             },
             ...mapActions('search', ['setSearchWord', 'addSearchHistory']),
             search(searchWord) {
-                this.startSearch = true
                 this.searchSuggestList = []
+                this.cancelSearch = true
                 if (searchWord.trim()) {
                     this.setSearchWord(searchWord)
                     this.addSearchHistory(searchWord)
@@ -62,9 +67,13 @@
                 }
             },
             getSuggest() {
-                if (this.fuzzySearch.length !== 0 &&!this.startSearch) {
+                if (this.fuzzySearch.length !== 0) {
                     getSearchSuggest(this.fuzzySearch).then(res => {
-                        this.searchSuggestList = res.result.allMatch
+                        if (this.cancelSearch) {
+                            this.cancelSearch = false
+                        } else {
+                            this.searchSuggestList = res.result.allMatch
+                        }
                     })
                 } else {
                     this.searchSuggestList = []
@@ -72,7 +81,7 @@
             },
             getSearchSuggestData(v) {
                 this.fuzzySearch = v
-                !this.debounceFn && (this.debounceFn = debounce(this.getSuggest, 200))
+                !this.debounceFn && (this.debounceFn = debounce(this.getSuggest, 100))
                 this.debounceFn()
             }
         }

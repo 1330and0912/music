@@ -83,7 +83,7 @@
     }
 
     .drop-down-menu {
-        height: calc(100% - 49px);
+        height: calc(100% );
         overflow-y: scroll;
     }
 </style>

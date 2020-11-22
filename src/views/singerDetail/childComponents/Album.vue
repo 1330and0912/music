@@ -100,8 +100,8 @@
                         const {id, name: songName} = item
                         const {picUrl: bg} = item.al
                         const author = item.ar[0].name
-                        const lyric = (await getLyric(id)).lrc && dataLyric((await getLyric(id)).lrc.lyric) || ''//歌词
-                        lyric && this.albumContent.push({mvid, id, songName, bg, author, lyric})
+                        const lyric = dataLyric((await getLyric(id)).lrc)
+                        this.albumContent.push({mvid, id, songName, bg, author, lyric})
                     })
                 }
             }
