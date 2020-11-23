@@ -10,8 +10,8 @@ export function request(config) {
         withCredentials: true,
     })
     instance.interceptors.request.use(data => {
-            if (window.localStorage.getItem('cookie')) {
-                if (data.params) {
+        if (window.localStorage.getItem('cookie')) {
+                if (data.params ) {
                     data.params.cookie = window.localStorage.getItem('cookie')
                 }
             }

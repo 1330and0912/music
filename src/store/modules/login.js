@@ -1,20 +1,15 @@
-//函数返回对象方式
-// const state = () => ({
-//     phone: '',
-//     password: ''
-// })
 // 对象方式
 const isLogin = window.sessionStorage.getItem('profile') ? true : false
-let uid,profile=null
-if(isLogin){
+let uid, profile = null
+if (isLogin) {
     profile = JSON.parse(window.sessionStorage.getItem('profile'))
 }
-uid  = profile?profile.userId:''
+uid = profile ? profile.userId : ''
 const state = {
     phone: '',
     password: '34040hu*',
     isLogin: isLogin,
-    uid:uid,
+    uid: uid,
     profile: null
 }
 const mutations = {
@@ -55,6 +50,10 @@ const actions = {
     },
     setLoginStatus({commit}, isLogin) {
         commit('saveLoginStatus', isLogin)
+    },
+    //退出登录
+    logout({commit}) {
+
     }
 
 }

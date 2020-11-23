@@ -57,6 +57,7 @@
     }
 
     .scroll {
+        -webkit-overflow-scrolling:touch;
         overflow-y: scroll !important;
     }
 </style>

@@ -6,6 +6,7 @@
             </template>
             <template v-else>
                 <div id="playlistHighQuality">
+
                     <div class="h">
                         <div class="icon" @click="back">
                             <van-icon name="down"/>
@@ -14,7 +15,16 @@
                             返回
                         </div>
                     </div>
+
                     <div class="item-wrap">
+                        <div class="sw">
+                            <swiper :options="swiperOptions">
+                                <swiper-slide @click.native="openPlaylist(item.id)" :key="item.id" v-for="item in swiperImg">
+                                    <img :src="item.bg"/>
+                                </swiper-slide>
+                            </swiper>
+                        </div>
+
                         <div v-for="item in tags" class="item">
                             <strong class="name">{{item}}</strong>
                             <div class="wrap">
@@ -38,14 +48,31 @@
     import {getPlaylistHighQuality, getTopPlayList} from "../api";
     import Loading from "../components/common/loading/Loading";
 
+    import { swiper, swiperSlide} from "vue-awesome-swiper";
+    import "swiper/dist/css/swiper.css";
+
     export default {
         name: "PlaylistHighQuality",
-        components: {Loading},
+        components: {Loading, swiper, swiperSlide},
         data() {
             return {
                 playlist: [],
                 tags: [],
                 isShowLoading: true,
+                swiperOptions: {
+                    autoplay: true,
+                    loop: true,
+                    effect : 'coverflow',
+                    slidesPerView: 2,
+                    centeredSlides: true,
+                    coverflowEffect: {
+                        rotate: 90,
+                        stretch: 10,
+                        depth:  60,
+                        modifier: 1.5,
+                        slideShadows : true
+                    },
+                }
             }
         },
         created() {
@@ -85,6 +112,9 @@
                     return this.playlist.filter(item => item.tag == tag)
                 }
             },
+            swiperImg(){
+                return this.playlist.slice(0,9)
+            }
 
 
         },
@@ -93,6 +123,17 @@
 </script>
 
 <style lang="less" scoped>
+    .sw{
+        padding: 0 10px;
+    }
+    .swiper-container {
+        height: 200px;
+
+        img {
+            width: 100%;
+            height: 200px;
+        }
+    }
 
     .slide-right-leave-active {
         transition: all .3s ease;

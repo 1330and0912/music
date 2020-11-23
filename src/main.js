@@ -4,10 +4,6 @@ import router from './router'
 import store from './store'
 import Toast from '../plugins/toast/index'
 import  './plugins/vant'
-import VueAwesomeSwiper from 'vue-awesome-swiper'
-import 'swiper/swiper-bundle.css'
-
-Vue.use(VueAwesomeSwiper, /* { default options with global component } */)
 Vue.config.productionTip = false
 Vue.use(Toast)
 //插入方法
