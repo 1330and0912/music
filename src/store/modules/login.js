@@ -1,8 +1,9 @@
-// 对象方式
-const isLogin = window.sessionStorage.getItem('profile') ? true : false
+import {LocalData,SessionData} from "../../storage/storage";
+
+const isLogin = SessionData.getItem('profile') ? true : false
 let uid, profile = null
 if (isLogin) {
-    profile = JSON.parse(window.sessionStorage.getItem('profile'))
+    profile = SessionData.getItem('profile')
 }
 uid = profile ? profile.userId : ''
 const state = {
@@ -24,7 +25,16 @@ const mutations = {
     },
     saveLoginStatus(state, isLogin) {
         state.isLogin = isLogin
-        state.profile = JSON.parse(window.sessionStorage.getItem('profile'))
+        state.profile = SessionData.getItem('profile')
+    },
+    logout(state) {
+        state.profile=null
+        state.isLogin = false
+        state.uid = ''
+        // session.removeItem('profile')
+        // local.removeItem('ids')
+        // local.removeItem('cookie')
+
     }
 }
 const getters = {
@@ -53,7 +63,7 @@ const actions = {
     },
     //退出登录
     logout({commit}) {
-
+        commit('logout')
     }
 
 }

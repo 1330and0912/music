@@ -1,3 +1,5 @@
+import {LocalData} from "../../storage/storage";
+
 const state = {
     searchWord: '',//搜索关键词
     searchHistory: []//搜索记录
@@ -19,7 +21,7 @@ const mutations = {
                 state.searchHistory.splice(index, 1)
                 state.searchHistory.unshift(searchHistory)
             }
-            window.localStorage.searchHistory = JSON.stringify(state.searchHistory)
+            LocalData.setItem('searchHistory',state.searchHistory)
         }
     },
     // 删除搜索记录
@@ -45,7 +47,7 @@ const actions = {
     deleteSearchHistory({commit}, index) {
         if (index == -1) {
             commit('deleteAllSearchHistory')
-            window.localStorage.removeItem('searchHistory')
+           LocalData.removeItem('searchHistory')
         } else {
             commit('deleteSearchHistoryByIndex')
         }

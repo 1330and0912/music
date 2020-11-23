@@ -1,5 +1,5 @@
 <template>
-    <div id="mainSet">
+    <div id="mainSet" :class="this.$store.state.isShowPlayBar?'bottom-padding':''">
         <div class="set-wrap">
             <top/>
             <music-serve/>
@@ -24,8 +24,11 @@
 </script>
 
 <style lang="less" scoped>
+    .bottom-padding {
+        padding-bottom: 49px !important;
+    }
+
     #mainSet {
-        position: relative;
         width: 100%;
         height: 100%;
         background-color: #F7F7F7;

@@ -1,6 +1,5 @@
 import axios from 'axios'
-import router from '../router/index'
-import store from '../store/index'
+import {LocalData} from "../storage/storage";
 
 
 export function request(config) {
@@ -10,9 +9,9 @@ export function request(config) {
         withCredentials: true,
     })
     instance.interceptors.request.use(data => {
-        if (window.localStorage.getItem('cookie')) {
-                if (data.params ) {
-                    data.params.cookie = window.localStorage.getItem('cookie')
+            if (LocalData.getItem('cookie')) {
+                if (data.params) {
+                    data.params.cookie = LocalData.getItem('cookie')
                 }
             }
             return data

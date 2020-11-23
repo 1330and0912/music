@@ -1,7 +1,9 @@
-let isLogin = window.sessionStorage.getItem('profile') ? true : false
+import {SessionData,LocalData} from "../../storage/storage";
+
+let isLogin = SessionData.getItem('profile')
 let ids = null
 if (isLogin) {
-    ids = JSON.parse(window.localStorage.getItem('ids'))
+    ids = LocalData.getItem('ids')
 }
 const state = {
     likeMusic: [],

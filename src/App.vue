@@ -33,10 +33,10 @@
         watch: {
             isLogin(newVal) {
                 if (newVal) {
-                    if (window.sessionStorage.getItem('profile')) {
+                    if (this.SessionData.getItem('profile')) {
                         loginStatus().then(res => {
                             if (res.code == 200) {
-                                window.sessionStorage.setItem('profile', JSON.stringify(res.profile))
+                                this.SessionData.setItem('profile', res.profile)
                                 this.setUid()
                                 this.saveLikeMusicIds()
                             }
@@ -78,11 +78,11 @@
         }
         ,
         created() {
-            if (window.sessionStorage.getItem('profile')) {
+            if (this.SessionData.getItem('profile')) {
                 this.setLoginStatus(true)
                 loginStatus().then(res => {
                     if (res.code == 200) {
-                        window.sessionStorage.setItem('profile', JSON.stringify(res.profile))
+                        this.SessionData.setItem('profile', res.profile)
                         this.setUid()
                         this.saveLikeMusicIds()
                     }
@@ -90,8 +90,8 @@
             }
 
 
-            if (window.localStorage.currentMusic) {
-                this.setCurrentMusic(JSON.parse(window.localStorage.currentMusic))
+            if (this.LocalData.getItem('currentMusic')) {
+                this.setCurrentMusic(this.LocalData.getItem('currentMusic'))
             } else {
                 this.$store.state.isShowPlayBar = false
             }
@@ -106,19 +106,18 @@
             //获取一些localStorage数据
             getInitData() {
                 // 获取播放队列数据
-                window.localStorage.playQueuedData && this.writePlayQueuedData(JSON.parse(window.localStorage.playQueuedData))
+                this.LocalData.getItem('playQueuedData') && this.writePlayQueuedData(this.LocalData.getItem('playQueuedData'))
             },
             async saveLikeMusicIds() {
                 let res = await getLikeList(this.uid)
                 this.saveIds(res.ids)
-                window.localStorage.setItem('ids', JSON.stringify(res.ids))
+                this.LocalData.setItem('ids', res.ids)
             }
         }
     }
 </script>
 <style lang="less">
     @import "assets/css/base.css";
-
 
 
     #app {

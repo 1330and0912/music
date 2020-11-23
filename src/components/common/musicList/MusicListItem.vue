@@ -51,14 +51,15 @@
                     this.playMusic(this.musicInfo)
                     console.log(this.musicInfo);
                     let data
-                    if (window.localStorage.playQueuedData) {
-                        data = JSON.parse(window.localStorage.playQueuedData)
+                    if (this.LocalData.getItem('playQueuedData')) {
+                        data = this.LocalData.getItem('playQueuedData')
                     } else {
                         data = []
                     }
                     let index = data.findIndex(item => item.id == this.musicInfo.id)
+                    let currentIndex = data.findIndex(item => item.id == this.getCurrentMusic.id)
                     if (index == -1) {
-                        data.push(this.musicInfo)
+                        data = data.insert(this.musicInfo,currentIndex)
                     }
                     this.writePlayQueuedData(data)
                 } else {

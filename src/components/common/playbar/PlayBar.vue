@@ -116,28 +116,15 @@
 </script>
 
 <style lang="less" scoped>
-    .slide-down-enter {
-        opacity: 0;
-    }
 
-    .slide-down-enter-to {
-        position: fixed;
-        opacity: 1;
-        z-index: 101;
-    }
-
-    .slide-down-enter-active {
-        transition: all .3s;
-    }
 
     .slide-down-leave-to {
         position: fixed;
-        z-index: 101;
-        transform: translateY(100%);
+        z-index: 301;
+        opacity: 0;
 
     }
     .slide-down-leave-active {
-        opacity: 0;
         transition: all .1s !important;
     }
 
@@ -157,7 +144,7 @@
         color: @night-mode-height-color;
         width: 100%;
         position: fixed !important;
-        z-index: 11120 !important;
+        z-index: 1111 !important;
         bottom: -1px;
         height: 49px;
         /*background-image: linear-gradient(120deg,*/

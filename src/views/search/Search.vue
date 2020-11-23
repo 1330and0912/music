@@ -29,8 +29,7 @@
         width: 100%;
         height: 100%;
         background-color: @content-color;
-        position: relative;
-        z-index: 101;
+
     }
 
     .search-wrapper {
@@ -44,7 +43,7 @@
 
     .fade-leave-to {
         position: fixed !important;
-        z-index: 9999;
+        z-index: 200;
         transform: translateX(100%);
     }
 </style>
