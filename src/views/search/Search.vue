@@ -29,6 +29,8 @@
         width: 100%;
         height: 100%;
         background-color: @content-color;
+        position: relative;
+        z-index: 101;
     }
 
     .search-wrapper {
@@ -36,14 +38,13 @@
         overflow: scroll;
     }
 
-    .fade-enter-active, .fade-leave-active {
-        transition: all .3s ease-out;
+     .fade-leave-active {
+        transition: all .5s ease-out;
     }
 
     .fade-leave-to {
-        position: fixed;
+        position: fixed !important;
         z-index: 9999;
         transform: translateX(100%);
-
     }
 </style>

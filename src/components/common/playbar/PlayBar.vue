@@ -123,7 +123,7 @@
     .slide-down-enter-to {
         position: fixed;
         opacity: 1;
-        z-index: 9999;
+        z-index: 101;
     }
 
     .slide-down-enter-active {
@@ -132,7 +132,7 @@
 
     .slide-down-leave-to {
         position: fixed;
-        z-index: 9999;
+        z-index: 101;
         transform: translateY(100%);
 
     }
@@ -156,7 +156,8 @@
         border-top-right-radius: 7px;
         color: @night-mode-height-color;
         width: 100%;
-        position: fixed;
+        position: fixed !important;
+        z-index: 11120 !important;
         bottom: -1px;
         height: 49px;
         /*background-image: linear-gradient(120deg,*/

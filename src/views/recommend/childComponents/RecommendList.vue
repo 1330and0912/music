@@ -31,6 +31,7 @@
 
 <style lang="less" scoped>
     .recommend-list {
+        background-color: white;
         padding: 10px 10px 0;
         height: 100%;
         width: 100%;

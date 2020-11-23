@@ -27,6 +27,7 @@
 
 <style lang="less" scoped>
     .comment {
+        background-color: white;
         padding: 10px;
     }
   .h {

@@ -98,20 +98,15 @@
 
 <style lang="less" scoped>
 
-    .slide-down-enter-active {
-        transition: all .3s !important;
-    }
-
     .slide-down-leave-to {
         transform: translateX(100%);
-        position: fixed;
-        top: 0;
+        position: fixed !important;
+        opacity: 0;
         z-index: 9999;
     }
 
     .slide-down-leave-active {
-        opacity: 1;
-        transition: all .3s !important;
+        transition: all .8s !important;
     }
 
     .bottom-padding {
@@ -122,6 +117,7 @@
         overflow: scroll;
         width: 100%;
         height: 100%;
+
     }
 
     .song-list-wrap {

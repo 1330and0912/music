@@ -26,7 +26,8 @@
                 isShowNavBar: false,
                 path: ['/profile', '/discover', '/category', '/recommend'],
                 removePlayBar: false,
-                redirectCop: ['/recent', '/favorite-music', '/my-collect']
+                redirectCop: ['/recent', '/favorite-music', '/my-collect'],
+                transitionName: ''
             }
         },
         watch: {
@@ -48,7 +49,7 @@
                 this.isShowNavBar = to.meta.isShowNavBar
                 if (!this.getPlayQueuedData.length) {
                     this.$store.state.isShowPlayBar = false
-                }else {
+                } else {
                     this.$store.state.isShowPlayBar = to.meta.isShowPlayBar
                 }
             },
@@ -117,6 +118,8 @@
 </script>
 <style lang="less">
     @import "assets/css/base.css";
+
+
 
     #app {
         height: 100%;

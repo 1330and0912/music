@@ -32,7 +32,7 @@
                 <div>{{mvData.shareCount}}</div>
             </div>
         </div>
-        <van-sticky :offset-top="offsetTop">
+        <van-sticky offset-top="245">
             <div @click="goSingerDetail(artists[0].id)" class="single">
                 <div v-if="artists.length"  class="single-info">
                     <img  :src="artists[0].img1v1Url+'?param=50y50'" alt="">
@@ -85,6 +85,7 @@
 
 <style lang="less" scoped>
     .base-info {
+        background-color: white;
         display: flex;
         justify-content: space-between;
         padding: 10px 20px 10px;

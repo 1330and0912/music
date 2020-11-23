@@ -1,18 +1,19 @@
 <template>
-    <div id="recommend">
-        <div  class="scroll-wrap">
-            <swipe/>
-            <van-list
-                    :class="this.$store.state.isShowPlayBar?'bottom-padding':''"
-                    v-model="loading"
-                    :finished="finished"
-                    finished-text="没有更多了"
-                    @load="onLoad"
-                    :immediate-check="false"
-                    offset="1"
-            >
-                <van-sticky :offset-top="47">
-                    <div class="category">
+    <transition name="fade">
+        <div id="recommend">
+            <div class="scroll-wrap">
+                <swipe/>
+                <van-list
+                        :class="this.$store.state.isShowPlayBar?'bottom-padding':''"
+                        v-model="loading"
+                        :finished="finished"
+                        finished-text="没有更多了"
+                        @load="onLoad"
+                        :immediate-check="false"
+                        offset="1"
+                >
+                    <van-sticky :offset-top="47">
+                        <div class="category">
                 <span
                         @click="changeTab(index)"
                         :class="index==currentIndex?'current-index':''" :key="index"
@@ -20,13 +21,15 @@
                         v-for="(item,index) in categoryList">
                     {{item}}
                 </span>
-                    </div>
-                </van-sticky>
+                        </div>
+                    </van-sticky>
 
-                <recommend-list :data-list="mvList[this.currentIndex][this.categoryList[this.currentIndex]]"/>
-            </van-list>
+                    <recommend-list :data-list="mvList[this.currentIndex][this.categoryList[this.currentIndex]]"/>
+                </van-list>
+            </div>
         </div>
-    </div>
+    </transition>
+
 </template>
 
 <script>
@@ -100,6 +103,17 @@
 </script>
 
 <style lang="less" scoped>
+    .fade-leave-active {
+        transition: opacity .3s;
+    }
+
+    .fade-leave-to {
+        position: fixed;
+        opacity: 0;
+        z-index: 99;
+        width: 100%;
+    }
+
     .scroll-wrap {
         overflow: scroll;
         height: 100%;

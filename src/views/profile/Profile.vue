@@ -1,4 +1,5 @@
 <template>
+    <transition name="fade">
         <div :class="this.$store.state.isShowPlayBar?'bottom-padding':''" id="profile">
             <div class="scroll-wrap">
                 <user-avatar class="user"/>
@@ -7,6 +8,8 @@
                 <song-list-ranking/>
             </div>
         </div>
+    </transition>
+
 </template>
 
 <script>
@@ -35,6 +38,16 @@
 </script>
 
 <style lang="less" scoped>
+    .fade-leave-active {
+        transition: opacity .3s;
+    }
+
+    .fade-leave-to {
+        position: fixed;
+        opacity: 0;
+        z-index: 99;
+        width: 100%;
+    }
 
     #profile {
         width: 100%;

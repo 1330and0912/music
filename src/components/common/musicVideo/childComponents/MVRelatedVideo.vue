@@ -51,6 +51,7 @@
 
 <style lang="less" scoped>
     .related-video {
+        background-color: white;
         padding: 15px 0 0;
         border-bottom: 10px solid rgba(0,0,0,.05);
         span {

@@ -19,7 +19,7 @@
 
 <style lang="less" scoped>
     .loading {
-        z-index: 111111;
+        z-index: 100;
         width: 300px;
         height: 200px;
         position: absolute;

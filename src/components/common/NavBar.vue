@@ -88,7 +88,7 @@
         display: flex;
         align-items: center;
         position: fixed;
-        z-index: 999999;
+        z-index: 100;
         top: 0px;
         left: 0;
         right: 0;

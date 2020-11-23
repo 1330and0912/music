@@ -1,7 +1,7 @@
 <template>
     <transition name="slide-down">
         <div v-if="Object.keys(getCurrentMusic).length" id="play"
-             :style="{backgroundImage:`url(${getCurrentMusic.bg}?param=1080y500)`}">
+             :style="{backgroundImage:`url(${getCurrentMusic.bg}?param=350y500)`}">
             <div class="nav-bar">
                 <i @click="back" class="iconfont icon-zuojiantou"></i>
                 <span>{{getCurrentMusic.author}}-{{getCurrentMusic.songName}}</span>
@@ -58,17 +58,18 @@
     }
 
     .slide-down-leave-to {
-        position: fixed;
-        z-index: 9999;
+        position: fixed !important;
     }
 
     .slide-down-leave-active {
         opacity: 0;
-        transition: all .8s !important;
+        transition: all 0.8s !important;
         transform: translateY(100%);
     }
 
     #play {
+        position: relative;
+        z-index: 999;
         transition: font-size .3s;
         background-color: #cccccc;
         height: 100%;

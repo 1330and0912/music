@@ -1,10 +1,10 @@
 <template>
     <div class="wrapper">
-<!--        <loading v-if="isShowLoading" :show-loading="isShowLoading"/>-->
-        <div   :style="{paddingTop:`${h}`}" id="musicVideo">
+        <div id="musicVideo">
             <div ref="videoWrap" class="video-wrap">
                 <back/>
-                <video x5-video-player-type="h5-page" x5-playsinline="" playsinline="" webkit-playsinline="" ref="video"
+                <video x5-video-player-type="h5-page" x5-playsinline="" playsinline="" webkit-playsinline=""
+                       ref="video"
                        @canplay="playVideo" controls
                        :src="url">
                 </video>
@@ -33,8 +33,6 @@
                 this.url = ''
                 this.getMVUrlData()
                 this.getCommentData()
-                this.isShowLoading = true
-
             }
         },
         data() {
@@ -55,8 +53,8 @@
             playVideo() {
                 this.$nextTick(() => {
                     this.$refs.video.play()
-                    let ratio = this.$refs.video.videoWidth / document.querySelector('.video-wrap').clientWidth
-                    this.h = this.$refs.video.videoHeight / ratio + 32 + 'px'
+                    // let ratio = this.$refs.video.videoWidth / document.querySelector('.video-wrap').clientWidth
+                    // this.h = this.$refs.video.videoHeight / ratio + 32 + 'px'
                 })
             },
             showBack(e) {
@@ -87,25 +85,22 @@
 </script>
 
 <style lang="less" scoped>
-    .show {
-        top: 10px;
-    }
-
-    .hide {
-        top: -30px;
-    }
 
     #musicVideo {
+        padding-top: 240px;
         width: 100%;
         height: 100%;
 
         .video-wrap {
             width: 100%;
+            height: 200px !important;
         }
 
         video {
-            width: 100vw;
-            height: 100%;
+            height: 200px !important;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 1);
+
         }
 
         .video-wrap {

@@ -125,18 +125,21 @@
 <style lang="less" scoped>
     .sw{
         padding: 0 10px;
+        width: 100%;
     }
     .swiper-container {
         height: 200px;
+        width: 100%;
 
         img {
+            border-radius: 10px;
             width: 100%;
             height: 200px;
         }
     }
 
     .slide-right-leave-active {
-        transition: all .3s ease;
+        transition: all .5s ease;
     }
 
     .slide-right-leave-to {
@@ -152,6 +155,8 @@
     }
 
     #playlistHighQuality {
+        position: relative;
+        z-index: 101;
         padding-bottom: 30px;
         width: 100%;
         height: 100%;
