@@ -1,8 +1,10 @@
 <template>
-    <div  class="singer-detail">
-        <fixed-nav/>
-        <tab-bar :id="id"/>
-    </div>
+    <transition name="slide-down">
+        <div class="singer-detail">
+            <fixed-nav/>
+            <tab-bar :id="id"/>
+        </div>
+    </transition>
 </template>
 
 <script>
@@ -15,16 +17,28 @@
         props: ['id'],
         data() {
             return {
-                musicInfo:[],
-                bg:''
+                musicInfo: [],
+                bg: ''
             }
         },
 
 
     }
 </script>
-<!--:style="{backgroundImage:`url(${bg})`}"-->
+
 <style lang="less" scoped>
+    .slide-down-leave-to {
+        opacity: 0;
+
+        transform: scale(0.1);
+    }
+
+    .slide-down-leave-active {
+        position: fixed !important;
+        z-index: 9999;
+        transition: all .5s !important;
+    }
+
     .singer-detail {
         height: 100%;
         width: 100%;

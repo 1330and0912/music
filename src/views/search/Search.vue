@@ -37,13 +37,15 @@
         overflow: scroll;
     }
 
-     .fade-leave-active {
+
+    .fade-leave-active {
+        position: fixed !important;
+        z-index: 200;
         transition: all .5s ease-out;
     }
 
     .fade-leave-to {
-        position: fixed !important;
-        z-index: 200;
-        transform: translateX(100%);
+        opacity: 0;
+        transform: translateX(70%);
     }
 </style>

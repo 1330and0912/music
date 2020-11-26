@@ -31,17 +31,11 @@
                     const {cover: imgurl, name, playCount, artistName: author, id} = await item
                     this.mvData.push({imgurl, name, playCount, author, id})
                 })
-                console.log(res);
             }
         },
         activated() {
             this.getRelatedMVInfo()
-            // author:"薛之谦"
-            // id:10954450
-            // imgurl:"http://p1.music.126.net/GMUTkS8j87-D8pqFuIy0Ng==/109951165267495161.jpg"
-            // name:"小尖尖"
-            // playCount:800388
-            // publishTime:"2020-08-25"
+
         },
         deactivated() {
             this.mvData = []

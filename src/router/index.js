@@ -275,6 +275,7 @@ const routes = [
 
 const router = new VueRouter({
     routes,
+    mode:'history'
 })
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location, onResolve, onReject) {

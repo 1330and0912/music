@@ -42,7 +42,7 @@
             },
             lyrics() {
                 if (!this.lyric.length) return [{
-                    lyricStr: '占无歌词',
+                    lyricStr: '暂无歌词',
                     duration: 1
                 }]
                 return this.lyric.filter(item => {

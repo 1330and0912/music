@@ -1,9 +1,9 @@
 <template>
-    <div class="music-list" :class="isScrollY? 'scroll':''">
+    <div   class="music-list" :class="isScrollY? 'scroll':''">
         <div v-if="isShowLoadingProps" class="l">
             <loading :show-loading="isShowLoading"/>
         </div>
-        <music-list-item :key="index" :music-info="item"   v-for="(item,index) in musicInfo"/>
+        <music-list-item :key="index" :music-info="item" v-for="(item,index) in musicInfo"/>
     </div>
 </template>
 
@@ -42,10 +42,11 @@
             }
         },
         activated() {
+
             if (this.musicInfo.length == 0) {
                 this.isShowLoading = true
             }
-        },
+        }
     }
 </script>
 
@@ -57,7 +58,7 @@
     }
 
     .scroll {
-        -webkit-overflow-scrolling:touch;
+        -webkit-overflow-scrolling: touch;
         overflow-y: scroll !important;
     }
 </style>

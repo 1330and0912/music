@@ -1,19 +1,21 @@
 <template>
-    <div class="wrapper">
-        <div id="musicVideo">
-            <div ref="videoWrap" class="video-wrap">
-                <back/>
-                <video x5-video-player-type="h5-page" x5-playsinline="" playsinline="" webkit-playsinline=""
-                       ref="video"
-                       @canplay="playVideo" controls
-                       :src="url">
-                </video>
+    <transition name="slide-down">
+        <div class="wrapper">
+            <div id="musicVideo">
+                <div ref="videoWrap" class="video-wrap">
+                    <back/>
+                    <video x5-video-player-type="h5-page" x5-playsinline="" playsinline="" webkit-playsinline=""
+                           ref="video"
+                           @canplay="playVideo" controls
+                           :src="url">
+                    </video>
+                </div>
+                <m-v-base-info :offset-top="h" :id="id"/>
+                <m-v-related-video :id="id"/>
+                <comment :comment-data="commentData"/>
             </div>
-            <m-v-base-info :offset-top="h" :id="id"/>
-            <m-v-related-video :id="id"/>
-            <comment :comment-data="commentData"/>
         </div>
-    </div>
+    </transition>
 </template>
 
 <script>
@@ -85,6 +87,17 @@
 </script>
 
 <style lang="less" scoped>
+    .slide-down-leave-to {
+        opacity: 0;
+
+        transform: scale(0.1);
+    }
+
+    .slide-down-leave-active {
+        position: fixed !important;
+        z-index: 9999;
+        transition: all .5s !important;
+    }
 
     #musicVideo {
         padding-top: 240px;

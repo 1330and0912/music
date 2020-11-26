@@ -99,14 +99,15 @@
 <style lang="less" scoped>
 
     .slide-down-leave-to {
-        transform: translateX(100%);
-        position: fixed !important;
         opacity: 0;
-        z-index: 9999;
+
+        transform: scale(0.1);
     }
 
     .slide-down-leave-active {
-        transition: all .8s !important;
+        position: fixed !important;
+        z-index: 9999;
+        transition: all .5s !important;
     }
 
     .bottom-padding {
@@ -135,7 +136,8 @@
         height: 100%;
         background-size: cover;
         background-position: center center;
-        filter: blur(100px);
+        filter: blur(111px);
+        filter: brightness(44%);
 
     }
 </style>

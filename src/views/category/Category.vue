@@ -1,11 +1,8 @@
 <template>
-    <transition name="fade">
-        <div id="category" :class="this.$store.state.isShowPlayBar?'bottom-padding':''">
-            <drop-down-menu/>
-        </div>
-    </transition>
+    <div id="category" :class="this.$store.state.isShowPlayBar?'bottom-padding':''">
+        <drop-down-menu/>
+    </div>
 </template>
-
 <script>
     import DropDownMenu from './childComponents/DropDownMenu'
     import CategoryList from "./childComponents/CategoryList";

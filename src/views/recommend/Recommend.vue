@@ -1,5 +1,4 @@
 <template>
-    <transition name="fade">
         <div id="recommend">
             <div class="scroll-wrap">
                 <swipe/>
@@ -28,7 +27,6 @@
                 </van-list>
             </div>
         </div>
-    </transition>
 
 </template>
 

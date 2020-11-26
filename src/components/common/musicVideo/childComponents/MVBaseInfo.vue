@@ -69,7 +69,6 @@
                 const {data} = await getMVData(this.id)
                 const {commentCount, subCount, shareCount, playCount, publishTime, name, artists} = data
                 this.artists = artists
-                console.log(this.artists);
                 this.mvData = {commentCount, subCount, shareCount, playCount, publishTime, name}
                 this.mvData.like = this.mvData.shareCount * 3//点赞数量为假数据 分享次数*3
             },

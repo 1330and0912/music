@@ -62,12 +62,10 @@
                     this.categoryList.push({name, id, picUrl, followed})
                 })
                 this.loading = false
-                console.log(resetOffset);
             },
             //加载更多
             onLoad() {
                 this.changeCategory(1, false, false)
-                console.log('load');
             }
         },
         created() {

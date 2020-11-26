@@ -5,7 +5,7 @@
                 <loading :show-loading="true"/>
             </template>
             <template v-else>
-                <div id="playlistHighQuality">
+                <div  ref="play" id="playlistHighQuality">
 
                     <div class="h">
                         <div class="icon" @click="back">
@@ -117,8 +117,7 @@
             }
 
 
-        },
-
+        }
     }
 </script>
 

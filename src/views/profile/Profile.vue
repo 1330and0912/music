@@ -1,5 +1,4 @@
 <template>
-    <transition name="fade">
         <div :class="this.$store.state.isShowPlayBar?'bottom-padding':''" id="profile">
             <div class="scroll-wrap">
                 <user-avatar class="user"/>
@@ -8,7 +7,6 @@
                 <song-list-ranking/>
             </div>
         </div>
-    </transition>
 
 </template>
 

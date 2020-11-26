@@ -1,5 +1,4 @@
 <template>
-    <transition name="fade">
         <div id="discover" :class="this.$store.state.isShowPlayBar?'bottom-padding':''">
             <div class="scroll">
                 <netease-mv-swiper/>
@@ -10,7 +9,6 @@
                 <recommend-album/>
             </div>
         </div>
-    </transition>
 
 </template>
 
