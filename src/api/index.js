@@ -36,7 +36,7 @@ import {
     RecommendPlayList,
     RecommendSong,
     RecommendMV,
-    NeteaseMV, AlbumNewSt, TopList, PlayListDetail, HighqualityTags, TopPlayList
+    NeteaseMV, AlbumNewSt, TopList, PlayListDetail, HighqualityTags, TopPlayList, UserPlayList
 } from "./resource";
 import {fuchsia} from "color-name";
 import PlaylistHighQuality from "../views/PlaylistHighQuality";
@@ -474,10 +474,19 @@ export function getPlaylistHighQuality() {
         params: {}
     })
 }
+
 //获取精品歌单列表
-export function getTopPlayList(limit =100) {
+export function getTopPlayList(limit = 100) {
     return request({
         url: TopPlayList,
         params: {limit}
+    })
+}
+
+//获取用户歌单列表
+export function getUserPlayList(uid) {
+    return request({
+        url: UserPlayList,
+        params: {uid}
     })
 }

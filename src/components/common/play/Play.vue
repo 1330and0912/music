@@ -42,20 +42,7 @@
 </script>
 
 <style lang="less" scoped>
-    .slide-down-enter {
-        opacity: .5;
-    }
 
-    .slide-down-enter-to {
-        position: absolute;
-    }
-
-    .slide-down-enter-active {
-        transition: all .5s !important;
-    }
-
-    .slide-down-leave {
-    }
 
     .slide-down-leave-to {
         position: fixed !important;

@@ -106,6 +106,7 @@ const neverLogin = [
         component: () => import('views/myCollect/MyCollect'),
         meta: {isLogin: true, isShowPlayBar: true}
     },
+
 ]
 //登录注册相关组件路由
 const loginReg = [
@@ -270,12 +271,17 @@ const routes = [
             isShowNavBar: false,
             isShowPlayBar: true,
         }
-    }
+    },
+    {
+        path: '/user-play-list',
+        name: 'userPlayList',
+        component: () => import('views/userplaylist/UserPlayList'),
+        meta: {isLogin: false, isShowPlayBar: true},
+    },
 ]
 
 const router = new VueRouter({
     routes,
-    mode:'history'
 })
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location, onResolve, onReject) {

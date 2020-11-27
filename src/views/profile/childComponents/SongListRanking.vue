@@ -7,7 +7,7 @@
         <div class="item-wrap">
             <div class="item" @click="goSongList(item.id)" :key="item.id" v-for="item of songList">
                 <div class="img-wrap">
-                    <img :src="item.coverImgUrl+'?param=50y50'" alt="">
+                    <img v-lazy="item.coverImgUrl+'?param=50y50'" alt="">
                 </div>
                 <div class="text">{{item.name}}</div>
             </div>

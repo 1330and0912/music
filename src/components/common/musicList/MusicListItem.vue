@@ -50,18 +50,7 @@
                 if (url) {
                     this.playMusic(this.musicInfo)
                     console.log(this.musicInfo);
-                    let data
-                    if (this.LocalData.getItem('playQueuedData')) {
-                        data = this.LocalData.getItem('playQueuedData')
-                    } else {
-                        data = []
-                    }
-                    let index = data.findIndex(item => item.id == this.musicInfo.id)
-                    let currentIndex = data.findIndex(item => item.id == this.getCurrentMusic.id)
-                    if (index == -1) {
-                        data = data.insert(this.musicInfo,currentIndex)
-                    }
-                    this.writePlayQueuedData(data)
+
                 } else {
                     this.$toast.success(`该歌曲无版权`)
                 }

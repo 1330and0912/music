@@ -1,4 +1,5 @@
 import {random} from 'lodash'
+import {LocalData} from "../../storage/storage";
 
 const state = {
     recentPlay: [],//最近播放的音乐数据，
@@ -66,6 +67,7 @@ const mutations = {
     // 保存播放队列音乐数据
     savePlayQueuedData(state, value) {
         state.playQueuedData = value
+        LocalData.setItem('playQueuedData',value)
     }
 }
 const actions = {
@@ -78,6 +80,18 @@ const actions = {
     playMusic({commit, state}, musicInfo) {
         commit('savaCurrentMusicInfo', musicInfo)
         commit('playMusic')
+        let data
+        if ( LocalData.getItem('playQueuedData')) {
+            data =  LocalData.getItem('playQueuedData')
+        } else {
+            data = []
+        }
+        let index = data.findIndex(item => item.id == state.currentMusic.id)
+        let currentIndex = data.findIndex(item => item.id == state.currentMusic.id)
+        if (index == -1) {
+            data = data.insert(musicInfo,currentIndex)
+        }
+        commit('savePlayQueuedData',data)
     },
     //切换播放状态
     toggleMusicState({commit}) {
@@ -129,7 +143,6 @@ const actions = {
     //写入播放队列数据
     writePlayQueuedData({commit}, value) {
         commit('savePlayQueuedData', value)
-        window.localStorage.playQueuedData = JSON.stringify(value)
     },
     setCurrentMusic({commit}, musicInfo) {
         commit('savaCurrentMusicInfo', musicInfo)

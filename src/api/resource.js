@@ -42,4 +42,5 @@ export const TopList = '/toplist'//所有歌单
 export const PlayListDetail = '/playlist/detail'//获取歌单详情
 export const HighqualityTags = '/playlist/highquality/tags'//获取精品歌单标签
 export const TopPlayList = '/top/playlist/highquality'//获取精品歌单标签
+export const UserPlayList = '/user/playlist'//获取用户自建歌单
 

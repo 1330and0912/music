@@ -32,7 +32,6 @@
         background-color: white;
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
-
     }
     .h{
         padding: 15px 15px 5px;

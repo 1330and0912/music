@@ -21,7 +21,8 @@ import {
     Sticky,
     Sidebar,
     SidebarItem,
-    Slider
+    Slider,
+    Popover
 
 } from 'vant'
 
@@ -48,3 +49,4 @@ Vue.use(Sticky)
 Vue.use(Sidebar)
 Vue.use(SidebarItem)
 Vue.use(Slider)
+Vue.use(Popover)

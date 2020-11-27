@@ -21,11 +21,10 @@
                     </div>
                 </div>
             </div>
-            <div class="my-collect more">
+            <div class="my-collect more" @click="toUserPlayList">
                 <div class="wrap">
-                    <i class="iconfont icon-dibudaohanglan-
-"></i>
-                    <span>更多</span>
+                    <van-icon name="coupon-o"/>
+                    <span>我的歌单</span>
                 </div>
             </div>
         </div>
@@ -34,11 +33,12 @@
 
 <script>
     import HeaderBar from "./HeaderBar";
-
+    import {mapState} from 'vuex'
     export default {
         name: "MyMusic",
         components: {HeaderBar},
         computed: {
+            ...mapState('login',['uid'])
         },
         methods: {
             goFavoriteMusic() {
@@ -46,6 +46,11 @@
             },
             goMyCollect() {
                 this.$router.push('my-collect')
+            },
+            toUserPlayList() {
+                this.$router.push({
+                    name:'userPlayList',
+                })
             }
         }
     }
@@ -126,7 +131,7 @@
 
             .wrap {
                 i {
-                    margin-top: 0;
+                    margin-top: 10px;
                     color: white;
                 }
             }

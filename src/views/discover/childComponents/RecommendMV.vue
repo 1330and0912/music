@@ -1,6 +1,6 @@
 <template>
     <div class="recommend-mv">
-        <titles text-left="每日MV推荐" text-right="播放MV"/>
+        <titles text-left="每日MV推荐" text-right="播放MV" @click="goMV"/>
         <div class="mv-wrap">
             <div @click="playMV(item.id)" :key="item.id" class="item" v-for="item in mvData">
                 <div class="img-wrap">
@@ -31,6 +31,9 @@
         methods: {
             playMV(id) {
                 this.$router.push(`music-video/${id}`)
+            },
+            goMV() {
+                this.$router.push(`music-video/${this.mvData[0].id}`)
             }
         },
 

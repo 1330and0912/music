@@ -76,7 +76,7 @@
                     } else if (this.scrollTop >= baseH - topH) {
                         this.topBarRgb = 1
                     } else {
-                        this.topBarRgb = this.scrollTop / 400
+                        this.topBarRgb = this.scrollTop / 330
                     }
 
                 }
@@ -131,13 +131,12 @@
         z-index: -1;
         position: absolute;
         left: 0;
-        bottom: 0;
+        top: 0;
         width: 100%;
-        height: 100%;
+        height: 300px;
         background-size: cover;
         background-position: center center;
         filter: blur(111px);
-        filter: brightness(44%);
 
     }
 </style>

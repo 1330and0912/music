@@ -45,25 +45,19 @@
 
 <style lang="less" scoped>
     .base-info {
-        height:35%;
         width: 100%;
         transition: background-color .3s;
-
+        padding:60px 15px 10px;
+        height: 236px;
         .m {
             display: flex;
-            padding: 0px 15px 0;
             width: 100%;
             align-items: center;
-            padding-top: 65px;
             .img-wrap {
                 flex-shrink: 0;
-                height: 50%;
-                width: 38%;
-
                 img {
                     border-radius: 8px;
-                    width: 100%;
-                    height: 100%;
+                    width:120px;
                 }
             }
 
@@ -73,7 +67,7 @@
 
                 .header {
                     color: white;
-                    font-size: 18px;
+                    font-size: 14px;
                 }
 
             }
@@ -91,7 +85,7 @@
                     height: 40px;
 
                     img {
-                        border-radius: 50%;
+                        border-radius: 10px;
                         width: 100%;
                         height: 100%;
                     }
@@ -99,18 +93,17 @@
             }
         }
         .b-icon{
-            margin-top: 15px;
             color: white;
-            padding:0 40px;
+            padding:0 20px;
             display: flex;
             width: 100%;
             justify-content: space-between;
-
+            margin-top: 10px;
             .icon-wrap{
-                font-size: 24px;
+                font-size: 22px;
                 text-align: center;
                 .text{
-                    font-size: 14px;
+                    font-size: 12px;
                 }
             }
         }
