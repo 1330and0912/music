@@ -138,12 +138,12 @@
     }
 
     .slide-right-leave-active {
+        position: fixed;
+        z-index: 9999;
         transition: all .5s ease;
     }
 
     .slide-right-leave-to {
-        position: fixed;
-        z-index: 9999;
         transform: translateX(100%);
 
     }

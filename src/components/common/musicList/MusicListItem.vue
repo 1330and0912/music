@@ -16,7 +16,7 @@
         </div>
         <div class="icon">
             <i @click.stop="goMV(musicInfo.mvid)" v-if="musicInfo.mvid" class="go-mv iconfont icon-bofang1"></i>
-            <i class=" iconfont icon-ziyuan"></i>
+            <i @click.stop="openEdit" class="edit iconfont icon-ziyuan"></i>
         </div>
     </div>
 </template>
@@ -59,6 +59,10 @@
                 setTimeout(() => {
                     this.$router.push(`music-video/${mvid}`)
                 }, 300)
+            },
+            //打开编辑下拉框
+            openEdit() {
+                this.$emit('edit',this.musicInfo)
             }
         }
     }
@@ -113,19 +117,32 @@
             display: flex;
             align-items: center;
             color: @night-mode-color;
-            transition: .3s;
             justify-content: space-between;
 
-            &:active {
-                transform: scale(1.5);
-            }
+
 
             i {
-                color: rgba(0,0,0,.5);
+                color: rgba(0, 0, 0, .5);
                 font-size: 20px;
                 width: 20px;
+
                 &:last-child {
-                    font-size:  22px;
+                    font-size: 22px;
+                }
+            }
+
+            .go-mv {
+                transition: .3s;
+                margin-right: 10px;
+
+                &:active {
+                    transform: scale(2);
+                }
+            }
+            .edit{
+                transition: .3s;
+                &:active {
+                    transform: scale(2);
                 }
             }
 

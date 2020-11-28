@@ -1,5 +1,5 @@
 <template>
-    <transition name="slide-down">
+    <transition name="scale">
         <div class="wrapper">
             <loading v-if="isShowLoading" :show-loading="isShowLoading"/>
             <div v-else class="song-list-wrap" @scroll="scroll">
@@ -98,15 +98,15 @@
 
 <style lang="less" scoped>
 
-    .slide-down-leave-to {
+    .scale-leave-to {
         opacity: 0;
 
         transform: scale(0.1);
     }
 
-    .slide-down-leave-active {
+    .scale-leave-active {
         position: fixed !important;
-        z-index: 9999;
+        z-index: 111;
         transition: all .5s !important;
     }
 

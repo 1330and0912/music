@@ -119,13 +119,14 @@
 
 
     .slide-down-leave-to {
-        position: fixed;
-        z-index: 301;
+        transform:translateY(30%) ;
         opacity: 0;
 
     }
     .slide-down-leave-active {
-        transition: all .1s !important;
+        position: fixed;
+        z-index: 301;
+        transition: all .3s !important;
     }
 
     .move-start {

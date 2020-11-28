@@ -22,7 +22,15 @@ import {
     Sidebar,
     SidebarItem,
     Slider,
-    Popover
+    Popover,
+    Uploader,
+    SwipeCell,
+    Button,
+    ActionSheet,
+    Checkbox,
+    CheckboxGroup,
+    Cell,
+    CellGroup
 
 } from 'vant'
 
@@ -50,3 +58,11 @@ Vue.use(Sidebar)
 Vue.use(SidebarItem)
 Vue.use(Slider)
 Vue.use(Popover)
+Vue.use(Uploader)
+Vue.use(SwipeCell)
+Vue.use(Button)
+Vue.use(ActionSheet)
+Vue.use(Checkbox)
+Vue.use(CheckboxGroup)
+Vue.use(Cell)
+Vue.use(CellGroup)

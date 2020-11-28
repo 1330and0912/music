@@ -1,11 +1,11 @@
 <template>
-    <div   class="the-model" @click="close" v-show="value">
+    <div class="the-model" @click="close" v-show="value">
         <div class="content">
             <div class="title">新建歌单</div>
-            <input type="text" placeholder="请输入歌单标题">
+            <input v-model="playlistName" type="text" placeholder="请输入歌单标题">
             <div class="control">
                 <div class="cancel" @click.stop="cancel">取消</div>
-                <div class="ok" @click.stop="submit">提交</div>
+                <div class="ok" :class="playlistName.trim()?'':'disable'" @click.stop="submit">提交</div>
             </div>
         </div>
     </div>
@@ -15,7 +15,8 @@
         name: "TheModel",
         data() {
             return {
-                value: false
+                value: false,
+                playlistName: ''
             }
         },
         props: {
@@ -29,6 +30,7 @@
                 this.value = newVal
             },
             value(newVal) {
+                if (!newVal) this.playlistName = ''
                 this.$emit('changeShow', newVal)
             }
         },
@@ -41,14 +43,18 @@
                 this.$emit('cancel')
             },
             submit() {
-                this.$emit('submit')
+                if(this.playlistName.trim()!==''){
+                    this.$emit('submit',this.playlistName)
+                }
             }
         }
     }
 </script>
 
 <style lang="less" scoped>
-
+    .disable{
+        color: rgba(221,3,1,0.4) !important;
+    }
     .the-model {
         width: 100%;
         height: 100%;
@@ -61,11 +67,11 @@
             content: '';
             background-color: rgba(0, 0, 0, 1);
             opacity: .5;
-            z-index: 1;
+            z-index: 111;
         }
 
         .content {
-            z-index: 11;
+            z-index: 112;
             box-shadow: 0 0 10px rgba(1, 0, 220, .1);
             border-radius: 10px;
             padding: 15px;
@@ -86,7 +92,7 @@
                 width: 100%;
                 border-color: transparent transparent;
                 border-bottom: 1px solid rgba(0, 0, 0, .1);
-                padding: 6px 2px;
+                padding: 8px 3px;
 
                 &::placeholder {
                     font-size: 12px;

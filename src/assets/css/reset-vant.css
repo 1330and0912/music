@@ -19,7 +19,10 @@
 .netease-mv-swiper .van-swipe {
     height: 160px;
 }
+
 /*.recommend .van-list {*/
 /*    height: 100vh;*/
 /*}*/
-
+.list-item .van-swipe-cell {
+    height: 100px;
+}

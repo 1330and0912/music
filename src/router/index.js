@@ -44,6 +44,10 @@ const playRedirect = [
     {
         path: '/song-list/play',
         redirect: '/play'
+    },
+    {
+        path: '/user-play-list-detail/play',
+        redirect: '/play'
     }
 ]
 
@@ -277,7 +281,15 @@ const routes = [
         name: 'userPlayList',
         component: () => import('views/userplaylist/UserPlayList'),
         meta: {isLogin: false, isShowPlayBar: true},
+
     },
+    {
+        path: '/user-play-list-detail/:name',
+        name: 'userPlaylistName',
+        props: true,
+        meta: {isLogin: false, isShowPlayBar: true},
+        component: () => import('views/userplaylist/childComponents/UserPlaylistDetail')
+    }
 ]
 
 const router = new VueRouter({
