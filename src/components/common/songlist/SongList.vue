@@ -100,13 +100,18 @@
 
     .scale-leave-to {
         opacity: 0;
-
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
         transform: scale(0.1);
     }
 
     .scale-leave-active {
+
         position: fixed !important;
-        z-index: 111;
+        z-index: 211;
         transition: all .5s !important;
     }
 

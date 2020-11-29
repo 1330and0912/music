@@ -2,7 +2,7 @@
     <div class="nav-header">
         <div class="back-wrap">
             <i @click="back" class="iconfont icon-zuojiantou"></i>
-            <span>{{title}}</span>
+            <span class="title">{{title}}</span>
         </div>
     </div>
 </template>
@@ -40,6 +40,13 @@
             .icon-zuojiantou {
                 font-size: 36px;
                 margin-right: 5px;
+            }
+            .title{
+                display: inline-block;
+                width: 200px;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
             }
         }
 

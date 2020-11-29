@@ -41,11 +41,11 @@
     .fade-leave-active {
         position: fixed !important;
         z-index: 200;
-        transition: all .5s ease-out;
+        transition: all .3s linear;
     }
 
     .fade-leave-to {
         opacity: 0;
-        transform: translateX(70%);
+        transform: translateX(50%);
     }
 </style>

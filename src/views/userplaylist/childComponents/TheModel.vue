@@ -43,8 +43,8 @@
                 this.$emit('cancel')
             },
             submit() {
-                if(this.playlistName.trim()!==''){
-                    this.$emit('submit',this.playlistName)
+                if (this.playlistName.trim() !== '') {
+                    this.$emit('submit', this.playlistName)
                 }
             }
         }
@@ -52,9 +52,10 @@
 </script>
 
 <style lang="less" scoped>
-    .disable{
-        color: rgba(221,3,1,0.4) !important;
+    .disable {
+        color: rgba(221, 3, 1, 0.4) !important;
     }
+
     .the-model {
         width: 100%;
         height: 100%;

@@ -1,6 +1,6 @@
 <template>
     <transition name="scale">
-        <div id="userPlayList">
+        <div id="userPlayList" :class="this.$store.state.isShowPlayBar?'bottom-padding':''">
             <the-model @changeShow="changShow" :show="isShowPopover" @submit="newPlaylist"/>
             <div class="topBar">
                 <div class="back">
@@ -12,7 +12,10 @@
                 </div>
             </div>
             <div class="list-wrap">
-                <user-play-list-item @edit="edit" v-for="(item,index) in userPlaylist" :list="item"/>
+                <transition-group name="list-complete" tag="div">
+                    <user-play-list-item :key="item.name" @edit="edit" v-for="(item,index) in userPlaylist"
+                                         :list="item"/>
+                </transition-group>
             </div>
             <div class="action">
                 <action-sheet @select="select" @isShow="isShow" :options="options" :show-action="show"/>
@@ -54,7 +57,7 @@
             ...mapState('userPlayList', ['userPlaylist'])
         },
         methods: {
-            ...mapActions('userPlayList', ['createPlayList','deletePlaylist']),
+            ...mapActions('userPlayList', ['createPlayList', 'deletePlaylist']),
             openPopover() {
                 this.isShowPopover = true
             },
@@ -92,23 +95,39 @@
 </script>
 
 <style lang="less" scoped>
+    .bottom-padding {
+        padding-bottom: 49px !important;
+    }
+
+    .list-complete-item {
+        transition: all 1s;
+    }
+
+    .list-complete-enter, .list-complete-leave-to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+
+    .list-complete-enter-active,.list-complete-leave-active {
+        transition: all 1s;
+    }
+
     .scale-leave-to {
         opacity: 0;
-
-        transform: scale(0.1);
+        transform: scale(0.5);
     }
 
     .scale-leave-active {
         position: fixed !important;
-        z-index: 111;
-        transition: all .5s !important;
+        z-index: 266;
+        transition: all .3s !important;
     }
 
     #userPlayList {
         width: 100%;
         height: 100%;
         overflow-y: scroll;
-        background-color: white;
+        background-color: #F7F7F7;
     }
 
     .topBar {
@@ -121,7 +140,7 @@
         height: 49px;
         padding: 0 10px;
         color: white;
-        background-color: #FF3A3A;
+        background-color:#FF3A3A;
         z-index: 11;
 
         .back {

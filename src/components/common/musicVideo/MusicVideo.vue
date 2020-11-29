@@ -88,9 +88,14 @@
 
 <style lang="less" scoped>
     .slide-down-leave-to {
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
         opacity: 0;
 
-        transform: scale(0.1);
+        transform: scale(0.01);
     }
 
     .slide-down-leave-active {

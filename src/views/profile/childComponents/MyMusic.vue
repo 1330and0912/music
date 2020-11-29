@@ -24,7 +24,7 @@
             <div class="my-collect more" @click="toUserPlayList">
                 <div class="wrap">
                     <van-icon name="coupon-o"/>
-                    <span>我的歌单</span>
+                    <span>本地歌单</span>
                 </div>
             </div>
         </div>

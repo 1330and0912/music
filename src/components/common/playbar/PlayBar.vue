@@ -154,7 +154,7 @@
         /*rgba(0, 0, 0, .8),*/
         /*rgba(1, 2, 0, .6),*/
         /*rgba(0, 2, 0, 1));*/
-        background-color: @bottom-color;
+        background-color: rgba(255,255,255,.95);
         display: flex;
         justify-content: space-between;
         padding: 0 10px;

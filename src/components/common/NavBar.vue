@@ -57,6 +57,19 @@
         computed: {
             ...mapState('login', ['isLogin'])
         },
+        watch: {
+            $route(to, form) {
+                if (this.$route.path == '/discover') {
+                    this.currentIndex = 1
+                } else if (this.$route.path == '/category') {
+                    this.currentIndex = 2
+                } else if (this.$route.path == '/recommend') {
+                    this.currentIndex = 3
+                } else {
+                    this.currentIndex = 0
+                }
+            }
+        },
         methods: {
             changeTab(index) {
                 if (this.$route.path !== this.path[index]) {
@@ -106,12 +119,13 @@
             padding-bottom: 3px;
         }
 
-        .set{
+        .set {
             justify-content: flex-start;
             padding-left: 15px;
             padding-bottom: 5px;
         }
-        .search{
+
+        .search {
             justify-content: flex-end;
             padding-right: 15px;
         }

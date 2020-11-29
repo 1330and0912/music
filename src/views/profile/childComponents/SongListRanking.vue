@@ -27,7 +27,7 @@
         },
         async created() {
             const {list: res} = await getTopList()
-            this.songList = res.slice(0,6)
+            this.songList = res.slice(0, 6)
         },
         methods: {
             goSongList(id) {
@@ -67,6 +67,10 @@
 
             &:active {
                 background-color: rgba(0, 0, 0, .1);
+            }
+
+            .text {
+                    font-size: 14px;
             }
 
             .img-wrap {
