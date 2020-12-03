@@ -17,11 +17,11 @@
                     设置
                 </div>
             </li>
-            <li>
+            <li @click="exit">
                 <div class="icon">
                     <van-icon name="stop-circle-o"/>
                 </div>
-                <div class="title">
+                <div  class="title">
                     退出
                 </div>
             </li>
@@ -30,8 +30,16 @@
 </template>
 
 <script>
+    import {mapMutations} from 'vuex'
     export default {
-        name: "BottomControl"
+        name: "BottomControl",
+        methods: {
+            ...mapMutations('login',['logout']),
+            exit() {
+                this.logout()
+                this.$router.push('login')
+            }
+        }
     }
 </script>
 

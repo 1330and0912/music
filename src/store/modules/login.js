@@ -28,13 +28,14 @@ const mutations = {
         state.profile = SessionData.getItem('profile')
     },
     logout(state) {
-        state.profile=null
-        state.isLogin = false
-        state.uid = ''
-        // session.removeItem('profile')
-        // local.removeItem('ids')
-        // local.removeItem('cookie')
-
+        if(state.isLogin){
+            state.profile=null
+            state.isLogin = false
+            state.uid = ''
+            SessionData.removeItem('profile')
+            LocalData.removeItem('ids')
+            LocalData.removeItem('cookie')
+        }
     }
 }
 const getters = {

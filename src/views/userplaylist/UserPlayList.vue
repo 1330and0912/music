@@ -108,9 +108,10 @@
         transform: translateX(100%);
     }
 
-    .list-complete-enter-active,.list-complete-leave-active {
+    .list-complete-enter-active, .list-complete-leave-active {
         transition: all 1s;
     }
+
 
     .scale-leave-to {
         opacity: 0;
@@ -123,7 +124,9 @@
         transition: all .3s !important;
     }
 
+
     #userPlayList {
+
         width: 100%;
         height: 100%;
         overflow-y: scroll;
@@ -137,10 +140,10 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        height: 49px;
+        height: 44px;
         padding: 0 10px;
         color: white;
-        background-color:#FF3A3A;
+        background-color:#663366;
         z-index: 11;
 
         .back {

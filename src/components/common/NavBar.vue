@@ -19,7 +19,6 @@
             <van-icon name="search" color="black"/>
         </div>
     </div>
-
 </template>
 
 <script>
@@ -96,12 +95,15 @@
 </script>
 
 <style lang="less" scoped>
+
+
     .nav-bar-wrap {
+        position: fixed;
+        z-index: 200;
         width: 100%;
         display: flex;
         align-items: center;
-        position: fixed;
-        z-index: 100;
+
         top: 0px;
         left: 0;
         right: 0;

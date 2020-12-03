@@ -19,7 +19,7 @@
                 </div>
                 <span class="text">已购</span>
             </li>
-            <li>
+            <li @click="goRecentPlay">
                 <div class="icon">
                     <van-icon name="play-circle-o" color="white"/>
                 </div>
@@ -56,6 +56,11 @@
 <script>
     export default {
         name: "MyList",
+        methods: {
+            goRecentPlay() {
+                this.$router.push('recent')
+            }
+        }
 
     }
 </script>

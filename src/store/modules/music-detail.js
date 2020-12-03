@@ -1,8 +1,9 @@
 import {random} from 'lodash'
 import {LocalData} from "../../storage/storage";
 
+const recent = LocalData.getItem('recentPlay') || []
 const state = {
-    recentPlay: [],//最近播放的音乐数据，
+    recentPlay: recent,//最近播放的音乐数据，
     currentMusic: {},//当前播放的歌曲信息
     isPlay: false,//判断是否在播放音乐,
     currentTime: 0,//当前播放时间
@@ -14,8 +15,12 @@ const state = {
 }
 const mutations = {
     //保存用户已播放过的音乐
-    saveRecentPlay(state, payload) {
-        state.recentPlay = payload
+    saveRecentPlay(state, musicInfo) {
+        let index = state.recentPlay.findIndex(item =>item.id==musicInfo.id)
+        if(index==-1){
+            state.recentPlay.push(musicInfo)
+            LocalData.setItem('recentPlay',state.recentPlay)
+        }
     },
     //保存当前播放歌曲的信息
     savaCurrentMusicInfo(state, musicInfo) {
@@ -67,31 +72,31 @@ const mutations = {
     // 保存播放队列音乐数据
     savePlayQueuedData(state, value) {
         state.playQueuedData = value
-        LocalData.setItem('playQueuedData',value)
+        LocalData.setItem('playQueuedData', value)
     }
 }
 const actions = {
-    //获取保存播放音乐数据
-    //@recentPlay 最近播放的音乐数据
-    saveRecentPlay({commit}, recentPlay) {
-        commit('saveRecentPlay', recentPlay)
-    },
     //播放音乐
     playMusic({commit, state}, musicInfo) {
         commit('savaCurrentMusicInfo', musicInfo)
         commit('playMusic')
+        commit('saveRecentPlay',musicInfo)
         let data
-        if ( LocalData.getItem('playQueuedData')) {
-            data =  LocalData.getItem('playQueuedData')
+        if (LocalData.getItem('playQueuedData')) {
+            data = LocalData.getItem('playQueuedData')
         } else {
             data = []
         }
         let index = data.findIndex(item => item.id == state.currentMusic.id)
         let currentIndex = data.findIndex(item => item.id == state.currentMusic.id)
         if (index == -1) {
-            data = data.insert(musicInfo,currentIndex)
+            if (data.length >= 2) {
+                data = data.insert(musicInfo, currentIndex)
+            } else {
+                data.push(musicInfo)
+            }
         }
-        commit('savePlayQueuedData',data)
+        commit('savePlayQueuedData', data)
     },
     //切换播放状态
     toggleMusicState({commit}) {

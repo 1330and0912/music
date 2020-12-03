@@ -1,7 +1,7 @@
 <template>
     <transition name="slide-right">
         <div class="detail">
-            <nav-header :title="playlist[0].name" class="nav"/>
+            <nav-header title="自建歌单" class="nav"/>
             <template v-if="playlist[0].detail.length">
                 <music-list :is-show-loading-props="false" :music-info="playlist[0].detail "/>
             </template>
@@ -10,7 +10,7 @@
                     <div class="text">
                         歌单里没有歌曲
                     </div>
-                    <div class="btn">添加歌曲</div>
+                    <div class="btn" @click="addMusic">添加歌曲</div>
                 </div>
             </template>
         </div>
@@ -30,6 +30,12 @@
             ...mapGetters('userPlayList', ['getUserPlaylistByName']),
             playlist() {
                 return this.getUserPlaylistByName(this.name)
+            },
+
+        },
+        methods:{
+            addMusic() {
+                this.$router.push('recent')
             }
         }
 
@@ -38,7 +44,7 @@
 
 <style lang="less" scoped>
     .nav {
-        background-color:#FF3A3A;
+        background-color: #663366;
         width: 100%;
         margin-top: 0;
     }
@@ -50,13 +56,12 @@
         -o-transform: translate3d(0, 0, 0);
         transform: translate3d(0, 0, 0);
         transform: translateX(100%);
-        opacity: 0.5;
     }
 
     .slide-right-leave-active {
         position: absolute;
         z-index: 300;
-        transition: all .5s;
+        transition: all .2s;
     }
 
     .detail {
@@ -66,7 +71,7 @@
         height: 100%;
         background-color: #F7F7F7;
         overflow-y: scroll;
-        padding-top: 48px;
+        padding-top: 44px;
     }
 
     .bottom-padding {
@@ -93,7 +98,7 @@
             line-height: 35px;
             height: 35px;
             border-radius: 30px;
-            background-color: #FF3A3A;
+            background-color: #663366;
             color: white;
         }
     }

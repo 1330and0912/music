@@ -7,7 +7,6 @@
                 <song-list-ranking/>
             </div>
         </div>
-
 </template>
 
 <script>
@@ -27,25 +26,12 @@
                 type: String,
                 default: 'url(~../../assets/img/profile/defaultbackgroundimg.jpg)'
             }
-        },
-        computed: {},
-        mounted() {
-
         }
+
     }
 </script>
 
 <style lang="less" scoped>
-    .fade-leave-active {
-        transition: opacity .3s;
-    }
-
-    .fade-leave-to {
-        position: fixed;
-        opacity: 0;
-        z-index: 99;
-        width: 100%;
-    }
 
     #profile {
         width: 100%;

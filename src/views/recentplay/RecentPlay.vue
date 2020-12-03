@@ -1,66 +1,64 @@
 <template>
-    <div :class="this.$store.state.isShowPlayBar?'bottom-padding':''" id="recentPlay">
-        <music-list :music-info="recentPlay"/>
-    </div>
+    <transition name="slide">
+        <div :class="this.$store.state.isShowPlayBar?'bottom-padding':''" id="recentPlay">
+            <nav-header class="nav" title="最近播放"/>
+            <music-list   :music-info="recentPlay" :is-show-loading-props="false"/>
+        </div>
+    </transition>
 </template>
 
 <script>
     import {getRecentPlay, getSongURL, getLyric} from "api";
 
-    import MusicList from "components/common/musicList/MusicList";
 
-    import {mapActions} from 'vuex'
+    import {mapMutations, mapState} from 'vuex'
     import {dataLyric} from "common/dataLyric";
+    import MusicList from "../../components/common/musicList/MusicList";
+    import NavHeader from "../../components/common/NavHeader";
 
     export default {
         name: "RecentPlay",
-        components: {MusicList},
+        components: {NavHeader, MusicList},
         data() {
-            return {
-                recentPlay: [],
-                uid: ''
-            }
+            return {}
         },
-        async created() {
-            this.$store.state.isShowLoading = true
-
-            //获取用户id
-            this.uid = JSON.parse(window.sessionStorage.getItem('profile')).userId
-            const {allData: res} = await getRecentPlay(this.uid)
-            res.forEach(async (item) => {
-                if ((await getSongURL(item.song.id)).data[0].url) {//如果获取不到音乐url则不添加
-                    this.recentPlay.push({
-                        id: item.song.id,//音乐id
-                        songName: item.song.name,//歌曲名
-                        author: item.song.ar[0].name,//演唱者
-                        bg: item.song.al.picUrl,//歌曲背景
-                        musicUrl: (await getSongURL(item.song.id)).data[0].url,//歌曲url
-                        lyric: dataLyric((await getLyric(item.song.id)).lrc.lyric)//歌词
-                    })
-                }
-            })
-            this.$store.state.isShowLoading = false
-            this.saveRecentPlay(this.recentPlay)//将播放过的歌曲信息保存到vuex
-            // console.log(this.recentPlay);
+        computed: {
+            ...mapState('musicDetail', ['recentPlay'])
         },
-        methods: {
-            ...mapActions('musicDetail', ['saveRecentPlay']),
-        }
+        methods: {}
     }
 </script>
 
 <style lang="less" scoped>
+
+
+
+    .slide-leave-to {
+        transform: translateX(100%);
+    }
+
+    .slide-leave-active {
+        position: absolute;
+        z-index: 300;
+        transition: transform  .3s;
+    }
+
     .bottom-padding {
         padding-bottom: 49px !important;
     }
 
+    .nav {
+        margin: 0;
+        width: 100%;
+        background-color: #FF3A3A;
+    }
+
+
     #recentPlay {
-        overflow: scroll;
+        padding-top: 44px;
+        width: 100%;
         height: 100%;
         color: white;
-        background-size: cover;
-        background-position: center center;
-        background-repeat: no-repeat;
-        padding: 49px 0 0;
+        background-color: #F3F3F3;
     }
 </style>
