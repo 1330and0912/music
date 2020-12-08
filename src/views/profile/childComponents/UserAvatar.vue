@@ -1,7 +1,7 @@
 <template>
     <div class="user-avatar">
         <template v-if="profile">
-            <div class="avatar-wrap">
+            <div class="avatar-wrap" @click="userDetail(profile.userId)">
                 <div class="avatar">
                     <img v-lazy="profile.avatarUrl+'?param=100y100'" alt="">
                 </div>
@@ -39,6 +39,9 @@
         methods: {
             login() {
                 this.$router.push('/login')
+            },
+            userDetail(id) {
+                console.log(id);
             }
         }
     }

@@ -1,11 +1,11 @@
 <template>
     <div class="action-wrap">
-        <van-action-sheet class="action " v-model="value">
+        <van-action-sheet :get-container="container" close-on-popstate class="action " v-model="value">
             <slot name="content">
                 <div class="title" v-if="options">
                     名称:{{options.title}}
                 </div>
-                <template  v-if="options">
+                <template v-if="options">
                     <div @click="select(index)" v-for="(item,index) in options.btn" class="btn-item">
                         <van-icon :name="item.icon"/>
                         <div class="text">{{item.text}}</div>
@@ -19,7 +19,7 @@
 <script>
     export default {
         name: "ActionSheet",
-        props: ['showAction', 'options' ],
+        props: ['showAction', 'options','container'],
         data() {
             return {
                 value: false
@@ -44,6 +44,10 @@
 </script>
 
 <style lang="less" scoped>
+    .action-wrap {
+        width: 100%;
+    }
+
     .action {
         width: 100%;
         padding: 5px 20px;

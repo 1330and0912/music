@@ -25,4 +25,11 @@
 /*}*/
 .list-item .van-swipe-cell {
     height: 100px;
+
+
+}
+
+.action-wrap .van-action-sheet{
+
+    z-index: 9999 !important;
 }

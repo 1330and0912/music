@@ -100,7 +100,7 @@
             .music-name {
                 color: @night-mode-height-color;
                 font-size: 14px;
-                width: 200px;
+                width: 150px;
                 overflow: hidden;
                 white-space: nowrap;
                 text-overflow: ellipsis;

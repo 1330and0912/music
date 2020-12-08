@@ -22,7 +22,7 @@
                         </van-cell>
                     </van-cell-group>
                 </van-checkbox-group>
-                <div class="action-btn" @click="addToPlaylist">添加收藏</div>
+                <div   class="action-btn" @click="addToPlaylist">添加收藏</div>
             </template>
         </action-sheet>
     </div>
@@ -98,11 +98,14 @@
                     this.showAction = false
                     this.result = []
                     this.$toast({
-                        message:res,
-                        icon:'music-o',
-                        duration:500
+                        message: res,
+                        icon: 'music-o',
+                        duration: 500
                     })
                 }
+            },
+            getContainer() {
+                return document.querySelector('.music-list')
             }
         }
     }

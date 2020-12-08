@@ -21,13 +21,6 @@
     export default {
         name: "Profile",
         components: {SongListRanking, MainSet, Swipe, MyMusic, MyList, UserAvatar},
-        props: {
-            background: {
-                type: String,
-                default: 'url(~../../assets/img/profile/defaultbackgroundimg.jpg)'
-            }
-        }
-
     }
 </script>
 
@@ -37,10 +30,7 @@
         width: 100%;
         padding: 49px 10px 0;
         height: 100%;
-        /*background-size: 100% 280px;*/
-        /*background-repeat: no-repeat;*/
-        /*background-attachment: fixed;*/
-        //background-image: url("../../assets/img/profile/defaultbackgroundimg.jpg");
+
         background-color: #F8F8F8;
     }
 

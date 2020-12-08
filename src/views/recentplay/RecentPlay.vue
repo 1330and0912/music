@@ -50,7 +50,7 @@
     .nav {
         margin: 0;
         width: 100%;
-        background-color: #FF3A3A;
+        background-color: #FF6699;
     }
 
 

@@ -88,8 +88,6 @@
                     }
                 });
             }
-
-
             if (this.LocalData.getItem('currentMusic')) {
                 this.setCurrentMusic(this.LocalData.getItem('currentMusic'))
             } else {

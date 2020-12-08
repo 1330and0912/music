@@ -121,6 +121,7 @@
         position: relative;
         overflow-y: scroll;
         height: 100%;
+        width: 100%;
         padding: 10px 10px 0;
         display: flex;
         justify-content: space-between;
@@ -174,7 +175,7 @@
 
     .album-detail {
         height: 100%;
-
+        width: 100%;
         .header {
             background-position: center center;
             background-size: cover;

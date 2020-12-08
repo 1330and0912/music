@@ -3,23 +3,17 @@
         <span>
             <i @click="back" class="iconfont icon-zuojiantou"></i>
         </span>
-        <collect @collect="collectMV"/>
     </div>
 </template>
 
 <script>
-    import Collect from "../../Collect";
 
     export default {
         name: "Back",
-        components: {Collect},
         methods: {
             back() {
                 this.$router.back()
             },
-            collectMV() {
-                this.$toast("收藏成功")
-            }
         }
     }
 </script>
