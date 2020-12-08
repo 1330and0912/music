@@ -6,6 +6,7 @@ export const RegisterCellPhone = '/register/cellphone'//注册账号/修改密�
 export const InitProfile = '/activate/init/profile'//初始化昵称
 export const LoginCellphone = '/login/cellphone'//手机号码登录
 export const LoginStatus = '/login/status'//登录状态
+export const UserDetail = '/user/detail'//登录状态
 export const GetLyric = '/lyric'//获取歌词
 export const GetSongURL = '/song/url'//获取音乐url
 export const RecentPlay = '/user/record'//获取用户最近播放记录

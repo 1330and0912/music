@@ -54,7 +54,7 @@ const playRedirect = [
     }
 ]
 
-//路由页面组件
+//路由页面级组件
 const routerView = [
     ,
     {
@@ -113,6 +113,13 @@ const neverLogin = [
         component: () => import('views/myCollect/MyCollect'),
         meta: {isLogin: true, isShowPlayBar: true}
     },
+    {
+        path: '/user-detail/:id',
+        name: 'userDetail',
+        props:true,
+        component: () => import('views/userDetail/UserDetail'),
+        meta: {isLogin: true, isShowPlayBar: true}
+    }
 
 ]
 //登录注册相关组件路由

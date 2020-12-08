@@ -36,7 +36,7 @@ import {
     RecommendPlayList,
     RecommendSong,
     RecommendMV,
-    NeteaseMV, AlbumNewSt, TopList, PlayListDetail, HighqualityTags, TopPlayList, UserPlayList
+    NeteaseMV, AlbumNewSt, TopList, PlayListDetail, HighqualityTags, TopPlayList, UserPlayList, UserDetail
 } from "./resource";
 import {fuchsia} from "color-name";
 import PlaylistHighQuality from "../views/PlaylistHighQuality";
@@ -129,6 +129,14 @@ export function loginStatus() {
     })
 }
 
+//获取用户详细信息
+//@id 用户id
+export function getUserDetail(uid) {
+    return request({
+        url:UserDetail,
+        params:{uid}
+    })
+}
 //获取歌词
 // @lyricID:音乐id
 export function getLyric(lyricID) {

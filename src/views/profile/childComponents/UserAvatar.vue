@@ -42,6 +42,10 @@
             },
             userDetail(id) {
                 console.log(id);
+                this.$router.push({
+                    name: 'userDetail',
+                    params: {id}
+                })
             }
         }
     }
