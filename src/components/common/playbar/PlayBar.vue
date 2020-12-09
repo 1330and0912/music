@@ -16,6 +16,7 @@
                    :src="url">
             </audio>
             <van-popup round position="bottom"
+                       bottom="10%"
                        v-model="isShowPopup"
                        @open="popupOpen"
                        @click.stop="popupClick">

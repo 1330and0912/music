@@ -18,6 +18,10 @@ const rect = [
         path: '/user-play-list-detail/recent',
         redirect: '/recent'
     },
+    {
+        path:'/user-detail/recent',
+        redirect:'/recent'
+    }
 ]
 //mv页面相关路由重定向
 const musicVideoRedirect = [

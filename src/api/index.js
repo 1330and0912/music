@@ -36,7 +36,7 @@ import {
     RecommendPlayList,
     RecommendSong,
     RecommendMV,
-    NeteaseMV, AlbumNewSt, TopList, PlayListDetail, HighqualityTags, TopPlayList, UserPlayList, UserDetail
+    NeteaseMV, AlbumNewSt, TopList, PlayListDetail, HighqualityTags, TopPlayList, UserPlayList, UserDetail, UserSub
 } from "./resource";
 import {fuchsia} from "color-name";
 import PlaylistHighQuality from "../views/PlaylistHighQuality";
@@ -135,6 +135,13 @@ export function getUserDetail(uid) {
     return request({
         url:UserDetail,
         params:{uid}
+    })
+}
+//获取用户收藏信息
+export function getUserSub() {
+    return request({
+        url:UserSub,
+        params:{}
     })
 }
 //获取歌词

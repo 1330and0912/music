@@ -22,7 +22,7 @@
                         </van-cell>
                     </van-cell-group>
                 </van-checkbox-group>
-                <div   class="action-btn" @click="addToPlaylist">添加收藏</div>
+                <div :class="$store.state.isShowPlayBar?'btn-b':''"   class="action-btn" @click="addToPlaylist">添加收藏</div>
             </template>
         </action-sheet>
     </div>
@@ -137,7 +137,9 @@
         color: #0086b3;
         font-size: 14px;
     }
-
+    .btn-b{
+        padding-bottom:  90px;
+    }
 
     .cell span {
         display: inline-block;

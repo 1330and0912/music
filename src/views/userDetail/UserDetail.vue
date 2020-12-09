@@ -30,6 +30,27 @@
                         地区: 福建 泉州
                     </div>
                 </div>
+                <div class="sub">
+                    <div class="title">
+                        音乐品味
+                    </div>
+                    <div v-if="recentPlay.length" class="sub-item" @click="recent">
+                        <img :src="`${recentPlay[0].bg}?param=50y50` " alt="">
+                        <div class="text">
+                            <span class="t1">最近播放歌曲</span>
+                            <span class="t2">累计听歌{{recentPlay.length}}首</span>
+                        </div>
+                    </div>
+                    <div class="sub-item" @click="favoriteMusic">
+                        <img src="~assets/img/likemusic.jpg" alt="">
+                        <div class="text">
+                            <span class="t1">我喜欢的音乐</span>
+                            <span class="t2">
+                                 {{ids.length}}首
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </content-list>
         </div>
     </transition>
@@ -37,7 +58,8 @@
 
 <script>
     import ContentList from "../../components/common/ContentList";
-    import {getUserDetail} from "../../api";
+    import {getUserDetail, getUserSub} from "../../api";
+    import {mapState} from 'vuex'
 
     export default {
         name: "UserDetail",
@@ -45,24 +67,41 @@
         props: ['id'],
         data() {
             return {
-                userDetail: {}
+                userDetail: {},
+                subData: {}
             }
         },
         methods: {},
         async created() {
             const res = await getUserDetail(this.id)
-            console.log(res);
             const {avatarUrl, cCount, follows, nickname} = res.profile
             const {level, createDays, createTime} = res
             this.userDetail = {avatarUrl, cCount, follows, nickname, level, createDays, createTime}
+            this.getSubData()
+        },
+        methods: {
+            async getSubData() {
+                this.subData = await getUserSub()
+                console.log(this.subData);
+            },
+            recent(){
+                this.$router.push('recent')
+            },
+            favoriteMusic(){
+                this.$router.push({
+                    path:'/favorite-music',
+                    name:'favoriteMusic'
+                })
+            }
         },
         computed: {
+            ...mapState('musicDetail', ['recentPlay']),
+            ...mapState('collect', ['ids']),
             creatTime() {
-                let date =new Date(this.userDetail.createTime)
+                let date = new Date(this.userDetail.createTime)
                 let y = date.getFullYear()
-                let m = date.getMonth()+1
+                let m = date.getMonth() + 1
                 return `${y}年${m}月注册`
-
             }
         }
     }
@@ -168,5 +207,46 @@
             padding-top: 20px;
             .item-text;
         }
+    }
+
+    .sub {
+        margin-top: 20px;
+        .item-content;
+
+        .title {
+            .item-title;
+            margin-bottom: 5px;
+        }
+
+        .sub-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+
+            img {
+                border-radius: 10px;
+                width: 50px;
+                height: 50px;
+                margin-right: 10px;
+            }
+
+            .text {
+                line-height: 16px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                .t1 {
+                    color: #000;
+                    font-size: 14px;
+                    margin-bottom: 3px;
+                }
+
+                .t2 {
+                    .item-text;
+                }
+            }
+        }
+
     }
 </style>

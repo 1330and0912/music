@@ -1,18 +1,19 @@
 <template>
     <transition name="slide-right">
         <div class="detail">
-            <nav-header title="自建歌单" class="nav"/>
-            <template v-if="playlist[0].detail.length">
-                <music-list :is-show-loading-props="false" :music-info="playlist[0].detail "/>
-            </template>
-            <template v-else>
-                <div class="null">
-                    <div class="text">
-                        歌单里没有歌曲
+            <content-list title="自建歌单">
+                <template v-if="playlist[0].detail.length">
+                    <music-list :is-show-loading-props="false" :music-info="playlist[0].detail "/>
+                </template>
+                <template v-else>
+                    <div class="null">
+                        <div class="text">
+                            歌单里没有歌曲
+                        </div>
+                        <div class="btn" @click="addMusic">添加歌曲</div>
                     </div>
-                    <div class="btn" @click="addMusic">添加歌曲</div>
-                </div>
-            </template>
+                </template>
+            </content-list>
         </div>
     </transition>
 </template>
@@ -21,10 +22,11 @@
     import {mapGetters} from 'vuex'
     import MusicList from "../../../components/common/musicList/MusicList";
     import NavHeader from "../../../components/common/NavHeader";
+    import ContentList from "../../../components/common/ContentList";
 
     export default {
         name: "UserPlaylistDetail",
-        components: {NavHeader, MusicList},
+        components: {ContentList, NavHeader, MusicList},
         props: ['name'],
         computed: {
             ...mapGetters('userPlayList', ['getUserPlaylistByName']),
@@ -71,7 +73,6 @@
         height: 100%;
         background-color: #F7F7F7;
         overflow-y: scroll;
-        padding-top: 44px;
     }
 
     .bottom-padding {
@@ -80,7 +81,7 @@
 
     .null {
         position: absolute;
-        top: 40%;
+        top: 10%;
         left: 50%;
         transform: translate(-50%, -50%);
 

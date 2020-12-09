@@ -29,7 +29,10 @@
 
 }
 
-.action-wrap .van-action-sheet{
+.van-popup {
+    z-index: 10000!important;
+}
 
+.action-wrap .van-action-sheet {
     z-index: 9999 !important;
 }

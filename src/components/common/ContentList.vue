@@ -1,7 +1,10 @@
 <template>
     <div id="content" @scroll="scroll">
         <div class="header" :style="{backgroundColor:bc}">
-            <span :style="{'color':color}" class="back" @click="$router.back()">返回</span>
+            <span :style="{'color':color}" class="back" @click="$router.back()">
+                <i class="iconfont icon-zuojiantou"></i>
+                {{title}}
+            </span>
             <div class="more">
                 <van-icon :color="color" name="ellipsis"/>
             </div>
@@ -10,7 +13,7 @@
             <img src="~assets/img/profile/user.jpg" alt="">
         </div>
         <div class="content">
-            <slot ></slot>
+            <slot></slot>
         </div>
     </div>
 </template>
@@ -21,26 +24,32 @@
         data() {
             return {
                 opacity: 1,
-                bc:'transparent',
-                color:'white'
+                bc: 'transparent',
+                color: 'white'
             }
         },
+        props: ['title'],
         methods: {
             scroll(e) {
                 let top = e.target.scrollTop;
                 if (top >= 200) {
                     this.bc = 'white'
-                    this.color='black'
-                }else {
-                    this.color='white'
+                    this.color = 'black'
+                } else {
+                    this.color = 'white'
                     this.bc = 'transparent'
                 }
                 if (top <= 300) {
                     let ratio = top / 300
                     this.opacity = 1 - ratio
                 }
-                this.$emit('scrolling',top)
+                this.$emit('scrolling', top)
             }
+        },
+        activated() {
+            this.color = 'white'
+            this.bc = 'transparent'
+            this.opacity = 1
         }
     }
 </script>
@@ -63,7 +72,7 @@
         top: 0;
         left: 0;
         right: 0;
-        z-index: 22;
+        z-index: 1201;
 
         .more, .back {
             color: white;
@@ -75,6 +84,14 @@
             align-items: center;
         }
 
+        .back {
+            display: flex;
+            align-items: center;
+            i {
+                margin-right: 6px;
+                font-size: 26px;
+            }
+        }
     }
 
     .h-img {

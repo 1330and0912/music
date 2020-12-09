@@ -1,8 +1,9 @@
 <template>
     <transition name="slide">
         <div :class="this.$store.state.isShowPlayBar?'bottom-padding':''" id="recentPlay">
-            <nav-header class="nav" title="最近播放"/>
-            <music-list   :music-info="recentPlay" :is-show-loading-props="false"/>
+            <content-list title="最近播放" >
+                <music-list :music-info="recentPlay" :is-show-loading-props="false"/>
+            </content-list>
         </div>
     </transition>
 </template>
@@ -15,12 +16,13 @@
     import {dataLyric} from "common/dataLyric";
     import MusicList from "../../components/common/musicList/MusicList";
     import NavHeader from "../../components/common/NavHeader";
+    import ContentList from "../../components/common/ContentList";
 
     export default {
         name: "RecentPlay",
-        components: {NavHeader, MusicList},
+        components: {ContentList, NavHeader, MusicList},
         data() {
-            return {}
+            return {bg:require('../../assets/img/profile/user.jpg')}
         },
         computed: {
             ...mapState('musicDetail', ['recentPlay'])
@@ -32,7 +34,6 @@
 <style lang="less" scoped>
 
 
-
     .slide-leave-to {
         transform: translateX(100%);
     }
@@ -40,22 +41,15 @@
     .slide-leave-active {
         position: absolute;
         z-index: 300;
-        transition: transform  .3s;
+        transition: transform .3s;
     }
 
     .bottom-padding {
         padding-bottom: 49px !important;
     }
 
-    .nav {
-        margin: 0;
-        width: 100%;
-        background-color: #FF6699;
-    }
-
 
     #recentPlay {
-        padding-top: 44px;
         width: 100%;
         height: 100%;
         color: white;
