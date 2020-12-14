@@ -3,7 +3,7 @@
         <div class="detail">
             <content-list title="自建歌单">
                 <template v-if="playlist[0].detail.length">
-                    <music-list :is-show-loading-props="false" :music-info="playlist[0].detail "/>
+                    <music-list :is-scroll-y="false" :is-show-loading-props="false" :music-info="playlist[0].detail "/>
                 </template>
                 <template v-else>
                     <div class="null">

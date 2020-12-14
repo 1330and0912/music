@@ -1,4 +1,3 @@
-import {random} from 'lodash'
 import {LocalData} from "../../storage/storage";
 
 const recent = LocalData.getItem('recentPlay') || []
@@ -16,10 +15,10 @@ const state = {
 const mutations = {
     //保存用户已播放过的音乐
     saveRecentPlay(state, musicInfo) {
-        let index = state.recentPlay.findIndex(item =>item.id==musicInfo.id)
-        if(index==-1){
+        let index = state.recentPlay.findIndex(item => item.id == musicInfo.id)
+        if (index == -1) {
             state.recentPlay.push(musicInfo)
-            LocalData.setItem('recentPlay',state.recentPlay)
+            LocalData.setItem('recentPlay', state.recentPlay)
         }
     },
     //保存当前播放歌曲的信息
@@ -80,7 +79,7 @@ const actions = {
     playMusic({commit, state}, musicInfo) {
         commit('savaCurrentMusicInfo', musicInfo)
         commit('playMusic')
-        commit('saveRecentPlay',musicInfo)
+        commit('saveRecentPlay', musicInfo)
         let data
         if (LocalData.getItem('playQueuedData')) {
             data = LocalData.getItem('playQueuedData')
@@ -110,7 +109,7 @@ const actions = {
     prevSong({commit, state}) {
         let index
         if (state.playMode == 2) {
-            index = random(0, state.playQueuedData.length - 1)
+            index = Math.floor(Math.random() * state.playQueuedData.length)
         } else {
             index = state.playQueuedData.findIndex(item => item.id == state.currentMusic.id) - 1
             index = index < 0 ? state.playQueuedData.length - 1 : index
@@ -121,7 +120,7 @@ const actions = {
     nextSong({commit, state}) {
         let index
         if (state.playMode == 2) {
-            index = random(0, state.playQueuedData.length - 1)
+            index = Math.floor(Math.random() * state.playQueuedData.length)
         } else {
             index = state.playQueuedData.findIndex(item => item.id == state.currentMusic.id) + 1
             index = index > state.playQueuedData.length - 1 ? 0 : index
@@ -134,7 +133,7 @@ const actions = {
     },
     // 随机播放模式
     randomPlay({commit, state}) {
-        let index = random(0, state.playQueuedData.length - 1)
+        let index = Math.floor(Math.random() * state.playQueuedData.length)
         commit('randomPlay', index)
     },
     // 获取音乐时长

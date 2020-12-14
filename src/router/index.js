@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import {nextTick} from "q";
 import store from "../store";
-
 Vue.use(VueRouter)
 //普通路由重定向
 const rect = [

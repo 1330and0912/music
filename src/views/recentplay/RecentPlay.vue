@@ -1,8 +1,8 @@
 <template>
     <transition name="slide">
         <div :class="this.$store.state.isShowPlayBar?'bottom-padding':''" id="recentPlay">
-            <content-list title="最近播放" >
-                <music-list :music-info="recentPlay" :is-show-loading-props="false"/>
+            <content-list  title="最近播放">
+                <music-list :is-scroll-y="false" :music-info="recentPlay" :is-show-loading-props="false"/>
             </content-list>
         </div>
     </transition>
@@ -22,12 +22,16 @@
         name: "RecentPlay",
         components: {ContentList, NavHeader, MusicList},
         data() {
-            return {bg:require('../../assets/img/profile/user.jpg')}
+            return {
+                bg: require('../../assets/img/profile/user.jpg'),
+            }
         },
         computed: {
             ...mapState('musicDetail', ['recentPlay'])
         },
-        methods: {}
+        methods: {
+
+        }
     }
 </script>
 

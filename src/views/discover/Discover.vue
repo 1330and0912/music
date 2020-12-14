@@ -1,14 +1,14 @@
 <template>
-        <div id="discover" :class="this.$store.state.isShowPlayBar?'bottom-padding':''">
-            <div class="scroll">
-                <netease-mv-swiper/>
-                <dragon-bar/>
-                <recommend-play-list/>
-                <recommend-song/>
-                <recommend-m-v/>
-                <recommend-album/>
-            </div>
+    <div id="discover" :class="this.$store.state.isShowPlayBar?'bottom-padding':''">
+        <div class="scroll">
+            <netease-mv-swiper/>
+            <dragon-bar/>
+            <recommend-play-list/>
+            <recommend-song/>
+            <recommend-m-v/>
+            <recommend-album/>
         </div>
+    </div>
 
 </template>
 

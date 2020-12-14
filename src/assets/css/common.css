@@ -5,4 +5,7 @@
 .page-padding {
   padding: 30px 15px;
 }
+.main-bc {
+  background-image: linear-gradient(#EBEBEB, #F1F1F1, #F8F8F8);
+}
 /*# sourceMappingURL=common.css.map */

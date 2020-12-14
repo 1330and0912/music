@@ -6,7 +6,11 @@
                 {{title}}
             </span>
             <div class="more">
-                <van-icon :color="color" name="ellipsis"/>
+                <van-popover :offset="[-62,-21]" v-model="showPopover" trigger="click" :actions="actions">
+                    <template #reference>
+                        <van-icon size="28" :color="color" name="ellipsis"/>
+                    </template>
+                </van-popover>
             </div>
         </div>
         <div class="h-img" :style="{'opacity':opacity}">
@@ -25,19 +29,27 @@
             return {
                 opacity: 1,
                 bc: 'transparent',
-                color: 'white'
+                color: 'white',
+                showPopover: false,
+                actions: [
+                    { text: '选项一', icon: 'add-o' },
+                    { text: '选项二', icon: 'music-o' },
+                    { text: '选项三', icon: 'more-o' },
+                ],
             }
         },
         props: ['title'],
         methods: {
             scroll(e) {
                 let top = e.target.scrollTop;
-                if (top >= 200) {
+                if (top >= 251) {
                     this.bc = 'white'
                     this.color = 'black'
+                    this.$emit('scroll', true)
                 } else {
                     this.color = 'white'
                     this.bc = 'transparent'
+                    this.$emit('scroll', false)
                 }
                 if (top <= 300) {
                     let ratio = top / 300
@@ -87,6 +99,7 @@
         .back {
             display: flex;
             align-items: center;
+
             i {
                 margin-right: 6px;
                 font-size: 26px;

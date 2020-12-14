@@ -36,7 +36,16 @@ import {
     RecommendPlayList,
     RecommendSong,
     RecommendMV,
-    NeteaseMV, AlbumNewSt, TopList, PlayListDetail, HighqualityTags, TopPlayList, UserPlayList, UserDetail, UserSub
+    NeteaseMV,
+    AlbumNewSt,
+    TopList,
+    PlayListDetail,
+    HighqualityTags,
+    TopPlayList,
+    UserPlayList,
+    UserDetail,
+    UserSub,
+    RefLogin
 } from "./resource";
 import {fuchsia} from "color-name";
 import PlaylistHighQuality from "../views/PlaylistHighQuality";
@@ -126,6 +135,12 @@ export function loginCellphone(phone, password) {
 export function loginStatus() {
     return request({
         url: LoginStatus, params: {}
+    })
+}
+//刷新用户登录
+export function refreshLogin() {
+    return request({
+        url: RefLogin, params: {timestamp:new Date().getTime()}
     })
 }
 

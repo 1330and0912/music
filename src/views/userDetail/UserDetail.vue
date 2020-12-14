@@ -58,7 +58,7 @@
 
 <script>
     import ContentList from "../../components/common/ContentList";
-    import {getUserDetail, getUserSub} from "../../api";
+    import {getUserDetail, getUserSub, refreshLogin} from "../../api";
     import {mapState} from 'vuex'
 
     export default {
@@ -82,10 +82,10 @@
         methods: {
             async getSubData() {
                 this.subData = await getUserSub()
-                console.log(this.subData);
             },
             recent(){
                 this.$router.push('recent')
+
             },
             favoriteMusic(){
                 this.$router.push({
@@ -109,14 +109,13 @@
 
 <style lang="less" scoped>
     .fade-leave-to {
-        transform: scale(0.1);
         opacity: 0;
+        transform: translate3d(-66%,100%,1210px);
     }
-
     .fade-leave-active {
         position: absolute;
         z-index: 222;
-        transition: .3s;
+        transition:all   .3s;
     }
 
     #userDetail {

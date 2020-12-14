@@ -3,8 +3,10 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import Toast from '../plugins/toast/index'
-import './plugins/vant'
-
+// import './plugins/vant'
+Vue.use(vant.Lazyload,{
+    loading: require('./assets/img/vload.jpg'),
+});
 Vue.config.productionTip = false
 Vue.use(Toast)
 import {LocalData, SessionData} from "./storage/storage";

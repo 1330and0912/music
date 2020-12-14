@@ -5,7 +5,7 @@
                 <loading :show-loading="true"/>
             </template>
             <template v-else>
-                <div  ref="play" id="playlistHighQuality">
+                <div ref="play" id="playlistHighQuality">
 
                     <div class="h">
                         <div class="icon" @click="back">
@@ -19,7 +19,8 @@
                     <div class="item-wrap">
                         <div class="sw">
                             <swiper :options="swiperOptions">
-                                <swiper-slide @click.native="openPlaylist(item.id)" :key="item.id" v-for="item in swiperImg">
+                                <swiper-slide @click.native="openPlaylist(item.id)" :key="item.id"
+                                              v-for="item in swiperImg">
                                     <img :src="item.bg"/>
                                 </swiper-slide>
                             </swiper>
@@ -30,7 +31,7 @@
                             <div class="wrap">
                                 <div @click="openPlaylist(list.id)" v-for="list in list(item)" :key="list.id"
                                      class="wrap-con">
-                                    <img v-lazy="list.bg+'?param=100y100'" alt="">
+                                    <img v-lazy="list.bg+'?param=200y200'" alt="">
                                     <div class="desc">
                                         {{ list.description}}
                                     </div>
@@ -48,8 +49,7 @@
     import {getPlaylistHighQuality, getTopPlayList} from "../api";
     import Loading from "../components/common/loading/Loading";
 
-    import { swiper, swiperSlide} from "vue-awesome-swiper";
-    import "swiper/dist/css/swiper.css";
+    import {swiper, swiperSlide} from "vue-awesome-swiper";
 
     export default {
         name: "PlaylistHighQuality",
@@ -62,15 +62,15 @@
                 swiperOptions: {
                     autoplay: true,
                     loop: true,
-                    effect : 'coverflow',
+                    effect: 'coverflow',
                     slidesPerView: 2,
                     centeredSlides: true,
                     coverflowEffect: {
-                        rotate: 90,
-                        stretch: 10,
-                        depth:  60,
-                        modifier: 1.5,
-                        slideShadows : true
+                        rotate: 0,
+                        stretch: 50,
+                        depth: 180,
+                        modifier: 2,
+                        slideShadows: true
                     },
                 }
             }
@@ -112,8 +112,8 @@
                     return this.playlist.filter(item => item.tag == tag)
                 }
             },
-            swiperImg(){
-                return this.playlist.slice(0,9)
+            swiperImg() {
+                return this.playlist.slice(0, 9)
             }
 
 
@@ -122,16 +122,20 @@
 </script>
 
 <style lang="less" scoped>
-    .sw{
+    .sw {
         padding: 0 10px;
         width: 100%;
     }
+
     .swiper-container {
         height: 200px;
-        width: 100%;
+
+        .swiper-slide {
+            border-radius: 20px;
+        }
 
         img {
-            border-radius: 10px;
+            border-radius: 20px;
             width: 100%;
             height: 200px;
         }

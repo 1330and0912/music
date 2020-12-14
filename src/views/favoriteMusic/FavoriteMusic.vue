@@ -36,6 +36,7 @@
             ...mapActions('collect', ['saveLikeMusic']),
             async getMusicInfo() {
                 const {songs} = await getSongDetail(this.ids.join(','))
+                if(!songs)return
                 songs.forEach(async item => {
                     const mvid = item.mv
                     const {id, name: songName} = item

@@ -12,10 +12,16 @@
                 </div>
             </div>
             <div class="list-wrap">
-                <transition-group name="list-complete" tag="div">
+                <transition-group v-if="userPlaylist.length" name="list-complete" tag="div">
                     <user-play-list-item :key="item.name" @edit="edit" v-for="(item,index) in userPlaylist"
                                          :list="item"/>
                 </transition-group>
+                <div v-else class="empty">
+                    当前无歌单
+                    <div @click="openPopover" class="btn-add">
+                        去添加
+                    </div>
+                </div>
             </div>
             <div class="action">
                 <action-sheet @select="select" @isShow="isShow" :options="options" :show-action="show"/>
@@ -40,7 +46,7 @@
                 actions: [{name: '选项一'}, {name: '选项二'}, {name: '选项三'}],
                 playlist: [],
                 isShowPopover: false,
-                img: require('D:\\web\\music\\music\\src\\assets\\img\\uplaylist.jpg'),
+                img: require('../../assets/img/uplaylist.jpg'),
                 options: {
                     title: '',
                     btn: [
@@ -126,7 +132,6 @@
 
 
     #userPlayList {
-
         width: 100%;
         height: 100%;
         overflow-y: scroll;
@@ -143,7 +148,7 @@
         height: 44px;
         padding: 0 10px;
         color: white;
-        background-color:#663366;
+        background-color: #FC3B2A;
         z-index: 11;
 
         .back {
@@ -171,6 +176,27 @@
     .list-wrap {
         width: 100%;
         padding-top: 49px;
+
+        .empty {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: absolute;
+            width: 200px;
+            top: calc(50% - 44px);
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 13px;
+            .btn-add {
+                background-color: @main-color;
+                color: white;
+                font-size: 16px;
+                margin-top: 15px;
+                padding: 10px 30px;
+                border-radius: 20px;
+            }
+        }
     }
 
 

@@ -1,6 +1,20 @@
 import axios from 'axios'
 import {LocalData} from "../storage/storage";
+import {
+    LikeMusic,
+    UserSub,
+    UserPlayList,
+    UserDetail,
+    LikeList,
+    RefLogin,
+    MVList,
+    CollectSinger,
+    SingerList,
+    LoginStatus
+} from '../api/resource'
 
+//需要添加cookie的接口
+let url = [LikeMusic, UserSub, UserPlayList, UserDetail, LikeList, RefLogin, MVList, CollectSinger, SingerList, LoginStatus]
 
 export function request(config) {
     const instance = axios.create({
@@ -9,7 +23,8 @@ export function request(config) {
         withCredentials: true,
     })
     instance.interceptors.request.use(data => {
-            if (LocalData.getItem('cookie')) {
+            let isNeverLogin = url.findIndex(item => item == data.url)
+            if (LocalData.getItem('cookie') && isNeverLogin !== -1) {
                 if (data.params) {
                     data.params.cookie = LocalData.getItem('cookie')
                 }

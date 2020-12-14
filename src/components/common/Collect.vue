@@ -25,7 +25,7 @@
 </script>
 
 <style lang="less" scoped>
-    .icon-aixin {
+    .icon-aixin  {
         font-size: 20px;
         color: whitesmoke;
         transition: .3s;
@@ -35,7 +35,6 @@
             transform: scale(1.8);
         }
     }
-
     .is-collect {
         color: red !important;
     }

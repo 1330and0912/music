@@ -1,21 +1,34 @@
 <template>
-    <div class="netease-mv-swiper">
-        <van-swipe autoplay="2300" indicator-color="#FF3A3A"  vertical>
-            <van-swipe-item @click="playMV(item.id)" v-for="item in mvData" :key="item.id">
+    <div class="sw">
+        <swiper :options="swiperOptions">
+            <swiper-slide @click.native="playMV(item.id)" :key="item.id"
+                          v-for="item in mvData">
                 <img v-lazy="item.cover+'?param=400y200'" alt="">
-            </van-swipe-item>
-        </van-swipe>
+            </swiper-slide>
+        </swiper>
     </div>
 </template>
 
 <script>
     import {getNeteaseMV} from "../../../api";
-
+    import "swiper/dist/css/swiper.css";
+    import {swiper,swiperSlide} from 'vue-awesome-swiper'
     export default {
         name: "NeteaseMvSwiper",
+        components:{swiper,swiperSlide},
         data() {
             return {
-                mvData: []
+                mvData: [],
+                swiperOptions: {
+                    speed:1000,
+                    autoplay: {
+                        disableOnInteraction: false,
+                        delay:800
+                    },
+                    loop: true,
+                    slidesPerView: 1,
+                    effect : 'cube',
+                }
             }
         },
         async created() {
@@ -31,14 +44,16 @@
 </script>
 
 <style lang="less" scoped>
-    .netease-mv-swiper {
-        height: 160px;
+    .sw {
+        padding: 0 10px;
         width: 100%;
-        border-radius: 8px;
-        img {
+    }
+    .swiper-container{
+        height: 160px;
+        img{
             width: 100%;
-            height: 100%;
-            border-radius: 8px;
+            height: 160px;
+            border-radius: 10px;
         }
     }
 </style>

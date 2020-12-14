@@ -1,12 +1,12 @@
 <template>
-        <div :class="this.$store.state.isShowPlayBar?'bottom-padding':''" id="profile">
-            <div class="scroll-wrap">
-                <user-avatar class="user"/>
-                <my-list/>
-                <my-music/>
-                <song-list-ranking/>
-            </div>
+    <div :class="this.$store.state.isShowPlayBar?'bottom-padding':''" id="profile">
+        <div class="scroll-wrap">
+            <user-avatar class="user"/>
+            <my-list/>
+            <my-music/>
+            <song-list-ranking/>
         </div>
+    </div>
 </template>
 
 <script>
@@ -30,8 +30,7 @@
         width: 100%;
         padding: 49px 10px 0;
         height: 100%;
-
-        background-color: #F8F8F8;
+        .main-bc;
     }
 
     .scroll-wrap {
