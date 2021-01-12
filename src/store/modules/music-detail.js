@@ -77,20 +77,23 @@ const mutations = {
 const actions = {
     //播放音乐
     playMusic({commit, state}, musicInfo) {
-        commit('savaCurrentMusicInfo', musicInfo)
-        commit('playMusic')
-        commit('saveRecentPlay', musicInfo)
+        //获取当前播放歌曲的索引位置
+        let currentIndex = state.playQueuedData.findIndex(item => item.id == state.currentMusic.id)
+        commit('savaCurrentMusicInfo', musicInfo)//设置当前播放音乐数据
+        commit('playMusic')//播放音乐
+        commit('saveRecentPlay', musicInfo)//将当前播放的音乐数据添加到最近播放列表中
+
         let data
         if (LocalData.getItem('playQueuedData')) {
             data = LocalData.getItem('playQueuedData')
         } else {
             data = []
         }
-        let index = data.findIndex(item => item.id == state.currentMusic.id)
-        let currentIndex = data.findIndex(item => item.id == state.currentMusic.id)
+        //判断当前音乐是否已存在播放队列
+        let index = data.findIndex(item => item.id == musicInfo.id)
         if (index == -1) {
-            if (data.length >= 2) {
-                data = data.insert(musicInfo, currentIndex)
+            if (data.length - 1 !== currentIndex) {
+                data.insert(musicInfo, currentIndex)
             } else {
                 data.push(musicInfo)
             }

@@ -1,10 +1,10 @@
 <template>
     <div class="dragon-bar">
-        <div class="item" :key="item.id" v-for="item in list">
+        <div class="item" :key="index" v-for="(item,index) in list">
             <div class="icon">
-                <img v-lazy="item.iconUrl+'?param=50y50'"/>
+                <van-icon :name="item"/>
             </div>
-            <div class="text">{{item.name}}</div>
+            <div class="text">{{text[index]}}</div>
         </div>
     </div>
 </template>
@@ -16,14 +16,25 @@
         name: "DragonBar",
         data() {
             return {
-                list: []
+                list: [
+                    'like-o',
+                    'star-o',
+                    'fire-o',
+                    'friends-o',
+                    'gift-o',
+                    'service-o',
+                ],
+                text: [
+                    '美日推荐',
+                    '私人FM',
+                    '歌单',
+                    '排行榜',
+                    '直播',
+                    '音乐',
+                ]
             }
-        },
-        async created() {
-            getDragonBar().then(res => {
-                this.list = res.data
-            })
         }
+
     }
 </script>
 
@@ -35,6 +46,9 @@
         justify-content: space-between;
         flex-wrap: nowrap;
         overflow-x: scroll;
+        background-color: white;
+        border-radius: 10px;
+        padding: 5px;
         &::-webkit-scrollbar {
             display: none;
         }
@@ -46,17 +60,23 @@
         flex-flow: column;
         align-items: center;
         justify-content: center;
+
         .icon {
             width: 40px;
             height: 40px;
             background-color: #FF3A3A;
             border-radius: 50%;
-            img {
-                width: 100%;
-                height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            i {
+                font-size: 22px;
+                color: white;
             }
         }
-        .text{
+
+        .text {
             margin-top: 6px;
             display: flex;
             align-items: center;

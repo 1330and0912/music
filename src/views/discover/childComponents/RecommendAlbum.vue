@@ -34,7 +34,6 @@
 <style lang="less" scoped>
     .recommend-album {
         width: 100%;
-        margin-top: 20px;
     }
 
     .album-wrap {
@@ -50,7 +49,8 @@
             margin-right:10px;
             border-radius:8px;
             overflow: hidden;
-            background-color: #EEEEEE;
+            background-color: white;
+
             img {
                 padding: 0;
                 margin: 0;

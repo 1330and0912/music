@@ -2,7 +2,6 @@ export class SessionData {
     constructor() {
 
     }
-
     static getItem(key) {
         if (window.sessionStorage.getItem(key)) {
             return JSON.parse(window.sessionStorage.getItem(key))

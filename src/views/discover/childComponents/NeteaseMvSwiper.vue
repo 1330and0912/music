@@ -45,7 +45,6 @@
 
 <style lang="less" scoped>
     .sw {
-        padding: 0 10px;
         width: 100%;
     }
     .swiper-container{

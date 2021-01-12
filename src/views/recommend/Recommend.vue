@@ -1,6 +1,6 @@
 <template>
         <div id="recommend">
-            <div class="scroll-wrap">
+            <div ref="scroll" class="scroll-wrap">
                 <swipe/>
                 <van-list
                         :class="this.$store.state.isShowPlayBar?'bottom-padding':''"
@@ -25,6 +25,7 @@
 
                     <recommend-list :data-list="mvList[this.currentIndex][this.categoryList[this.currentIndex]]"/>
                 </van-list>
+                <back-top ref-name="scroll"/>
             </div>
         </div>
 
@@ -35,10 +36,11 @@
     import RecommendList from "./childComponents/RecommendList";
     import Swipe from "../profile/childComponents/Swipe";
     import Loading from "../../components/common/loading/Loading";
+    import BackTop from "../../components/common/BackTop";
 
     export default {
         name: "Recommend",
-        components: {Loading, Swipe, RecommendList},
+        components: {BackTop, Loading, Swipe, RecommendList},
         data() {
             return {
                 categoryList: ['内地', '港台', '欧美', '日本', '韩国'],

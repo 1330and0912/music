@@ -34,10 +34,13 @@
                 cancelSearch: false
             }
         },
-        watch: {
-            $route(to, from) {
-                this.cancelSearch = true
-            }
+        // watch: {
+        //     $route(to, from) {
+        //         this.cancelSearch = true
+        //     }
+        // },
+        activated() {
+            this.cancelSearch = false
         },
         computed: {
             ...mapGetters('search', ['getSearchWord'])
@@ -47,6 +50,7 @@
         },
         methods: {
             back() {
+                this.searchSuggestList = []
                 this.$router.back()
             },
             ...mapActions('search', ['setSearchWord', 'addSearchHistory']),
@@ -81,7 +85,7 @@
             },
             getSearchSuggestData(v) {
                 this.fuzzySearch = v
-                !this.debounceFn && (this.debounceFn = debounce(this.getSuggest, 100))
+                !this.debounceFn && (this.debounceFn = debounce(this.getSuggest, 300))
                 this.debounceFn()
             }
         }

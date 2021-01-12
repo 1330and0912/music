@@ -2,7 +2,7 @@
     <div class="the-model" @click="close" v-show="value">
         <div class="content">
             <div class="title">新建歌单</div>
-            <input v-model="playlistName" type="text" placeholder="请输入歌单标题">
+            <input maxlength="10" v-model="playlistName" type="text" placeholder="请输入歌单标题不超过10位字符">
             <div class="control">
                 <div class="cancel" @click.stop="cancel">取消</div>
                 <div class="ok" :class="playlistName.trim()?'':'disable'" @click.stop="submit">提交</div>
@@ -15,7 +15,7 @@
         name: "TheModel",
         data() {
             return {
-                value: false,
+                value: false,//控制窗口的显示
                 playlistName: ''
             }
         },
@@ -35,13 +35,16 @@
             }
         },
         methods: {
+            // 点击遮罩层关闭窗口
             close(e) {
                 (e.target.className == 'the-model') && (this.value = false)
             },
+            //点击取消按钮关闭窗口
             cancel() {
                 this.value = false
                 this.$emit('cancel')
             },
+            //如果输入框不为空，点击保存按钮可发出自定义事件，并携带当前输入框的值为参数
             submit() {
                 if (this.playlistName.trim() !== '') {
                     this.$emit('submit', this.playlistName)

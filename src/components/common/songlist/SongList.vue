@@ -4,7 +4,7 @@
             <loading v-if="isShowLoading" :show-loading="isShowLoading"/>
             <div v-else class="song-list-wrap" @scroll="scroll">
                 <div class="song-list" id="songList"
-                     :style="{backgroundImage:`url(${songList[0].bg+'?param=150y130'})`}">
+                     :style="{backgroundImage:`url(${songList[0].bg+'?param=250y230'})`}">
                 </div>
                 <top-back ref="top" :title="songListName" :bg-color="topBarRgb"/>
                 <base-info ref="base" :opacity="opacity" :subscribers="subscribers" :base-info="songList[0]"/>
@@ -100,11 +100,11 @@
 
     .scale-leave-to {
         opacity: 0;
-        -webkit-transform: translate3d(0,0,0);
-        -moz-transform: translate3d(0,0,0);
-        -ms-transform: translate3d(0,0,0);
-        -o-transform: translate3d(0,0,0);
-        transform: translate3d(0,0,0);
+        -webkit-transform: translate3d(0, 0, 0);
+        -moz-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+        -o-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
         transform: scale(0.1);
     }
 
@@ -141,7 +141,9 @@
         height: 300px;
         background-size: cover;
         background-position: center center;
-        filter: blur(111px);
-
+        filter: blur(11px);
+        &:before {
+            .overflow
+        }
     }
 </style>

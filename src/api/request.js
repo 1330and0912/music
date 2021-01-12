@@ -18,10 +18,12 @@ let url = [LikeMusic, UserSub, UserPlayList, UserDetail, LikeList, RefLogin, MVL
 
 export function request(config) {
     const instance = axios.create({
-        baseURL: 'https://nicemusic-api.lxhcool.cn/',
-        // baseURL: ' http://192.168.0.22:3000',
+        baseURL: 'https://nicemusic-api.lxhcool.cn/',//接口默认基本地址
+        // baseURL: ' http://106.54.188.69:3000/',
         withCredentials: true,
+        timeout:8000//超时时间
     })
+    //请求拦截器，对需要携带cookie的api添加cookie参数
     instance.interceptors.request.use(data => {
             let isNeverLogin = url.findIndex(item => item == data.url)
             if (LocalData.getItem('cookie') && isNeverLogin !== -1) {
@@ -34,7 +36,7 @@ export function request(config) {
             console.log(err);
         }
     )
-
+    //响应拦截器，返回项目中只需要使用的data字段
     instance.interceptors.response.use(res => {
         return res.data
     }, err => {

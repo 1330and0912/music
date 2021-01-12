@@ -43,7 +43,6 @@
 <style lang="less" scoped>
     .recommend-mv {
         width: 100%;
-        height: 155px;
     }
 
     .mv-wrap {
@@ -55,19 +54,21 @@
         overflow-x: scroll;
 
         .item {
+            padding-bottom: 10px;
+            background-color: white;
             flex-shrink: 0;
             width: 30%;
             height: 100%;
             margin-right: 10px;
             border-radius: 8px;
-
+            overflow: hidden;
             img {
-                border-radius: 8px;
                 width: 100%;
                 height: 100px;
             }
 
             .text {
+                padding: 5px;
                 height: 18px;
                 font-size: 13px;
                 width: 100%;

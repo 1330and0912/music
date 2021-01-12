@@ -36,7 +36,9 @@
         name: "PlayBar",
         components: {PlayQueued},
         computed: {
-            ...mapGetters('musicDetail', ['getPlayQueuedData', 'getCurrentMusic', 'getIsPlay', 'getCurrentMusicPlayTime', 'getPlayMode', 'getProgressValue']),
+            ...mapGetters('musicDetail',
+                ['getPlayQueuedData', 'getCurrentMusic', 'getIsPlay', 'getCurrentMusicPlayTime',
+                    'getPlayMode', 'getProgressValue']),
         },
         data() {
             return {
@@ -55,10 +57,12 @@
                     this.$refs.audio.pause()
                 }
             },
+            //监听滚动条的变化实现音乐播放进度的切换功能
             getProgressValue(newVal) {
                 this.$refs.audio.currentTime = newVal
                 this.getCurrentTime(newVal)
             },
+            //监听当前播放音乐数据的变化，并通过id向后台请求音乐的url
             getCurrentMusic(newVal) {
                 getSongURL(newVal.id).then(res => {
                     this.url = res.data[0].url

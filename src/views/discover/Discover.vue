@@ -1,6 +1,6 @@
 <template>
     <div id="discover" :class="this.$store.state.isShowPlayBar?'bottom-padding':''">
-        <div class="scroll">
+        <div class="scroll" ref="scroll">
             <netease-mv-swiper/>
             <dragon-bar/>
             <recommend-play-list/>
@@ -23,7 +23,8 @@
 
     export default {
         name: "Discover",
-        components: {RecommendAlbum, NeteaseMvSwiper, RecommendMV, RecommendSong, RecommendPlayList, DragonBar, Swipe},
+        components: {
+            RecommendAlbum, NeteaseMvSwiper, RecommendMV, RecommendSong, RecommendPlayList, DragonBar, Swipe},
 
     }
 </script>
@@ -51,6 +52,7 @@
         height: 100%;
         padding-top: 49px;
         background-color: #F8F8F8;
+        .main-bc;
     }
 
     .scroll {

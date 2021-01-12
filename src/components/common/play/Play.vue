@@ -1,13 +1,13 @@
 <template>
     <transition name="slide-down">
-        <div v-if="Object.keys(getCurrentMusic).length" id="play"
-             :style="{backgroundImage:`url(${getCurrentMusic.bg}?param=350y500)`}">
+        <div @click="toogleShow" v-if="Object.keys(getCurrentMusic).length" id="play">
+            <div class="bef" :style="{backgroundImage:`url(${getCurrentMusic.bg}?param=50y50)`}"></div>
             <div class="nav-bar">
                 <i @click="back" class="iconfont icon-zuojiantou"></i>
                 <span>{{getCurrentMusic.author}}-{{getCurrentMusic.songName}}</span>
             </div>
-            <record :is-rotate="getIsPlay" :bg="getCurrentMusic.bg"/>
-            <lyric-detail :lyric="getCurrentMusic.lyric" class="lyric"></lyric-detail>
+            <record :class="showRec?'opa':''" :is-rotate="getIsPlay" :bg="getCurrentMusic.bg"/>
+            <lyric-detail :class="showLrc?'opa':''"  :lyric="getCurrentMusic.lyric" class="lyric"></lyric-detail>
             <progress-bar/>
             <music-control :id="getCurrentMusic.id" class="control"/>
         </div>
@@ -27,22 +27,35 @@
     export default {
         name: "Play",
         components: {ProgressBar, PhoneNavBar, MusicControl, LyricDetail, Record},
+        data() {
+            return {
+                showRec: false,
+                showLrc: true
+            }
+        },
         methods: {
             back() {
                 this.$router.back()
+            },
+            toogleShow(e){
+                if(e.target.className=='bef' ||e.target.className=='record-bg' ||e.target.className=='lyric'){
+                    this.showRec=!this.showRec
+                    this.showLrc=!this.showLrc
+                }
             }
         },
         computed: {
             ...mapGetters('musicDetail', ['getCurrentMusic', 'getIsPlay'])
         },
         beforeRouteUpdate(to) {
-            console.log(to);
         }
     }
 </script>
 
 <style lang="less" scoped>
-
+    .opa{
+        opacity:0;
+    }
 
     .slide-down-leave-to {
         position: fixed !important;
@@ -50,11 +63,12 @@
 
     .slide-down-leave-active {
         opacity: 0;
-        transition: all 0.8s !important;
+        transition: all  1s !important;
         transform: translateY(100%);
     }
 
     #play {
+        padding-bottom: 100px;
         position: relative;
         z-index: 999;
         transition: font-size .3s;
@@ -62,18 +76,25 @@
         height: 100%;
         width: 100%;
         color: white;
-        background-image: url("../../../assets/img/profile/private.jpg");
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center center;
 
-        &::before {
-            content: '';
+        .bef {
+            filter: blur(80px);
             position: absolute;
-            height: 100%;
             width: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
+            height: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+
+            &:before {
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, .4);
+            }
         }
+
 
         .nav-bar {
             position: relative;

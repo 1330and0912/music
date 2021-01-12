@@ -82,9 +82,8 @@
         width: 100%;
         height: 10%;
         position: relative;
-        background-image: url("../../../src/assets/img/myCollecy.jpg");
         background-size: cover;
-
+        background-color: rgba(222,2,2,.3);
         &::after {
             content: ' ';
             height: 100%;

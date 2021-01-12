@@ -16,6 +16,7 @@
     </div>
 </template>
 
+
 <script>
     import {mapGetters, mapActions} from 'vuex'
 
@@ -33,6 +34,7 @@
             ...mapGetters('musicDetail', ['getCurrentMusicPlayTime', 'getDuration'])
         },
         filters: {
+            // 歌曲总时长和当前播放时长显示
             filterPlayTime(value) {
                 let m = value / 60 < 10 ? `0${parseInt(value / 60)}` : parseInt(value / 60)
                 let s = value % 60 < 10 ? `0${parseInt(value % 60)}` : parseInt(value % 60)
@@ -88,8 +90,11 @@
     }
 
     .progress-bar {
-        position: relative;
-        z-index: 1111;
+        position: fixed;
+        height: 40px;
+        bottom: 60px;
+        left:50%;
+        transform: translateX(-50%);
         width: 80%;
         margin: 15px auto 0;
     }

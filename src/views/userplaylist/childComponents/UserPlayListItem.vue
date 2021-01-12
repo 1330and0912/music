@@ -8,7 +8,7 @@
             </div>
         </div>
         <div class="edit" @click.stop="edit">
-            <van-icon name="ellipsis"/>
+            <van-icon class="edit-icon" name="ellipsis"/>
         </div>
     </div>
 </template>
@@ -80,10 +80,13 @@
         font-size: 26px;
         color: rgba(0, 0, 0, .5);
         justify-self: start;
-        transition: all .3s;
+        transition: transform .3s;
 
         &:active {
             transform: scale(2);
+        }
+        .edit-icon{
+            transform: rotate(90deg);
         }
     }
 </style>

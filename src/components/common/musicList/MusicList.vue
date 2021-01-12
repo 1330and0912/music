@@ -3,7 +3,8 @@
         <div v-if="isShowLoadingProps" class="l">
             <loading :show-loading="isShowLoading"/>
         </div>
-        <music-list-item @edit="edit" :key="index" :music-info="item" v-for="(item,index) in musicInfo"/>
+        <music-list-item class="listItem" @edit="edit" :key="index" :music-info="item"
+                         v-for="(item,index) in musicInfo"/>
         <action-sheet @isShow="isShow" :show-action="showAction">
             <template #content>
                 <div class="action-title">添加到歌单</div>
@@ -22,7 +23,14 @@
                         </van-cell>
                     </van-cell-group>
                 </van-checkbox-group>
-                <div :class="$store.state.isShowPlayBar?'btn-b':''"   class="action-btn" @click="addToPlaylist">添加收藏</div>
+                <div :class="$store.state.isShowPlayBar?'btn-b':''" class="action-btn" @click="addToPlaylist">添加收藏
+                    <div class="btn-animation">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </div>
+                </div>
             </template>
         </action-sheet>
     </div>
@@ -136,9 +144,43 @@
         border-top: 2px solid rgba(0, 0, 0, .03);
         color: #0086b3;
         font-size: 14px;
+        position: relative;
+
+        .btn-animation {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 40px;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+
+            li {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                background-color: rgba(123, 0, 110, .1);
+                animation:  move 3s infinite linear ;
+                animation-direction: alternate;
+                &:nth-child(1){
+                    animation-delay: .1s;
+                }
+                &:nth-child(2){
+                    animation-delay: .2s;
+                }
+                &:nth-child(3){
+                    animation-delay: 0s;
+                }
+                &:nth-child(4){
+                    animation-delay: .3s;
+                }
+            }
+
+        }
     }
-    .btn-b{
-        padding-bottom:  90px;
+
+    .btn-b {
+        padding-bottom: 90px;
     }
 
     .cell span {
@@ -149,6 +191,48 @@
         -ms-text-overflow: ellipsis;
         text-overflow: ellipsis;
         font-size: 14px;
+
+    }
+
+    @keyframes move {
+        0% {
+            transform: translateY(-10px);
+            background-color: rgba(123, 0, 110, .2);
+        }
+        10%{
+            transform: translateY(-9px);
+        }
+        20%{
+            transform: translateY(-8px);
+        }
+       30%{
+            transform: translateY(-7px);
+           background-color: rgba(123, 0, 110, .2);
+       }
+        40%{
+            transform: translateY(-6px);
+            background-color: rgba(123, 0, 110, .1);
+        }
+        50%{
+            transform: translateY(-5px);
+        }
+        60%{
+            transform: translateY(-4px);
+        }
+        70%{
+            transform: translateY(-3px);
+            background-color: rgba(123, 0, 110, .2);
+        }
+        80%{
+            transform: translateY(-2px);
+        }
+        90%{
+            transform: translateY(-1px);
+        }
+        100% {
+            transform: translateY(0px);
+            background-color: rgba(123, 0, 110, .1);
+        }
 
     }
 </style>

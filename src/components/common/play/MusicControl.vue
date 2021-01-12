@@ -1,5 +1,5 @@
 <template>
-    <div class="musci-control">
+    <div class="music-control">
         <div class="control-wrap">
             <div @click="playMode" class="circulation">
                 <i class="iconfont   " :class="playModeIcon[getPlayMode]"></i>
@@ -96,8 +96,11 @@
 </script>
 
 <style lang="less" scoped>
-    .musci-control {
+    .music-control {
         width: 100%;
+        position: fixed;
+        height: 60px;
+        bottom: 0;
     }
 
     .control-wrap {

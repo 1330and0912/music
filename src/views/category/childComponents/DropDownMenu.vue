@@ -4,7 +4,7 @@
             <van-dropdown-item @change="changeCategory" v-model="area" :options="option1"/>
             <van-dropdown-item @change="changeCategory" v-model="type" :options="option2"/>
         </van-dropdown-menu>
-        <div class="drop-down-menu">
+        <div class="drop-down-menu" ref="scroll">
             <van-list
                     :immediate-check="false"
                     v-model="loading"
@@ -13,7 +13,8 @@
                     @load="onLoad"
             >
                 <category-list class="list" :category-list="categoryList"/>
-            </van-list>
+            </van-list >
+            <back-top ref-name="scroll"/>
         </div>
     </div>
 </template>
@@ -21,14 +22,15 @@
 <script>
     import {getCategoryList} from "../../../api";
     import CategoryList from "./CategoryList";
+    import BackTop from "../../../components/common/BackTop";
 
     export default {
-        components: {CategoryList},
+        components: {BackTop, CategoryList},
         data() {
             return {
-                loading: false,
-                finished: false,
-                offset: 0,
+                loading: false,//ajax请求是否结束
+                finished: false,//是否还有下一页数据
+                offset: 0,//当前页数
                 area: 7,
                 type: 1,
                 option1: [

@@ -24,7 +24,7 @@
         },
         async created() {
             const {result: res} = await getRecommendSong()
-            res.forEach(async item => {
+            res && res.forEach(async item => {
                 const {id, name: songName, picUrl: bg} = item
                 let lyric = (await getLyric(id)).lrc
                 lyric = dataLyric(lyric)
@@ -46,9 +46,12 @@
     .recommend-song {
         margin-top: 10px;
         height: 220px;
+
     }
 
     .list {
+        border-radius: 8px;
+        background-color: white;
         height: 175px;
     }
 </style>

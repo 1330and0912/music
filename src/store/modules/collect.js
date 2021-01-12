@@ -25,11 +25,12 @@ const mutations = {
     }
 }
 const actions = {
-    saveLikeMusic({commit}, musicInfo) {
-        commit('saveLikeMusic', musicInfo)
-    },
+
     saveIds({commit}, ids) {
         commit('saveIds', ids)
+    },
+    saveLikeMusic({commit}, musicInfo) {
+        commit('saveLikeMusic', musicInfo)
     },
     cancelLikeMusic({commit}, id) {
         commit('cancelLikeMusic', id)

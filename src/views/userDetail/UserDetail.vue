@@ -1,10 +1,10 @@
 <template>
     <transition name="fade">
         <div id="userDetail">
-            <content-list>
+            <content-list :title="title" @scroll="scroll" @scrolling="scrolling">
                 <div class="user-detail">
-                    <img :src="`${userDetail.avatarUrl}?param=100y100`" alt="">
-                    <div class="uname">{{userDetail.nickname}}</div>
+                    <img :style="{'opacity': opacity}" :src="`${userDetail.avatarUrl}?param=100y100`" alt="">
+                    <div :style="{'opacity': opacity}" class="uname">{{userDetail.nickname}}</div>
                     <div class="detail-list">
                         <div class="item">
                             <div class="l">{{userDetail.follows}}</div>
@@ -68,7 +68,9 @@
         data() {
             return {
                 userDetail: {},
-                subData: {}
+                subData: {},
+                title: '',
+                opacity:1
             }
         },
         methods: {},
@@ -83,15 +85,23 @@
             async getSubData() {
                 this.subData = await getUserSub()
             },
-            recent(){
+            recent() {
                 this.$router.push('recent')
-
             },
-            favoriteMusic(){
+            favoriteMusic() {
                 this.$router.push({
-                    path:'/favorite-music',
-                    name:'favoriteMusic'
+                    path: '/favorite-music',
+                    name: 'favoriteMusic'
                 })
+            },
+            scroll(isShowTitle) {
+                this.title = isShowTitle ? this.userDetail.nickname : ''
+            },
+            scrolling(top){
+                if (top <= 300) {
+                    let ratio = top / 200
+                    this.opacity = 1 - ratio
+                }
             }
         },
         computed: {
@@ -110,14 +120,14 @@
 <style lang="less" scoped>
     .fade-leave-to {
         opacity: 0;
-        transform: translate3d(-66%,100%,1210px);
+        transform: translate3d(-66%, 100%, 1210px);
     }
+
     .fade-leave-active {
         position: absolute;
         z-index: 222;
-        transition:all   .3s;
+        transition: all .3s;
     }
-
     #userDetail {
         width: 100%;
         height: 100%;

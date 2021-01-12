@@ -56,22 +56,21 @@
 
 <style lang="less" scoped>
     .recommend-play-list {
-        margin-top: 20px;
+        margin-top: 10px;
     }
 
     .item-wrap {
         display: flex;
         overflow-x: scroll;
-
         .item {
+            background-color: white;
             position: relative;
             flex-shrink: 0;
             width: 30%;
             margin: 0 10px 0 0;
             border-radius: 8px;
-
+            overflow: hidden;
             img {
-                border-radius: 8px;
                 width: 100%;
             }
 
@@ -91,14 +90,17 @@
             }
 
             .text {
+
                 font-size: 13px;
                 line-height: 18px;
                 overflow: hidden;
+                white-space: nowrap;
                 text-overflow: ellipsis;
                 display: -webkit-box;
                 -webkit-line-clamp: 2;
                 -webkit-box-orient: vertical;
                 width: 100px;
+                padding: 3px 5px;
             }
         }
     }
